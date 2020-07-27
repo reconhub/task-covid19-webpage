@@ -1,16 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <v-app id="inspire">
+      <recon-toolbar/>
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
+    </v-app>
   </div>
 </template>
-
+<script>
+import ReconToolbar from "@/components/ReconToolbar";
+export default {
+  name: "app",
+  components: {
+    ReconToolbar
+  },
+  methods: {
+    authenticate: function(provider) {
+      console.log(provider, this.$auth);
+      this.$auth.authenticate(provider).then(function(x) {
+        console.log("inside auth", x);
+        // Execute application logic after successful social authentication
+      });
+    }
+  }
+};
+</script>
+https://github.com/login/oauth/authorize?response_type=code&client_id=&redirect_uri=http://localhost:8080/auth/callback&scope=user:email
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -18,6 +37,7 @@
 }
 #nav {
   padding: 30px;
+  background-color: lightgray;
 }
 
 #nav a {

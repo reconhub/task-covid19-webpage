@@ -1,5 +1,6 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <v-card flat class="about">
+    <v-img :src="require('../assets/Placeholder.png')" class="my-3" contain height="200"/>
+    <h2>This is an about page</h2>
+  </v-card>
 </template>

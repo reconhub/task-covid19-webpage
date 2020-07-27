@@ -9,9 +9,16 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
+    "acorn-dynamic-import": "^4.0.0",
     "core-js": "^2.6.5",
+    "eslint": "^7.5.0",
+    "node-sass": "^4.14.1",
+    "oauth2-server": "^3.1.1",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.3"
+    "vue-authenticate": "^1.4.1",
+    "vue-axios": "^2.1.5",
+    "vue-router": "^3.0.3",
+    "vuetify": "^2.3.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.12.0",
@@ -21,6 +28,11 @@
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
-    "vue-template-compiler": "^2.6.10"
+    "sass": "^1.19.0",
+    "sass-loader": "^8.0.2",
+    "vue-cli-plugin-vuetify": "^2.0.7",
+    "vue-concise-slider": "^3.4.4",
+    "vue-template-compiler": "^2.6.10",
+    "vuetify-loader": "^1.3.0"
   }
 }
