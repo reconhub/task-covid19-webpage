@@ -16,11 +16,11 @@
         placeholder="Enter description..."
       ></v-text-field>
       <v-select label="Task priority" v-model="formInfo.priority" :items="priorityTypes"></v-select>
-      <v-select label="Task Label" v-model="formInfo.label" :items="labelTypes"></v-select>
+      <v-select label="Task Difficulty" v-model="formInfo.difficulty" :items="difficultyTypes"></v-select>
       <v-btn @click="submitForm">Submit</v-btn>
     </v-card>
     <v-row>
-      <v-col v-for="(task, i) in tasks" :key="i" cols="4">
+      <v-col v-for="(task, i) in tasks" :key="i" cols="4" style>
         <v-card class="mx-2 pr-2">
           <v-row>
             <v-col cols="8">
@@ -38,7 +38,7 @@
               <v-spacer></v-spacer>
               <div style="height: 40%">
                 <p>
-                  <i>{{task.label}}</i>
+                  <i>{{task.difficulty}}</i>
                 </p>
               </div>
             </v-col>
@@ -49,67 +49,90 @@
   </v-card>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   name: "explore",
+  props: ["token"],
   data() {
     return {
-      tasks: [
-        {
-          title: "Task1",
-          priority: "High",
-          label: "Beginner",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
-        },
-        {
-          title: "Task2",
-          priority: "Medium",
-          label: "Beginner",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
-        },
-        {
-          title: "Task3",
-          priority: "Low",
-          label: "Beginner",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
-        },
-        {
-          title: "Task4",
-          priority: "High",
-          label: "Beginner",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
-        },
-        {
-          title: "Task5",
-          priority: "High",
-          label: "Beginner",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
-        },
-        {
-          title: "Task6",
-          priority: "High",
-          label: "Beginner",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
-        }
-      ],
+      // tasks: [
+      //   {
+      //     title: "Task1",
+      //     priority: "High",
+      //     label: "Beginner",
+      //     description:
+      //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
+      //   },
+      //   {
+      //     title: "Task2",
+      //     priority: "Medium",
+      //     label: "Beginner",
+      //     description:
+      //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
+      //   },
+      //   {
+      //     title: "Task3",
+      //     priority: "Low",
+      //     label: "Beginner",
+      //     description:
+      //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
+      //   },
+      //   {
+      //     title: "Task4",
+      //     priority: "High",
+      //     label: "Beginner",
+      //     description:
+      //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
+      //   },
+      //   {
+      //     title: "Task5",
+      //     priority: "High",
+      //     label: "Beginner",
+      //     description:
+      //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
+      //   },
+      //   {
+      //     title: "Task6",
+      //     priority: "High",
+      //     label: "Beginner",
+      //     description:
+      //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
+      //   }
+      // ],
+      tasks: [],
       showForm: false,
       priorityTypes: ["Low", "Medium", "High", "Urgent"],
-      labelTypes: ["Beginner", "Intermediate", "Hard", "Admin-only"],
+      difficultyTypes: ["Beginner", "Intermediate", "Hard", "Admin-only"],
       formInfo: {
         title: "",
         priority: "",
-        label: "",
+        difficulty: "",
         description: ""
       },
       formText: "Create new task"
     };
   },
   methods: {
+    getTasks() {
+      let qry =
+        "https://api.github.com/repos/BenjaminOrtizUlloa/ExploreGitAPI/issues?per_page=100";
+
+      let self = this;
+      console.log(self);
+
+      axios
+        .get(qry, { headers: { Authorization: `token ${self.token}` } })
+        .then(function(res) {
+          self.tasks = self.parseIssues(res.data);
+          console.log("tasks", self.tasks);
+        })
+        .catch(function(err) {
+          console.log(JSON.stringify(err));
+          alert(err);
+          console.log(err);
+        });
+    },
     toggleForm() {
       this.showForm = !this.showForm;
       if (this.showForm) {
@@ -119,15 +142,54 @@ export default {
       }
     },
     submitForm() {
-      console.log("formInfo", this.formInfo);
-      let newTask = JSON.parse(JSON.stringify(this.formInfo));
-      this.tasks.push(newTask);
-      this.toggleForm();
-      this.formInfo.title = "";
-      this.formInfo.priority = "";
-      this.formInfo.label = "";
-      this.formInfo.description = "";
+      let self = this;
+      let qry =
+        "https://api.github.com/repos/BenjaminOrtizUlloa/ExploreGitAPI/issues";
+      axios
+        .post(
+          qry,
+          {
+            title: self.formInfo.title,
+            body: self.formInfo.description,
+            labels: [self.formInfo.priority, self.formInfo.difficulty]
+          },
+          { headers: { Authorization: `token ${self.token}` } }
+        )
+        .then(function(res) {
+          console.log("success", res);
+          self.toggleForm();
+          self.formInfo.title = "";
+          self.formInfo.priority = "";
+          self.formInfo.difficulty = "";
+          self.formInfo.description = "";
+        })
+        .catch(function(err) {
+          alert(err);
+          console.log(err);
+        });
+    },
+    parseIssues(dta) {
+      let issues = dta.map(function(x) {
+        let title = x.title;
+        let priority = x.labels.filter(y => y.description == "Priority")[0]
+          .name;
+        let difficulty = x.labels.filter(y => y.description == "Difficulty")[0]
+          .name;
+        let description = x.body;
+
+        return {
+          title: title,
+          priority: priority,
+          difficulty: difficulty,
+          description: description
+        };
+      });
+
+      return issues;
     }
+  },
+  mounted() {
+    this.getTasks();
   }
 };
 </script>

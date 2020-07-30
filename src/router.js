@@ -2,10 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Explore from './views/Explore.vue'
+import LogIn from './views/LogIn.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [{
       path: '/',
       name: 'home',
@@ -22,7 +24,16 @@ export default new Router({
     {
       path: '/explore',
       name: 'explore',
-      component: Explore
+      component: Explore,
+      props: (route) => ({
+        ...route.params
+      })
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LogIn
     }
+
   ]
 })

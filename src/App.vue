@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <v-app id="inspire">
-      <recon-toolbar/>
+      <recon-toolbar :token="token" @getToken="getToken"/>
       <keep-alive>
-        <router-view/>
+        <router-view @getToken="getToken"/>
       </keep-alive>
     </v-app>
   </div>
@@ -15,18 +15,19 @@ export default {
   components: {
     ReconToolbar
   },
+  data() {
+    return {
+      token: ""
+    };
+  },
   methods: {
-    authenticate: function(provider) {
-      console.log(provider, this.$auth);
-      this.$auth.authenticate(provider).then(function(x) {
-        console.log("inside auth", x);
-        // Execute application logic after successful social authentication
-      });
+    getToken(token) {
+      this.token = token;
     }
   }
 };
 </script>
-https://github.com/login/oauth/authorize?response_type=code&client_id=&redirect_uri=http://localhost:8080/auth/callback&scope=user:email
+
 <style>
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
