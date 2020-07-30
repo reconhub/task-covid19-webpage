@@ -13,7 +13,9 @@ export default {
     return {};
   },
   mounted() {
+    console.log("localstorae", localStorage);
     let aToken = this.$route.query.access_token;
+    localStorage.setItem("RECON_GitHub_Token", aToken);
 
     this.$emit("getToken", aToken);
     this.$router.push({ name: "explore", params: { token: aToken } });

@@ -24,6 +24,10 @@ export default {
     getToken(token) {
       this.token = token;
     }
+  },
+  mounted() {
+    let token = localStorage.getItem("RECON_GitHub_Token");
+    console.log("mountedToken", token);
   }
 };
 </script>

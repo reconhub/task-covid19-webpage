@@ -5,7 +5,10 @@
         <router-link to="/">RECON</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn v-if="token" @click="$router.push({name: 'explore', params: {token: token}})">Explore</v-btn>
+      <v-btn
+        v-if="token"
+        @click="$router.push({ name: 'explore', params: { token: token } })"
+      >Explore</v-btn>
       <v-btn @click="$router.push('about')">About</v-btn>
       <v-spacer></v-spacer>
       <v-btn

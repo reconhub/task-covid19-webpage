@@ -25,7 +25,7 @@
           <v-row>
             <v-col cols="8">
               <v-card-title>
-                <a href="#">{{task.title}}</a>
+                <a :href="task.url" target="_blank">{{task.title}}</a>
               </v-card-title>
               <v-card-subtitle v-text="task.description"></v-card-subtitle>
             </v-col>
@@ -50,56 +50,13 @@
 </template>
 <script>
 import axios from "axios";
+import { setTimeout } from "timers";
 
 export default {
   name: "explore",
   props: ["token"],
   data() {
     return {
-      // tasks: [
-      //   {
-      //     title: "Task1",
-      //     priority: "High",
-      //     label: "Beginner",
-      //     description:
-      //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
-      //   },
-      //   {
-      //     title: "Task2",
-      //     priority: "Medium",
-      //     label: "Beginner",
-      //     description:
-      //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
-      //   },
-      //   {
-      //     title: "Task3",
-      //     priority: "Low",
-      //     label: "Beginner",
-      //     description:
-      //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
-      //   },
-      //   {
-      //     title: "Task4",
-      //     priority: "High",
-      //     label: "Beginner",
-      //     description:
-      //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
-      //   },
-      //   {
-      //     title: "Task5",
-      //     priority: "High",
-      //     label: "Beginner",
-      //     description:
-      //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
-      //   },
-      //   {
-      //     title: "Task6",
-      //     priority: "High",
-      //     label: "Beginner",
-      //     description:
-      //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, eaque."
-      //   }
-      // ],
       tasks: [],
       showForm: false,
       priorityTypes: ["Low", "Medium", "High", "Urgent"],
@@ -124,6 +81,7 @@ export default {
       axios
         .get(qry, { headers: { Authorization: `token ${self.token}` } })
         .then(function(res) {
+          console.log(res.data);
           self.tasks = self.parseIssues(res.data);
           console.log("tasks", self.tasks);
         })
@@ -162,6 +120,9 @@ export default {
           self.formInfo.priority = "";
           self.formInfo.difficulty = "";
           self.formInfo.description = "";
+          setTimeout(function() {
+            self.getTasks();
+          }, 1000);
         })
         .catch(function(err) {
           alert(err);
@@ -176,12 +137,14 @@ export default {
         let difficulty = x.labels.filter(y => y.description == "Difficulty")[0]
           .name;
         let description = x.body;
+        let url = x.html_url;
 
         return {
           title: title,
           priority: priority,
           difficulty: difficulty,
-          description: description
+          description: description,
+          url: url
         };
       });
 
