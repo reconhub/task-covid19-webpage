@@ -26,8 +26,8 @@ export default {
     }
   },
   mounted() {
-    let token = localStorage.getItem("RECON_GitHub_Token");
-    console.log("mountedToken", token);
+    // let token = localStorage.getItem("RECON_GitHub_Token");
+    // console.log("mountedToken", token);
   }
 };
 </script>

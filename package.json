@@ -10,12 +10,11 @@
   },
   "dependencies": {
     "acorn-dynamic-import": "^4.0.0",
+    "axios": "^0.19.2",
     "core-js": "^2.6.5",
     "eslint": "^7.5.0",
     "node-sass": "^4.14.1",
-    "oauth2-server": "^3.1.1",
     "vue": "^2.6.10",
-    "vue-authenticate": "^1.4.1",
     "vue-axios": "^2.1.5",
     "vue-router": "^3.0.3",
     "vuetify": "^2.3.6"

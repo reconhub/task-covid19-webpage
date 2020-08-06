@@ -7,7 +7,7 @@ import LogIn from './views/LogIn.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [{
       path: '/',
       name: 'home',
@@ -30,9 +30,10 @@ export default new Router({
       })
     },
     {
-      path: '/login',
+      path: '/login/:token',
       name: 'login',
-      component: LogIn
+      component: LogIn,
+      props: true
     }
 
   ]
