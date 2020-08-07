@@ -1,60 +1,84 @@
 <template>
-  <!-- Make a div wrapped slider,set height and width -->
-  <v-card style="width:100%;margin:0;height:200px">
-    <!-- Using the slider component -->
-    <slider ref="slider" :options="options">
-      <!-- slideritem wrapped package with the components you need -->
-      <slideritem v-for="(item,index) in someList" :key="index" :style="item.style">
-        <a :href="item.link" target="_blank">{{item.txt}}</a>
-      </slideritem>
-      <!-- Customizable loading -->
-      <div slot="loading">loading...</div>
-    </slider>
-  </v-card>
+  <v-carousel cycle height="400" hide-delimiter-background show-arrows-on-hover>
+    <v-carousel-item v-for="(pkg, i) in packageList" :key="i">
+      <v-sheet :color="colors[i % colors.length ]" height="100%">
+        <v-row class="fill-height" align="center" justify="center">
+          <div class="display-3">
+            <p>
+              <b>
+                <a :href="pkg.link" target="_blank">
+                  <b>{{pkg.title}}</b>
+                </a>
+              </b>
+            </p>
+            <p>
+              <b style="font-size: 5vh">{{pkg.description}}</b>
+            </p>
+          </div>
+        </v-row>
+      </v-sheet>
+    </v-carousel-item>
+  </v-carousel>
 </template>
+
 <script>
-// import slider components
-import { slider, slideritem } from "vue-concise-slider";
+import VueSlickCarousel from "vue-slick-carousel";
+// optional style for arrows & dots
+import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
+
 export default {
-  el: "#app",
+  name: "MyComponent",
+  components: { VueSlickCarousel },
   data() {
     return {
-      //data list [array]
-      someList: [
+      colors: [
+        "indigo",
+        "warning",
+        "pink darken-2",
+        "red lighten-1",
+        "deep-purple accent-4"
+      ],
+      slides: ["First", "Second", "Third", "Fourth", "Fifth"],
+      packageList: [
         {
-          txt: "distcrete",
-          link: "https://github.com/reconhub/distcrete",
-          style: {
-            background: "#1bbc9b"
-          }
-        },
-        {
-          txt: "EpiEstim",
-          link: "https://github.com/mrc-ide/EpiEstim",
-          style: {
-            background: "#4bbfc3"
-          }
-        },
-        {
-          txt: "earlyR",
-          link: "https://github.com/reconhub/earlyR",
+          title: "incidence",
+          description: "☣ 📈 📉 ☣ Compute and visualise incidence ",
+          link: "https://github.com/reconhub/incidence",
           style: {
             background: "#7baabe"
           }
+        },
+        {
+          title: "outbreaker2",
+          description:
+            "Disease outbreak reconstruction from epidemiological and genetic data.",
+          link: "https://github.com/reconhub/outbreaker2"
+        },
+        {
+          title: "learn",
+          description:
+            "RECON learn: a free, open platform for training material on epidemics analysis.",
+          link: "https://github.com/reconhub/learn"
+        },
+        {
+          title: "epicontacts",
+          description:
+            "Handling, Visualisation and Analysis of Epidemiological Contacts",
+          link: "https://github.com/reconhub/epicontacts"
+        },
+        {
+          title: "aweek",
+          description: "Convert dates to arbitrary week definitions 📆",
+          link: "https://github.com/reconhub/aweek"
+        },
+        {
+          title: "deployer",
+          description: "Self-contained R environment on a thumb drive",
+          link: "https://github.com/reconhub/deployer"
         }
-      ],
-      //Slider configuration [obj]
-      options: {
-        currentPage: 0,
-        autoplay: 5000,
-        loop: true,
-        speed: 600
-      }
+      ]
     };
-  },
-  components: {
-    slider,
-    slideritem
   }
 };
 </script>
+

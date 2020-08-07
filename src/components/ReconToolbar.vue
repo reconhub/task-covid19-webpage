@@ -1,6 +1,9 @@
 <template>
   <v-card color="pink" flat tile>
     <v-toolbar color="grey">
+      <!-- <v-avatar>
+        <v-img :src="require('@/assets/logo-sticker.png')"/>
+      </v-avatar>-->
       <v-toolbar-title>
         <router-link to="/">RECON</router-link>
       </v-toolbar-title>
