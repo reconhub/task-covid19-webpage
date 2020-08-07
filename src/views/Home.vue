@@ -1,7 +1,7 @@
 <template>
   <v-card class="pa-0 ma-0">
-    <intro-slides/>
     <call-to-action/>
+    <intro-slides/>
     <quick-facts/>
   </v-card>
 </template>

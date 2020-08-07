@@ -3,7 +3,7 @@
     <v-row class="text-center">
       <v-col cols="12">
         <!-- <v-img :src="require('../assets/Placeholder.png')" class="my-3" contain height="100"/> -->
-        <v-img :src="require('@/assets/logo-sticker.png')" class="my-3" contain height="200"/>
+        <v-img :src="require('@/assets/logo-sticker.png')" class="my-3" contain height="250"/>
       </v-col>
       <v-col cols="12">
         <h2>Call to action</h2>
@@ -12,5 +12,6 @@
     </v-row>
   </v-container>
 </template>
+
 <script>
 </script>

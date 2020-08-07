@@ -1,7 +1,5 @@
 <template>
-  <v-container>
-    <h2>{{token}}</h2>
-  </v-container>
+  <v-container></v-container>
 </template>
 
 <script>
@@ -14,12 +12,9 @@ export default {
     return {};
   },
   mounted() {
-    console.log("token: ", this.token);
-    // console.log(this.$route.query);
-    // let aToken = this.$route.query.access_token;
     let aToken = this.token;
-    console.log(aToken);
-    // localStorage.setItem("RECON_GitHub_Token", aToken);
+
+    localStorage.setItem("RECON_GitHub_Token", aToken);
 
     this.$emit("getToken", aToken);
     this.$router.push({ name: "explore", params: { token: aToken } });
