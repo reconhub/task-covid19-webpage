@@ -32,6 +32,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ```
 docker build -t vue-test .
 docker run -it -p 8080:8080 --rm --name dockerize-vuejs-app-1 vue-test
-
-
 ```

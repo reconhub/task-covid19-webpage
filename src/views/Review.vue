@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     getSubmissions(status) {
-      let qry = `http://localhost:3000/issues?status=${status}`;
+      let qry = `${process.env.VUE_APP_API}/issues?status=${status}`;
 
       let self = this;
       console.log(self);
@@ -73,9 +73,9 @@ export default {
         });
     },
     judgeSubmission(sub, status) {
-      let qry = `http://127.0.0.1:3000/judgeIssue?note=${" "}&approver=${
-        this.user
-      }&status=${status}&id=${sub.id}`;
+      let qry = `http://127.0.0.1:3000/judgeIssue?token=${
+        this.token
+      }&note=${" "}&approver=${this.user}&status=${status}&id=${sub.id}`;
 
       let self = this;
 

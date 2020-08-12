@@ -34,7 +34,7 @@ export default {
         });
     },
     getAuthorization(username) {
-      let qry = `http://localhost:3000/auth?user=${username}`;
+      let qry = `${process.env.VUE_APP_API}/auth?user=${username}`;
 
       let self = this;
 

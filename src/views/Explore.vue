@@ -102,7 +102,7 @@ export default {
     submitForm(token) {
       console.log("inside submit form");
       let self = this;
-      let qry = `http://localhost:3000/submitIssue?author=${
+      let qry = `${process.env.VUE_APP_API}/submitIssue?author=${
         self.user
       }&difficulty=${self.formInfo.difficulty}&priority=${
         self.formInfo.priority
