@@ -11,7 +11,7 @@
       <v-btn v-if="token" @click="$router.push({ name: 'explore'})">Explore</v-btn>
       <v-btn @click="$router.push('about')">About</v-btn>
       <v-btn>Learn</v-btn>
-      <v-btn v-if="auth == 'admin'">Review</v-btn>
+      <v-btn v-if="auth == 'admin'" @click="$router.push('review')">Review</v-btn>
       <v-spacer></v-spacer>
       <v-btn
         v-if="!token"
