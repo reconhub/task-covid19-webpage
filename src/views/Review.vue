@@ -73,7 +73,7 @@ export default {
         });
     },
     judgeSubmission(sub, status) {
-      let qry = `http://127.0.0.1:3000/judgeIssue?token=${
+      let qry = `${process.env.VUE_APP_API}/judgeIssue?token=${
         this.token
       }&note=${" "}&approver=${this.user}&status=${status}&id=${sub.id}`;
 
