@@ -1,10 +1,22 @@
 <template>
   <div id="app">
     <v-app id="inspire">
-      <recon-toolbar :token="token" @getToken="getToken"/>
-      <keep-alive>
-        <router-view @getToken="getToken"/>
-      </keep-alive>
+      <recon-toolbar
+        :token="token"
+        :auth="auth"
+        :user="user"
+        @updateToken="updateToken"
+        @updateAuth="updateAuth"
+        @updateUser="updateUser"
+      />
+      <router-view
+        @updateToken="updateToken"
+        @updateAuth="updateAuth"
+        @updateUser="updateUser"
+        :token="token"
+        :auth="auth"
+        :user="user"
+      />
     </v-app>
   </div>
 </template>
@@ -17,17 +29,29 @@ export default {
   },
   data() {
     return {
-      token: ""
+      token: "",
+      auth: "",
+      user: ""
     };
   },
   methods: {
-    getToken(token) {
-      this.token = token;
+    updateToken() {
+      this.token = sessionStorage.getItem("RECON_GitHub_Token");
+    },
+    updateAuth() {
+      this.auth = sessionStorage.getItem("RECON_User_Auth");
+    },
+    updateUser() {
+      this.user = sessionStorage.getItem("RECON_User_Name");
     }
   },
   mounted() {
-    // let token = localStorage.getItem("RECON_GitHub_Token");
-    // console.log("mountedToken", token);
+    this.updateToken();
+    this.updateAuth();
+  },
+  beforeUpdate() {
+    this.updateToken();
+    this.updateAuth();
   }
 };
 </script>

@@ -1,9 +1,12 @@
 <template>
-  <v-container></v-container>
+  <v-card flat class="login">
+    <v-img :src="require('@/assets/rlogo-loader_250.gif')" class="my-3" contain height="200"/>
+    <p>Authorizing...</p>
+  </v-card>
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
 // https://andreybleme.com/2018-02-24/oauth-github-web-flow-cors-problem/
 export default {
   name: "LogIn",
@@ -11,13 +14,62 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    getUser(token) {
+      let qry = "https://api.github.com/user";
+
+      let self = this;
+
+      axios
+        .get(qry, { headers: { Authorization: `token ${token}` } })
+        .then(function(res) {
+          console.log("getUser", res.data);
+          self.getAuthorization(res.data.login);
+        })
+        .catch(function(err) {
+          console.log(JSON.stringify(err));
+          alert(err);
+          self.setToken("");
+          self.$router.push("/");
+        });
+    },
+    getAuthorization(username) {
+      let qry = `http://localhost:3000/auth?user=${username}`;
+
+      let self = this;
+
+      axios
+        .get(qry)
+        .then(function(res) {
+          console.log("getAuthorization", res.data);
+          self.setAuth(res.data.type);
+          self.setUser(res.data.user);
+          self.$router.push({ name: "explore" });
+        })
+        .catch(function(err) {
+          console.log(JSON.stringify(err));
+          alert(err);
+          self.setToken("");
+          self.$router.push("/");
+        });
+    },
+    setToken(tkn) {
+      sessionStorage.setItem("RECON_GitHub_Token", tkn);
+      this.$emit("updateToken");
+    },
+    setAuth(auth) {
+      sessionStorage.setItem("RECON_User_Auth", auth);
+      this.$emit("updateAuth");
+    },
+    setUser(user) {
+      sessionStorage.setItem("RECON_User_Name", user);
+      this.$emit("updateUser");
+    }
+  },
   mounted() {
-    let aToken = this.token;
-
-    localStorage.setItem("RECON_GitHub_Token", aToken);
-
-    this.$emit("getToken", aToken);
-    this.$router.push({ name: "explore", params: { token: aToken } });
+    let tkn = this.token;
+    this.setToken(tkn);
+    this.getUser(tkn);
   }
 };
 </script>

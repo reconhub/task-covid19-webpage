@@ -8,11 +8,10 @@
         <router-link to="/">RECON</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        v-if="token"
-        @click="$router.push({ name: 'explore', params: { token: token } })"
-      >Explore</v-btn>
+      <v-btn v-if="token" @click="$router.push({ name: 'explore'})">Explore</v-btn>
       <v-btn @click="$router.push('about')">About</v-btn>
+      <v-btn>Learn</v-btn>
+      <v-btn v-if="auth == 'admin'">Review</v-btn>
       <v-spacer></v-spacer>
       <v-btn
         v-if="!token"
@@ -25,11 +24,19 @@
 <script>
 export default {
   name: "toolbar",
-  props: ["token"],
+  props: ["token", "auth"],
+  data() {
+    return {};
+  },
   methods: {
     logout() {
-      this.$emit("getToken", "");
-      this.$router.push("home");
+      sessionStorage.setItem("RECON_GitHub_Token", "");
+      sessionStorage.setItem("RECON_User_Auth", "");
+      sessionStorage.setItem("RECON_User_Name", "");
+      this.$emit("updateToken");
+      this.$emit("updateAuth");
+      this.$emit("updateUser");
+      this.$router.push("/");
     }
   }
 };

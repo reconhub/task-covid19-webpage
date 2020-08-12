@@ -4,7 +4,7 @@
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat voluptates, porro tempora animi architecto at mollitia, fugit aperiam sunt doloribus tenetur impedit voluptatibus pariatur, assumenda numquam beatae asperiores nulla explicabo.</p>
     <v-row>
       <v-spacer></v-spacer>
-      <v-col cols="4">
+      <v-col cols="4" v-if="token">
         <v-btn @click="toggleForm">{{formText}}</v-btn>
       </v-col>
     </v-row>
@@ -17,7 +17,7 @@
       ></v-text-field>
       <v-select label="Task priority" v-model="formInfo.priority" :items="priorityTypes"></v-select>
       <v-select label="Task Difficulty" v-model="formInfo.difficulty" :items="difficultyTypes"></v-select>
-      <v-btn @click="submitForm">Submit</v-btn>
+      <v-btn @click="submitForm(token)">Submit</v-btn>
     </v-card>
     <v-row>
       <v-col v-for="(task, i) in tasks" :key="i" cols="4" style>
@@ -54,7 +54,7 @@ import { setTimeout } from "timers";
 
 export default {
   name: "explore",
-  props: ["token"],
+  props: ["token", "user"],
   data() {
     return {
       tasks: [],
@@ -71,7 +71,7 @@ export default {
     };
   },
   methods: {
-    getTasks() {
+    getTasks(token) {
       let qry =
         "https://api.github.com/repos/BenjaminOrtizUlloa/ExploreGitAPI/issues?per_page=100";
 
@@ -79,7 +79,7 @@ export default {
       console.log(self);
 
       axios
-        .get(qry, { headers: { Authorization: `token ${self.token}` } })
+        .get(qry, { headers: { Authorization: `token ${token}` } })
         .then(function(res) {
           console.log(res.data);
           self.tasks = self.parseIssues(res.data);
@@ -99,19 +99,24 @@ export default {
         this.formText = "Create new task";
       }
     },
-    submitForm() {
+    submitForm(token) {
+      console.log("inside submit form");
       let self = this;
-      let qry =
-        "https://api.github.com/repos/BenjaminOrtizUlloa/ExploreGitAPI/issues";
+      let qry = `http://localhost:3000/submitIssue?author=${
+        self.user
+      }&difficulty=${self.formInfo.difficulty}&priority=${
+        self.formInfo.priority
+      }&body=${self.formInfo.description}&title=${self.formInfo.title}`;
+      // "https://api.github.com/repos/BenjaminOrtizUlloa/ExploreGitAPI/issues";
       axios
         .post(
-          qry,
-          {
-            title: self.formInfo.title,
-            body: self.formInfo.description,
-            labels: [self.formInfo.priority, self.formInfo.difficulty]
-          },
-          { headers: { Authorization: `token ${self.token}` } }
+          qry
+          // {
+          //   title: self.formInfo.title,
+          //   body: self.formInfo.description,
+          //   labels: [self.formInfo.priority, self.formInfo.difficulty]
+          // },
+          // { headers: { Authorization: `token ${token}` } }
         )
         .then(function(res) {
           console.log("success", res);
@@ -120,9 +125,12 @@ export default {
           self.formInfo.priority = "";
           self.formInfo.difficulty = "";
           self.formInfo.description = "";
-          setTimeout(function() {
-            self.getTasks();
-          }, 1000);
+          alert(
+            "Thank you for submitting your task. It is waiting for admin approval."
+          );
+          // setTimeout(function() {
+          //   self.getTasks();
+          // }, 1000);
         })
         .catch(function(err) {
           alert(err);
@@ -152,7 +160,11 @@ export default {
     }
   },
   mounted() {
-    this.getTasks();
+    let token = sessionStorage.getItem("RECON_GitHub_Token");
+    this.$emit("updateToken");
+    if (token) {
+      this.getTasks(token);
+    }
   }
 };
 </script>

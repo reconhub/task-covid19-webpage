@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Explore from './views/Explore.vue'
 import LogIn from './views/LogIn.vue'
+import Review from './views/Review.vue'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       name: 'login',
       component: LogIn,
       props: true
+    },
+    {
+      path: '/review',
+      name: 'review',
+      component: Review
     }
 
   ]
