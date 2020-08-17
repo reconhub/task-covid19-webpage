@@ -28,7 +28,10 @@
               </p>
               <v-spacer></v-spacer>
               <v-btn v-if="issue_list[i].length" @click="closeIssue(i)">Close</v-btn>
-              <v-btn v-else @click="getIssue(repo, i)">Check issues</v-btn>
+              <v-btn v-else @click="getIssue(repo, i)">
+                Check
+                <br>issues
+              </v-btn>
             </v-col>
           </v-row>
           <v-row v-if="issue_list[i].length" class="mx-2">
@@ -55,9 +58,9 @@
                       <!-- <p>{{issue.body}}</p>     -->
                     </td>
                   </tr>
-                  <tr>
+                  <tr v-if="token">
                     <td>
-                      <v-btn>Add Issue</v-btn>
+                      <v-btn @click="updatePopup({type: 'CreateIssue', data: repo})">Add Issue</v-btn>
                     </td>
                   </tr>
                 </tbody>
@@ -73,6 +76,7 @@
 import axios from "axios";
 export default {
   name: "Repos",
+  props: ["token"],
   data() {
     return {
       repos: [],
@@ -81,6 +85,9 @@ export default {
     };
   },
   methods: {
+    updatePopup(dta) {
+      this.$emit("updatePopup", dta);
+    },
     makeRepo() {
       let qry = `https://api.github.com/orgs/RECON-Mirror/repos`;
       let bdy = {

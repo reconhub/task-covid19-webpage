@@ -1,5 +1,5 @@
 <template>
-  <v-card color="pink" flat tile>
+  <v-card flat tile>
     <v-toolbar color="grey">
       <!-- <v-avatar>
         <v-img :src="require('@/assets/logo-sticker.png')"/>
@@ -40,7 +40,6 @@ export default {
     }
   },
   mounted() {
-    console.log("process env", process.env.VUE_APP_GIT_LOGIN);
     this.git_login_url = process.env.VUE_APP_GIT_LOGIN;
   }
 };
