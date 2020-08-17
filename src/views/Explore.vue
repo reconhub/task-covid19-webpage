@@ -43,6 +43,14 @@
               </div>
             </v-col>
           </v-row>
+          <v-row>
+            <v-col>
+              <p>
+                Tags:
+                <span v-for="(tag, j) in task.otherTags" :key="j">&nbsp; {{tag.name}}&nbsp;|</span>
+              </p>
+            </v-col>
+          </v-row>
         </v-card>
       </v-col>
     </v-row>
@@ -140,10 +148,26 @@ export default {
     parseIssues(dta) {
       let issues = dta.map(function(x) {
         let title = x.title;
-        let priority = x.labels.filter(y => y.description == "Priority")[0]
-          .name;
-        let difficulty = x.labels.filter(y => y.description == "Difficulty")[0]
-          .name;
+        let priority = x.labels.filter(y => y.description == "Priority");
+
+        if (priority.length) {
+          priority = priority[0].name;
+        } else {
+          priority = "No Priority Assigned";
+        }
+
+        let difficulty = x.labels.filter(y => y.description == "Difficulty");
+
+        if (difficulty.length) {
+          difficulty = difficulty[0].name;
+        } else {
+          difficulty = "No Difficulty Assigned";
+        }
+
+        let otherTags = x.labels.filter(
+          y => (y.description != "Difficulty") & (y.description != "Priority")
+        );
+
         let description = x.body;
         let url = x.html_url;
 
@@ -152,7 +176,8 @@ export default {
           priority: priority,
           difficulty: difficulty,
           description: description,
-          url: url
+          url: url,
+          otherTags: otherTags
         };
       });
 

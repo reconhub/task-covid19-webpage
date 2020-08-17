@@ -8,15 +8,13 @@
         <router-link to="/">RECON</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn v-if="token" @click="$router.push({ name: 'explore'})">Explore</v-btn>
+      <v-btn @click="$router.push('repos')">Repos</v-btn>
       <v-btn @click="$router.push('about')">About</v-btn>
+      <v-btn v-if="token" @click="$router.push({ name: 'explore'})">Explore</v-btn>
       <v-btn>Learn</v-btn>
       <v-btn v-if="auth == 'admin'" @click="$router.push('review')">Review</v-btn>
       <v-spacer></v-spacer>
-      <v-btn
-        v-if="!token"
-        href="https://github.com/login/oauth/authorize?scope=public_repo,user:email,write:discussion&client_id=d7b7ae0e1e00bb84d819"
-      >Log in</v-btn>
+      <v-btn v-if="!token" :href="git_login_url">Log in</v-btn>
       <v-btn v-if="token" @click="logout">Log Out</v-btn>
     </v-toolbar>
   </v-card>
@@ -26,7 +24,9 @@ export default {
   name: "toolbar",
   props: ["token", "auth"],
   data() {
-    return {};
+    return {
+      git_login_url: ""
+    };
   },
   methods: {
     logout() {
@@ -38,6 +38,10 @@ export default {
       this.$emit("updateUser");
       this.$router.push("/");
     }
+  },
+  mounted() {
+    console.log("process env", process.env.VUE_APP_GIT_LOGIN);
+    this.git_login_url = process.env.VUE_APP_GIT_LOGIN;
   }
 };
 </script>

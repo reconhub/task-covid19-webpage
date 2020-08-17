@@ -68,6 +68,7 @@ export default {
   },
   mounted() {
     let tkn = this.token;
+    console.log("in login token", tkn);
     this.setToken(tkn);
     this.getUser(tkn);
   }

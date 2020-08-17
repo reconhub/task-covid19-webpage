@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Explore from './views/Explore.vue'
 import LogIn from './views/LogIn.vue'
 import Review from './views/Review.vue'
+import Repos from "./views/Repos.vue"
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/review',
       name: 'review',
       component: Review
+    },
+    {
+      path: "/repos",
+      name: "repos",
+      component: Repos
     }
 
   ]
