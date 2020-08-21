@@ -12,6 +12,20 @@
         :user="user"
         @updatePopup="updatePopup"
       />
+      <PopupEditUser
+        v-else-if="popup.type == 'EditUser'"
+        :popup="popup"
+        :token="token"
+        :user="user"
+        @updatePopup="updatePopup"
+      />
+      <PopupCreateUser
+        v-else-if="popup.type == 'CreateUser'"
+        :popup="popup"
+        :token="token"
+        :user="user"
+        @updatePopup="updatePopup"
+      />
       <v-btn v-else @click="updatePopup({type: ''})">Close</v-btn>
     </v-col>
     <v-spacer></v-spacer>
@@ -19,12 +33,16 @@
 </template>
 <script>
 import PopupCreateIssue from "@/components/PopupCreateIssue";
+import PopupEditUser from "@/components/PopupEditUser";
+import PopupCreateUser from "@/components/PopupCreateUser";
 
 export default {
   name: "popup",
   props: ["popup", "user", "token"],
   components: {
-    PopupCreateIssue
+    PopupCreateIssue,
+    PopupEditUser,
+    PopupCreateUser
   },
   data() {
     return {

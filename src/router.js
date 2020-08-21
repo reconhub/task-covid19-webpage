@@ -6,6 +6,7 @@ import LogIn from './views/LogIn.vue'
 import Review from './views/Review.vue'
 import Repos from "./views/Repos.vue"
 import MyTasks from "./views/MyTasks.vue"
+import AdminDashboard from "./views/AdminDashboard.vue"
 
 Vue.use(Router)
 
@@ -52,6 +53,11 @@ export default new Router({
       path: "/myTasks",
       name: "mytasks",
       component: MyTasks
+    },
+    {
+      path: "/adminDash",
+      name: "admindash",
+      component: AdminDashboard
     }
 
   ]

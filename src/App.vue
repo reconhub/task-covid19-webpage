@@ -17,6 +17,7 @@
         :token="token"
         :auth="auth"
         :user="user"
+        :popup="popup"
       />
       <Popup
         v-if="popup.type"
