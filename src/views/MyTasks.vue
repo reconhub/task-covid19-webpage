@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="explore pt-2">
-    <h2>This is a Review page</h2>
+    <h2>My Submitted Tasks</h2>
     <v-col>
       <v-row>
         <v-spacer></v-spacer>
@@ -15,14 +15,11 @@
       </v-row>
       <v-row>
         <v-spacer></v-spacer>
-        <v-data-table :headers="headers" :items="pendingSubmissions" :search="search">
-          <template v-slot:item.notes="{item}">
-            <v-text-field @click="mycheck(item)" v-model="item.note"></v-text-field>
-          </template>
-          <template v-slot:item.actions="{item}">
+        <v-data-table :headers="headers" :items="submissions" :search="search">
+          <!-- <template v-slot:item.actions="{item}">
             <v-icon small class="mr-2" @click="judgeSubmission(item, 'approved')">mdi-thumb-up</v-icon>
             <v-icon small @click="judgeSubmission(item, 'rejected')">mdi-thumb-down</v-icon>
-          </template>
+          </template>-->
         </v-data-table>
         <v-spacer></v-spacer>
       </v-row>
@@ -41,26 +38,26 @@ export default {
       search: "",
       headers: [
         {
-          text: "Author",
+          text: "Repo",
           align: "start",
-          value: "author"
+          value: "repo"
         },
         { text: "Title", value: "title" },
         { text: "Description", value: "body" },
         { text: "Difficulty", value: "difficulty" },
         { text: "Priority", value: "priority" },
+        { text: "Status", value: "status" },
         { text: "Created", value: "created_on" },
-        { text: "Updated", value: "last_update" },
-        { text: "Notes", value: "notes", sortable: false },
-        { text: "Actions", value: "actions", sortable: false }
+        { text: "Notes", value: "note" },
+        { text: "Updated", value: "last_update" }
       ],
-      pendingSubmissions: []
+      submissions: []
     };
   },
   methods: {
-    getSubmissions(status) {
-      let qry = `${process.env.VUE_APP_API}/issues?status=${status}`;
-
+    getSubmissions() {
+      let qry = `${process.env.VUE_APP_API}/myIssues?user=${this.user}`;
+      console.log(qry);
       let self = this;
       console.log(self);
 
@@ -68,39 +65,17 @@ export default {
         .get(qry)
         .then(function(res) {
           console.log("getsubmissions", res.data);
-          self.pendingSubmissions = res.data;
+          self.submissions = res.data;
         })
         .catch(function(err) {
           console.log(JSON.stringify(err));
           alert(err);
           console.log(err);
         });
-    },
-    judgeSubmission(sub, status) {
-      let qry = `${process.env.VUE_APP_API}/judgeIssue?token=${
-        this.token
-      }&note=${sub.note}&approver=${this.user}&status=${status}&id=${sub.id}`;
-
-      let self = this;
-
-      axios
-        .post(qry)
-        .then(function(res) {
-          console.log("judgeSubmission", res.data);
-          self.getSubmissions("pending");
-        })
-        .catch(function(err) {
-          console.log(JSON.stringify(err));
-          alert(err);
-          console.log(err);
-        });
-    },
-    mycheck(d) {
-      console.log(d);
     }
   },
   mounted() {
-    this.getSubmissions("pending");
+    this.getSubmissions();
     this.$emit("updateToken");
     this.$emit("updateAuth");
     this.$emit("updateUser");

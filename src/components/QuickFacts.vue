@@ -1,17 +1,21 @@
 <template>
   <v-container>
-    <h2>Quick Facts</h2>
-    <v-row v-for="(fact, i) in facts" :key="i">
-      <v-col v-if="i % 2 === 0" cols="4">
-        <!-- <v-img :src="require('../assets/Placeholder.png')" class="my-3" contain height="100"/> -->
-        <v-img :src="fact.img" class="my-3" contain height="100"/>
+    <v-row>
+      <v-spacer></v-spacer>
+      <v-col cols="10">
+        <h2>Tools developed by the R epidemics consortium (RECON) are essential in helping professionals design outbreak analytics pipelines in response to COVID19.</h2>
+      </v-col>
+      <v-spacer></v-spacer>
+    </v-row>
+    <v-row v-for="(fact, i) in facts" :key="i" align="center">
+      <v-col v-if="i % 2 === 0" cols="4" align="center">
+        <v-img :src="fact.img" class="my-3" contain height="200"/>
       </v-col>
       <v-col cols="8">
         <p>{{fact.txt}}</p>
       </v-col>
       <v-col v-if="i % 2 !== 0" cols="4">
-        <!-- <v-img :src="require('../assets/Placeholder.png')" class="my-3" contain height="100"/> -->
-        <v-img :src="fact.img" class="my-3" contain height="100"/>
+        <v-img :src="fact.img" class="my-3" contain height="200"/>
       </v-col>
     </v-row>
   </v-container>
@@ -26,23 +30,18 @@ export default {
       facts: [
         {
           txt:
-            "Enim illum ad dolores iusto sequi eveniet, saepe exercitationem vitae consectetur assumenda esse culpa dolorem, blanditiis voluptas nostrum! Dolor illo rem culpa?",
-          img: require("../assets/Placeholder.png")
+            "The tasking manager is a direct communication channel between field agents actively working on the response to COVID19 and the R community.",
+          img: require("../assets/QuickFacts/bubble.png")
         },
         {
           txt:
-            "Facere dignissimos, praesentium provident quidem quia tempora exercitationem consectetur et iste maxime sequi voluptatum dolores sint molestias doloremque maiores vero odio repellat.",
-          img: require("../assets/Placeholder.png")
+            "Your R programming skills can help field agents around the world.",
+          img: require("../assets/QuickFacts/ex_2.png")
         },
         {
           txt:
-            "Eius expedita tempora, odio numquam obcaecati reprehenderit voluptatum ipsum, quod assumenda animi neque ullam. Corporis cum fugiat omnis qui tempore, magni fugit.",
-          img: require("../assets/Placeholder.png")
-        },
-        {
-          txt:
-            "Sapiente dolorum vitae eos ad, enim molestias et sunt officiis placeat vel quod similique distinctio corporis tempore, accusamus commodi reiciendis, maiores expedita!",
-          img: require("../assets/Placeholder.png")
+            "RECON packages have been used in many outbreaks such as the Ebola outbreaks in West Africa (2014-2016) and Eastern Democratic Republic of the Congo (2018-2020), and are currently used by various public health institutions and academic modelling groups in the COVID-19 response.",
+          img: require("../assets/QuickFacts/outbreaker2_1.png")
         }
       ]
     };

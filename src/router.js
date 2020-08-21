@@ -5,6 +5,7 @@ import Explore from './views/Explore.vue'
 import LogIn from './views/LogIn.vue'
 import Review from './views/Review.vue'
 import Repos from "./views/Repos.vue"
+import MyTasks from "./views/MyTasks.vue"
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
       path: "/repos",
       name: "repos",
       component: Repos
+    },
+    {
+      path: "/myTasks",
+      name: "mytasks",
+      component: MyTasks
     }
 
   ]

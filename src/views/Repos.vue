@@ -2,11 +2,14 @@
   <v-card flat class="repos">
     <v-img :src="require('../assets/Placeholder.png')" class="my-3" contain height="200"/>
     <h2>Repos</h2>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum quam libero magnam molestiae iure et impedit alias vitae facilis. Sapiente nemo animi expedita pariatur libero rerum, ea culpa illum necessitatibus!</p>
-    <v-btn @click="makeRepo">Click me</v-btn>
+    <p>Here is a list of all the projects RECON has taken on in the past. Feel free to explore the projects. If you think something is missing, then please log in and post an issue.</p>
+    <v-btn
+      v-if="token"
+      @click="updatePopup({type: 'CreateIssue', data: repoCatcher })"
+    >Suggest a Repo</v-btn>
     <v-row>
       <v-col v-for="(repo, i) in repos" :key="i" sm="12" lg="4" md="6" xl="4" cols="12">
-        <v-card class="mx-2 px-2">
+        <v-card class="mx-2 px-2" :loading="!repos.length">
           <v-row>
             <v-col cols="8">
               <v-card-title>
@@ -79,10 +82,16 @@ export default {
   props: ["token"],
   data() {
     return {
-      repos: [],
+      repos: [{ name: "" }],
       issue_list: [],
       page: 1
     };
+  },
+  computed: {
+    repoCatcher() {
+      let repoCatch = this.repos.filter(d => d.name == "covid19hub");
+      if (repoCatch[0]) return repoCatch[0];
+    }
   },
   methods: {
     updatePopup(dta) {
@@ -124,7 +133,8 @@ export default {
       axios
         .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
         .then(function(res) {
-          self.repos = self.repos.concat(res.data);
+          self.repos = res.data;
+          // self.repos = self.repos.concat(res.data);
 
           if (res.data.length >= size) {
             self.page += 1;
