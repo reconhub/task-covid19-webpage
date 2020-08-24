@@ -1,25 +1,35 @@
 <template>
   <div id="app">
     <v-app id="inspire">
-      <recon-toolbar
+      <MenuDrawer
+        v-if="drawer"
         :token="token"
         :auth="auth"
         :user="user"
-        @updateToken="updateToken"
-        @updateAuth="updateAuth"
-        @updateUser="updateUser"
+        @toggleDrawer="toggleDrawer"
       />
-      <router-view
-        @updateToken="updateToken"
-        @updateAuth="updateAuth"
-        @updateUser="updateUser"
-        @updatePopup="updatePopup"
-        :token="token"
-        :auth="auth"
-        :user="user"
-        :popup="popup"
-        :repos="repos"
-      />
+      <v-main>
+        <recon-toolbar
+          :token="token"
+          :auth="auth"
+          :user="user"
+          @updateToken="updateToken"
+          @updateAuth="updateAuth"
+          @updateUser="updateUser"
+          @toggleDrawer="toggleDrawer"
+        />
+        <router-view
+          @updateToken="updateToken"
+          @updateAuth="updateAuth"
+          @updateUser="updateUser"
+          @updatePopup="updatePopup"
+          :token="token"
+          :auth="auth"
+          :user="user"
+          :popup="popup"
+          :repos="repos"
+        />
+      </v-main>
       <Popup
         v-if="popup.type"
         :popup="popup"
@@ -35,11 +45,13 @@
 import axios from "axios";
 import ReconToolbar from "@/components/ReconToolbar";
 import Popup from "@/components/Popup";
+import MenuDrawer from "@/components/MenuDrawer";
 export default {
   name: "app",
   components: {
     ReconToolbar,
-    Popup
+    Popup,
+    MenuDrawer
   },
   data() {
     return {
@@ -49,7 +61,8 @@ export default {
       popup: { type: "" },
       repos: [],
       collaborators: [],
-      page: 1
+      page: 1,
+      drawer: false
     };
   },
   methods: {
@@ -64,6 +77,10 @@ export default {
     },
     updatePopup(bus) {
       this.popup = bus;
+    },
+    toggleDrawer() {
+      console.log("drawer");
+      this.drawer = !this.drawer;
     },
     getRepos() {
       let self = this;

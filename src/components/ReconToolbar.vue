@@ -1,13 +1,14 @@
 <template>
-  <v-card flat tile>
-    <v-toolbar>
+  <div>
+    <v-app-bar class="hidden-md-and-down">
       <v-row align="end" class="px-3">
-        <p>Together against COVID19</p>
+        <p style="margin-bottom: 0;">Together against COVID19</p>
         <v-spacer></v-spacer>
         <a href="https://www.repidemicsconsortium.org/">repidemicsconsortium.org</a>
       </v-row>
-    </v-toolbar>
-    <v-toolbar>
+    </v-app-bar>
+    <v-app-bar>
+      <v-app-bar-nav-icon @click="$emit('toggleDrawer')" class="hidden-lg-and-up"></v-app-bar-nav-icon>
       <v-toolbar-title>
         <v-avatar>
           <v-img :src="require('@/assets/logo-sticker.png')"/>
@@ -15,18 +16,20 @@
         <router-link to="/">RECON</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <!-- <v-btn @click="$router.push('repos')">Repos</v-btn> -->
-      <v-btn @click="$router.push('about')">About</v-btn>
-      <v-btn>Learn</v-btn>
-      <v-btn v-if="token" @click="$router.push('myTasks')">My Tasks</v-btn>
-      <v-btn @click="$router.push({ name: 'explore'})">Explore</v-btn>
-      <v-btn v-if="auth == 'admin' | auth == 'reviewer'" @click="$router.push('review')">Review</v-btn>
-      <v-btn v-if="auth == 'admin'" @click="$router.push('adminDash')">Admin Dashboard</v-btn>
+      <div class="hidden-md-and-down">
+        <v-btn @click="$router.push('about')">About</v-btn>
+        <v-btn @click="$router.push('learn')">Learn</v-btn>
+        <v-btn @click="$router.push({ name: 'explore'})">Explore</v-btn>
+        <v-btn v-if="token" @click="$router.push('myTasks')">My Tasks</v-btn>
+        <v-btn v-if="auth == 'admin' | auth == 'reviewer'" @click="$router.push('review')">Review</v-btn>
+        <v-btn v-if="auth == 'admin'" @click="$router.push('adminDash')">Admin Dashboard</v-btn>
+        <!-- <v-btn @click="$router.push('repos')">Repos</v-btn> -->
+      </div>
       <v-spacer></v-spacer>
       <v-btn v-if="!token" :href="git_login_url">Log in</v-btn>
       <v-btn v-if="token" @click="logout">Log Out</v-btn>
-    </v-toolbar>
-  </v-card>
+    </v-app-bar>
+  </div>
 </template>
 <script>
 export default {

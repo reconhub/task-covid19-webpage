@@ -77,11 +77,15 @@ export default {
         });
     }
   },
-  mounted() {
-    this.getSubmissions();
+  beforeCreate() {
+    console.log("beforecreate");
     this.$emit("updateToken");
     this.$emit("updateAuth");
     this.$emit("updateUser");
+  },
+  mounted() {
+    console.log("now get subm");
+    this.getSubmissions();
   }
 };
 </script>

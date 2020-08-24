@@ -3,13 +3,23 @@
     <h2>This is an explore page</h2>
     <p>Here is a list of all the proposed and pending tasks submitted to RECON.</p>
     <v-row>
+      <v-col cols="4">
+        <v-row>
+          <v-col>
+            <v-select label="Filter Complexity" :items="complexityTypes" v-model="complexityFilter"></v-select>
+          </v-col>
+          <v-col>
+            <v-select label="Filter Priority" :items="priorityTypes" v-model="priorityFilter"></v-select>
+          </v-col>
+        </v-row>
+      </v-col>
       <v-spacer></v-spacer>
       <v-col cols="4" v-if="token">
         <v-btn @click="updatePopup({type: 'CreateIssue', data: '' })">Create new task</v-btn>
       </v-col>
     </v-row>
     <v-row>
-      <v-col v-for="(task, i) in tasks" :key="i" sm="12" lg="4" md="6" xl="4" cols="12">
+      <v-col v-for="(task, i) in filteredData" :key="i" sm="12" lg="4" md="6" xl="4" cols="12">
         <v-card class="mx-2 pr-2">
           <v-row>
             <v-col cols="8">
@@ -65,8 +75,43 @@ export default {
   data() {
     return {
       tasks: [],
-      details: []
+      details: [],
+      priorityFilter: "",
+      complexityFilter: "",
+      priorityTypes: [
+        { text: "None", value: "" },
+        { text: "Low", value: "Priority: Low" },
+        {
+          text: "Medium",
+          value: "Priority: Medium"
+        },
+        { text: "High", value: "Priority: High" }
+      ],
+      complexityTypes: [
+        { text: "None", value: "" },
+        { text: "Low", value: "Complexity: Low" },
+        {
+          text: "Medium",
+          value: "Complexity: Medium"
+        },
+        { text: "High", value: "Complexity: High" }
+      ]
     };
+  },
+  computed: {
+    filteredData() {
+      let dta = this.tasks;
+
+      if (this.priorityFilter) {
+        dta = dta.filter(d => d.priority == this.priorityFilter);
+      }
+
+      if (this.complexityFilter) {
+        dta = dta.filter(d => d.complexity == this.complexityFilter);
+      }
+
+      return dta;
+    }
   },
   methods: {
     getTasks() {
