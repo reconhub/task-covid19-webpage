@@ -15,14 +15,11 @@
         <router-link to="/">RECON</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn @click="$router.push('repos')">Repos</v-btn>
+      <!-- <v-btn @click="$router.push('repos')">Repos</v-btn> -->
       <v-btn @click="$router.push('about')">About</v-btn>
       <v-btn>Learn</v-btn>
       <v-btn v-if="token" @click="$router.push('myTasks')">My Tasks</v-btn>
-      <v-btn
-        v-if="auth == 'admin' | auth == 'reviewer'"
-        @click="$router.push({ name: 'explore'})"
-      >Explore</v-btn>
+      <v-btn @click="$router.push({ name: 'explore'})">Explore</v-btn>
       <v-btn v-if="auth == 'admin' | auth == 'reviewer'" @click="$router.push('review')">Review</v-btn>
       <v-btn v-if="auth == 'admin'" @click="$router.push('adminDash')">Admin Dashboard</v-btn>
       <v-spacer></v-spacer>

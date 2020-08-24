@@ -16,6 +16,9 @@
       <v-row>
         <v-spacer></v-spacer>
         <v-data-table :headers="headers" :items="submissions" :search="search">
+          <template v-slot:item.title="{item}">
+            <a :href="item.url">{{item.title}}</a>
+          </template>
           <!-- <template v-slot:item.actions="{item}">
             <v-icon small class="mr-2" @click="judgeSubmission(item, 'approved')">mdi-thumb-up</v-icon>
             <v-icon small @click="judgeSubmission(item, 'rejected')">mdi-thumb-down</v-icon>
@@ -44,7 +47,7 @@ export default {
         },
         { text: "Title", value: "title" },
         { text: "Description", value: "body" },
-        { text: "Difficulty", value: "difficulty" },
+        { text: "Complexity", value: "complexity" },
         { text: "Priority", value: "priority" },
         { text: "Status", value: "status" },
         { text: "Created", value: "created_on" },

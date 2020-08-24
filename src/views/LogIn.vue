@@ -44,7 +44,7 @@ export default {
           console.log("getAuthorization", res.data);
           self.setAuth(res.data.type);
           self.setUser(res.data.user);
-          self.$router.push({ name: "repos" });
+          self.$router.push({ name: "explore" });
         })
         .catch(function(err) {
           console.log(JSON.stringify(err));

@@ -79,10 +79,9 @@
 import axios from "axios";
 export default {
   name: "Repos",
-  props: ["token"],
+  props: ["token", "repos"],
   data() {
     return {
-      repos: [{ name: "" }],
       issue_list: [],
       page: 1
     };
@@ -122,33 +121,35 @@ export default {
           console.log(err);
         });
     },
+    // getRepos() {
+    //   let self = this;
+    //   let size = 100;
+    //   let qry = `https://api.github.com/orgs/${"reconhub"}/repos?sort=updated&per_page=${size}&page=${
+    //     this.page
+    //   }`;
+    //   console.log(qry);
+    //   axios
+    //     .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
+    //     .then(function(res) {
+    //       if (self.page == 1) {
+    //         self.repos = res.data;
+    //       } else {
+    //         self.repos = self.repos.concat(res.data);
+    //       }
 
-    getRepos() {
-      let self = this;
-      let size = 100;
-      let qry = `https://api.github.com/orgs/${"reconhub"}/repos?sort=updated&per_page=${size}&page=${
-        this.page
-      }`;
-      console.log(qry);
-      axios
-        .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
-        .then(function(res) {
-          self.repos = res.data;
-          // self.repos = self.repos.concat(res.data);
-
-          if (res.data.length >= size) {
-            self.page += 1;
-            self.getRepos(self.page);
-          } else {
-            self.issue_list = self.repos.map(() => []);
-          }
-        })
-        .catch(function(err) {
-          console.log(JSON.stringify(err));
-          alert(err);
-          console.log(err);
-        });
-    },
+    //       if (res.data.length >= size) {
+    //         self.page += 1;
+    //         self.getRepos(self.page);
+    //       } else {
+    //         self.issue_list = self.repos.map(() => []);
+    //       }
+    //     })
+    //     .catch(function(err) {
+    //       console.log(JSON.stringify(err));
+    //       alert(err);
+    //       console.log(err);
+    //     });
+    // },
     getIssue(repo_info, i) {
       let owner = repo_info.owner.login;
       let repo = repo_info.name;
@@ -177,7 +178,8 @@ export default {
     }
   },
   mounted() {
-    this.getRepos();
+    // this.getRepos();
+    this.issue_list = this.repos.map(() => []);
   }
 };
 </script>

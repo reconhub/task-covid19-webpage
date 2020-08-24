@@ -1,33 +1,22 @@
 <template>
-  <v-card flat class="explore pt-2">
+  <v-card flat class="explore pa-5">
     <h2>This is an explore page</h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat voluptates, porro tempora animi architecto at mollitia, fugit aperiam sunt doloribus tenetur impedit voluptatibus pariatur, assumenda numquam beatae asperiores nulla explicabo.</p>
+    <p>Here is a list of all the proposed and pending tasks submitted to RECON.</p>
     <v-row>
       <v-spacer></v-spacer>
       <v-col cols="4" v-if="token">
-        <v-btn @click="toggleForm">{{formText}}</v-btn>
+        <v-btn @click="updatePopup({type: 'CreateIssue', data: '' })">Create new task</v-btn>
       </v-col>
     </v-row>
-    <v-card v-if="showForm" class="mx-2 px-10 py-5">
-      <v-text-field label="Task Title" v-model="formInfo.title" placeholder="Enter title..."></v-text-field>
-      <v-text-field
-        label="Task Description"
-        v-model="formInfo.description"
-        placeholder="Enter description..."
-      ></v-text-field>
-      <v-select label="Task priority" v-model="formInfo.priority" :items="priorityTypes"></v-select>
-      <v-select label="Task Difficulty" v-model="formInfo.difficulty" :items="difficultyTypes"></v-select>
-      <v-btn @click="submitForm(token)">Submit</v-btn>
-    </v-card>
     <v-row>
-      <v-col v-for="(task, i) in tasks" :key="i" cols="4" style>
+      <v-col v-for="(task, i) in tasks" :key="i" sm="12" lg="4" md="6" xl="4" cols="12">
         <v-card class="mx-2 pr-2">
           <v-row>
             <v-col cols="8">
               <v-card-title>
                 <a :href="task.url" target="_blank">{{task.title}}</a>
               </v-card-title>
-              <v-card-subtitle v-text="task.description"></v-card-subtitle>
+              <!-- <v-card-subtitle v-text="task.description" style="white-space: pre"></v-card-subtitle> -->
             </v-col>
             <v-col cols="4">
               <div style="height: 40%">
@@ -38,7 +27,7 @@
               <v-spacer></v-spacer>
               <div style="height: 40%">
                 <p>
-                  <i>{{task.difficulty}}</i>
+                  <i>{{task.complexity}}</i>
                 </p>
               </div>
             </v-col>
@@ -46,9 +35,19 @@
           <v-row>
             <v-col>
               <p>
-                Tags:
-                <span v-for="(tag, j) in task.otherTags" :key="j">&nbsp; {{tag.name}}&nbsp;|</span>
+                Additional Tags:
+                <span
+                  v-for="(tag, j) in task.otherTags"
+                  :key="j"
+                >&nbsp; {{tag.name}}&nbsp;|</span>
               </p>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <p v-if="details[i]" style="white-space: pre-wrap">{{task.description}}</p>
+              <v-btn v-if="details[i]" @click="showDetail(i, false)">Hide Details</v-btn>
+              <v-btn v-else @click="showDetail(i, true)">Show Details</v-btn>
             </v-col>
           </v-row>
         </v-card>
@@ -66,31 +65,24 @@ export default {
   data() {
     return {
       tasks: [],
-      showForm: false,
-      priorityTypes: ["Low", "Medium", "High", "Urgent"],
-      difficultyTypes: ["Beginner", "Intermediate", "Hard", "Admin-only"],
-      formInfo: {
-        title: "",
-        priority: "",
-        difficulty: "",
-        description: ""
-      },
-      formText: "Create new task"
+      details: []
     };
   },
   methods: {
-    getTasks(token) {
-      let qry =
-        "https://api.github.com/repos/BenjaminOrtizUlloa/ExploreGitAPI/issues?per_page=100";
+    getTasks() {
+      let qry = `https://api.github.com/repos/BenjaminOrtizUlloa/ExploreGitAPI/issues`;
+
+      // "https://api.github.com/repos/BenjaminOrtizUlloa/ExploreGitAPI/issues?per_page=100";
 
       let self = this;
       console.log(self);
 
       axios
-        .get(qry, { headers: { Authorization: `token ${token}` } })
+        .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
         .then(function(res) {
           console.log(res.data);
           self.tasks = self.parseIssues(res.data);
+          self.details = self.tasks.map(() => false);
           console.log("tasks", self.tasks);
         })
         .catch(function(err) {
@@ -99,73 +91,30 @@ export default {
           console.log(err);
         });
     },
-    toggleForm() {
-      this.showForm = !this.showForm;
-      if (this.showForm) {
-        this.formText = "X";
-      } else {
-        this.formText = "Create new task";
-      }
-    },
-    submitForm(token) {
-      console.log("inside submit form");
-      let self = this;
-      let qry = `${process.env.VUE_APP_API}/submitIssue?author=${
-        self.user
-      }&difficulty=${self.formInfo.difficulty}&priority=${
-        self.formInfo.priority
-      }&body=${self.formInfo.description}&title=${self.formInfo.title}`;
-      // "https://api.github.com/repos/BenjaminOrtizUlloa/ExploreGitAPI/issues";
-      axios
-        .post(
-          qry
-          // {
-          //   title: self.formInfo.title,
-          //   body: self.formInfo.description,
-          //   labels: [self.formInfo.priority, self.formInfo.difficulty]
-          // },
-          // { headers: { Authorization: `token ${token}` } }
-        )
-        .then(function(res) {
-          console.log("success", res);
-          self.toggleForm();
-          self.formInfo.title = "";
-          self.formInfo.priority = "";
-          self.formInfo.difficulty = "";
-          self.formInfo.description = "";
-          alert(
-            "Thank you for submitting your task. It is waiting for admin approval."
-          );
-          // setTimeout(function() {
-          //   self.getTasks();
-          // }, 1000);
-        })
-        .catch(function(err) {
-          alert(err);
-          console.log(err);
-        });
+    updatePopup(dta) {
+      this.$emit("updatePopup", dta);
     },
     parseIssues(dta) {
       let issues = dta.map(function(x) {
         let title = x.title;
-        let priority = x.labels.filter(y => y.description == "Priority");
+        let priority = x.labels.filter(y => y.name.match(/^Priority_/g));
 
         if (priority.length) {
-          priority = priority[0].name;
+          priority = priority[0].name.replace("_", ": ");
         } else {
           priority = "No Priority Assigned";
         }
 
-        let difficulty = x.labels.filter(y => y.description == "Difficulty");
+        let complexity = x.labels.filter(y => y.name.match(/^Complexity_/g));
 
-        if (difficulty.length) {
-          difficulty = difficulty[0].name;
+        if (complexity.length) {
+          complexity = complexity[0].name.replace("_", ": ");
         } else {
-          difficulty = "No Difficulty Assigned";
+          complexity = "No Complexity Assigned";
         }
 
         let otherTags = x.labels.filter(
-          y => (y.description != "Difficulty") & (y.description != "Priority")
+          y => !y.name.match(/^Complexity_/g) & y.name.match(/^Priority_/g)
         );
 
         let description = x.body;
@@ -174,7 +123,7 @@ export default {
         return {
           title: title,
           priority: priority,
-          difficulty: difficulty,
+          complexity: complexity,
           description: description,
           url: url,
           otherTags: otherTags
@@ -182,14 +131,19 @@ export default {
       });
 
       return issues;
+    },
+    showDetail(i, bool) {
+      console.log("show" + bool);
+      this.$set(this.details, i, bool);
     }
   },
   mounted() {
     let token = sessionStorage.getItem("RECON_GitHub_Token");
     this.$emit("updateToken");
-    if (token) {
-      this.getTasks(token);
-    }
+    this.getTasks();
+    // if (token) {
+    //   this.getTasks(token);
+    // }
   }
 };
 </script>

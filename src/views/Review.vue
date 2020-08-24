@@ -17,7 +17,7 @@
         <v-spacer></v-spacer>
         <v-data-table :headers="headers" :items="pendingSubmissions" :search="search">
           <template v-slot:item.notes="{item}">
-            <v-text-field @click="mycheck(item)" v-model="item.note"></v-text-field>
+            <v-textarea @click="mycheck(item)" v-model="item.note"></v-textarea>
           </template>
           <template v-slot:item.actions="{item}">
             <v-icon small class="mr-2" @click="judgeSubmission(item, 'approved')">mdi-thumb-up</v-icon>
@@ -47,7 +47,7 @@ export default {
         },
         { text: "Title", value: "title" },
         { text: "Description", value: "body" },
-        { text: "Difficulty", value: "difficulty" },
+        { text: "Complexity", value: "complexity" },
         { text: "Priority", value: "priority" },
         { text: "Created", value: "created_on" },
         { text: "Updated", value: "last_update" },

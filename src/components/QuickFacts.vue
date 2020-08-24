@@ -31,17 +31,17 @@ export default {
         {
           txt:
             "The tasking manager is a direct communication channel between field agents actively working on the response to COVID19 and the R community.",
-          img: require("../assets/QuickFacts/bubble.png")
+          img: require("../assets/Placeholder.png")
         },
         {
           txt:
             "Your R programming skills can help field agents around the world.",
-          img: require("../assets/QuickFacts/ex_2.png")
+          img: require("../assets/Placeholder.png")
         },
         {
           txt:
             "RECON packages have been used in many outbreaks such as the Ebola outbreaks in West Africa (2014-2016) and Eastern Democratic Republic of the Congo (2018-2020), and are currently used by various public health institutions and academic modelling groups in the COVID-19 response.",
-          img: require("../assets/QuickFacts/outbreaker2_1.png")
+          img: require("../assets/Placeholder.png")
         }
       ]
     };

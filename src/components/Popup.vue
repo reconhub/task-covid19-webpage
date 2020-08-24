@@ -10,6 +10,7 @@
         :popup="popup"
         :token="token"
         :user="user"
+        :repos="repos"
         @updatePopup="updatePopup"
       />
       <PopupEditUser
@@ -38,7 +39,7 @@ import PopupCreateUser from "@/components/PopupCreateUser";
 
 export default {
   name: "popup",
-  props: ["popup", "user", "token"],
+  props: ["popup", "user", "token", "repos"],
   components: {
     PopupCreateIssue,
     PopupEditUser,

@@ -18,18 +18,21 @@
         :auth="auth"
         :user="user"
         :popup="popup"
+        :repos="repos"
       />
       <Popup
         v-if="popup.type"
         :popup="popup"
         :user="user"
         :token="token"
+        :repos="repos"
         @updatePopup="updatePopup"
       />
     </v-app>
   </div>
 </template>
 <script>
+import axios from "axios";
 import ReconToolbar from "@/components/ReconToolbar";
 import Popup from "@/components/Popup";
 export default {
@@ -43,7 +46,10 @@ export default {
       token: "",
       auth: "",
       user: "",
-      popup: { type: "" }
+      popup: { type: "" },
+      repos: [],
+      collaborators: [],
+      page: 1
     };
   },
   methods: {
@@ -58,12 +64,43 @@ export default {
     },
     updatePopup(bus) {
       this.popup = bus;
+    },
+    getRepos() {
+      let self = this;
+      let size = 100;
+      let qry = `https://api.github.com/orgs/${"reconhub"}/repos?sort=full_name&per_page=${size}&page=${
+        this.page
+      }`;
+      console.log("app" + qry);
+      axios
+        .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
+        .then(function(res) {
+          console.log("page", self.page);
+          console.log("data", res.data);
+          if (self.page == 1) {
+            self.repos = res.data;
+          } else {
+            self.repos = self.repos.concat(res.data);
+          }
+
+          if (res.data.length >= size) {
+            self.page += 1;
+            self.getRepos(self.page);
+          }
+        })
+        .catch(function(err) {
+          console.log(JSON.stringify(err));
+          alert(err);
+          console.log(err);
+        });
     }
   },
   mounted() {
     this.updateToken();
     this.updateAuth();
     this.updateUser();
+    this.getRepos();
+    console.log("app mounted");
   },
   beforeUpdate() {
     this.updateToken();

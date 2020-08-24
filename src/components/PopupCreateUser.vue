@@ -44,9 +44,9 @@ export default {
       let self = this;
 
       let qry = `https://api.github.com/users/${this.newUser}`;
-      let qry2 = `${process.env.VUE_APP_API}/addAuth?admin=${this.user}&user=${
-        this.newUser
-      }&type=${this.newRole}`;
+      let qry2 = `${process.env.VUE_APP_API}/addAuth?token=${
+        this.token
+      }&admin=${this.user}&user=${this.newUser}&type=${this.newRole}`;
 
       axios
         .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
@@ -57,6 +57,7 @@ export default {
             .post(qry2)
             .then(function(res) {
               alert(res.data);
+              self.close();
             })
             .catch(function(err) {
               alert(err);
