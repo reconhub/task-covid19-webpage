@@ -11,6 +11,9 @@
           <v-col>
             <v-select label="Filter Priority" :items="priorityTypes" v-model="priorityFilter"></v-select>
           </v-col>
+          <v-col>
+            <v-switch v-model="favoriteSwitch" label="Favorite Only"></v-switch>
+          </v-col>
         </v-row>
       </v-col>
       <v-spacer></v-spacer>
@@ -29,17 +32,18 @@
               <!-- <v-card-subtitle v-text="task.description" style="white-space: pre"></v-card-subtitle> -->
             </v-col>
             <v-col cols="4">
-              <div style="height: 40%">
-                <p style="border: 1px solid black">
-                  <i>{{task.priority}}</i>
-                </p>
+              <div v-if="token">
+                <v-btn icon :disabled="task.disabled" @click="follow(task, i)">
+                  <v-icon v-if="task.status" style="color: red;">mdi-star</v-icon>
+                  <v-icon v-else style="color: grey;">mdi-star</v-icon>
+                </v-btn>
               </div>
-              <v-spacer></v-spacer>
-              <div style="height: 40%">
-                <p>
-                  <i>{{task.complexity}}</i>
-                </p>
-              </div>
+              <p class="mb-0" style="border: 1px solid black">
+                <i>{{task.priority}}</i>
+              </p>
+              <p>
+                <i>{{task.complexity}}</i>
+              </p>
             </v-col>
           </v-row>
           <v-row>
@@ -78,6 +82,7 @@ export default {
       details: [],
       priorityFilter: "",
       complexityFilter: "",
+      favoriteSwitch: false,
       priorityTypes: [
         { text: "None", value: "" },
         { text: "Low", value: "Priority: Low" },
@@ -102,6 +107,10 @@ export default {
     filteredData() {
       let dta = this.tasks;
 
+      if (this.favoriteSwitch) {
+        dta = dta.filter(d => d.status);
+      }
+
       if (this.priorityFilter) {
         dta = dta.filter(d => d.priority == this.priorityFilter);
       }
@@ -114,8 +123,35 @@ export default {
     }
   },
   methods: {
-    getTasks() {
-      let qry = `https://api.github.com/repos/BenjaminOrtizUlloa/ExploreGitAPI/issues`;
+    follow(data, index) {
+      let qry = `${
+        process.env.VUE_APP_API
+      }/follow?status=${!data.status}&username=${this.user}&issue_id=${
+        data.id
+      }`;
+
+      data.disabled = true;
+      this.$set(this.tasks, index, data);
+
+      let that = this;
+
+      axios
+        .get(qry) // replace with put once figured out
+        .then(function(res) {
+          console.log("success", res);
+          data.disabled = false;
+          data.status = !data.status;
+          that.$set(that.tasks, index, data);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    getTasks(user) {
+      let qry = `${process.env.VUE_APP_API}/tasks`;
+      if (user) {
+        qry = qry + `?user=${user}`;
+      }
 
       // "https://api.github.com/repos/BenjaminOrtizUlloa/ExploreGitAPI/issues?per_page=100";
 
@@ -126,7 +162,8 @@ export default {
         .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
         .then(function(res) {
           console.log(res.data);
-          self.tasks = self.parseIssues(res.data);
+          self.tasks = res.data;
+          // self.tasks = self.parseIssues(res.data);
           self.details = self.tasks.map(() => false);
           console.log("tasks", self.tasks);
         })
@@ -142,6 +179,7 @@ export default {
     parseIssues(dta) {
       let issues = dta.map(function(x) {
         let title = x.title;
+        let id = x.id;
         let priority = x.labels.filter(y => y.name.match(/^Priority_/g));
 
         if (priority.length) {
@@ -166,6 +204,7 @@ export default {
         let url = x.html_url;
 
         return {
+          id: id,
           title: title,
           priority: priority,
           complexity: complexity,
@@ -185,7 +224,11 @@ export default {
   mounted() {
     let token = sessionStorage.getItem("RECON_GitHub_Token");
     this.$emit("updateToken");
-    this.getTasks();
+    if (token) {
+      this.getTasks(this.user);
+    } else {
+      this.getTasks();
+    }
     // if (token) {
     //   this.getTasks(token);
     // }

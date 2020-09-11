@@ -16,6 +16,15 @@
       <v-row>
         <v-spacer></v-spacer>
         <v-data-table :headers="headers" :items="pendingSubmissions" :search="search">
+          <template v-slot:item.complexity="{item}">
+            <v-select v-model="item.complexity" :items="complexityTypes" style="width: 100px;"></v-select>
+          </template>
+          <template v-slot:item.priority="{item}">
+            <v-select v-model="item.priority" :items="priorityTypes" style="width: 100px;"></v-select>
+          </template>
+          <template v-slot:item.repo="{item}">
+            <v-select v-model="item.repo" :items="repoLabels" style="width: 125px;"></v-select>
+          </template>
           <template v-slot:item.notes="{item}">
             <v-textarea @click="mycheck(item)" v-model="item.note"></v-textarea>
           </template>
@@ -35,7 +44,7 @@ import { setTimeout } from "timers";
 
 export default {
   name: "review",
-  props: ["token", "user"],
+  props: ["token", "user", "repos"],
   data() {
     return {
       search: "",
@@ -49,12 +58,36 @@ export default {
         { text: "Description", value: "body" },
         { text: "Complexity", value: "complexity" },
         { text: "Priority", value: "priority" },
-        { text: "Created", value: "created_on" },
+        { text: "Repo", value: "repo" },
+        // { text: "Created", value: "created_on" },
         { text: "Updated", value: "last_update" },
         { text: "Notes", value: "notes", sortable: false },
         { text: "Actions", value: "actions", sortable: false }
       ],
-      pendingSubmissions: []
+      pendingSubmissions: [],
+      priorityTypes: [
+        { text: "Low", value: "Priority_Low" },
+        {
+          text: "Medium",
+          value: "Priority_Medium"
+        },
+        { text: "High", value: "Priority_High" }
+      ],
+      complexityTypes: [
+        {
+          text: "Low",
+          value: "Complexity_Low"
+        },
+        {
+          text: "Medium",
+          value: "Complexity_Medium"
+        },
+        {
+          text: "High",
+          value: "Complexity_High"
+        }
+      ],
+      repoLabels: ["Do not know"]
     };
   },
   methods: {
@@ -79,7 +112,9 @@ export default {
     judgeSubmission(sub, status) {
       let qry = `${process.env.VUE_APP_API}/judgeIssue?token=${
         this.token
-      }&note=${sub.note}&approver=${this.user}&status=${status}&id=${sub.id}`;
+      }&note=${sub.note}&approver=${this.user}&status=${status}&id=${
+        sub.id
+      }&complexity=${sub.complexity}&priority=${sub.priority}&repo=${sub.repo}`;
 
       let self = this;
 
@@ -104,6 +139,7 @@ export default {
     this.$emit("updateToken");
     this.$emit("updateAuth");
     this.$emit("updateUser");
+    this.repoLabels = this.repoLabels.concat(this.repos.map(d => d.name));
   }
 };
 </script>
