@@ -56,7 +56,7 @@
               <v-select label="Task priority" v-model="formInfo.priority" :items="priorityTypes"></v-select>
             </v-col>
           </v-row>
-          <!-- <v-row>
+          <v-row>
             <v-col>
               <p>
                 <b>Assign task to specific github repo</b>
@@ -67,14 +67,14 @@
                 :items="repoLabels"
                 label="Assigned Repo"
               ></v-select>
-              <v-select
+              <!-- <v-select
                 width="100%"
                 v-model="formInfo.assignees"
                 :items="collaborators"
                 label="Assignee to Help"
-              ></v-select>
+              ></v-select>-->
             </v-col>
-          </v-row>-->
+          </v-row>
         </v-col>
       </v-row>
     </v-card-text>
