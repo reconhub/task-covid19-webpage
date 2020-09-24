@@ -48,6 +48,24 @@
           </v-row>
           <v-row>
             <v-col>
+              <v-btn
+                icon
+                :disabled="task.disabled"
+                @click="vote(task,i, task.vote > 0 ? 'none' : 'up')"
+              >
+                <v-icon v-if="task.vote > 0" style="color: green;">mdi-thumb-up</v-icon>
+                <v-icon v-else style="color: grey;">mdi-thumb-up</v-icon>
+              </v-btn>
+              <v-btn
+                icon
+                :disabled="task.disabled"
+                @click="vote(task,i, task.vote < 0 ? 'none' : 'down')"
+              >
+                <v-icon v-if="task.vote < 0" style="color: red;">mdi-thumb-down</v-icon>
+                <v-icon v-else style="color: grey;">mdi-thumb-down</v-icon>
+              </v-btn>
+            </v-col>
+            <!-- <v-col>
               <p>
                 Additional Tags:
                 <span
@@ -55,7 +73,7 @@
                   :key="j"
                 >&nbsp; {{tag.name}}&nbsp;|</span>
               </p>
-            </v-col>
+            </v-col>-->
           </v-row>
           <v-row>
             <v-col>
@@ -123,6 +141,37 @@ export default {
     }
   },
   methods: {
+    vote(data, index, vote) {
+      let qry = `${process.env.VUE_APP_API}/vote?vote=${vote}&issue_id=${
+        data.id
+      }&username=${this.user}`;
+
+      data.disabled = true;
+
+      this.$set(this.tasks, index, data);
+
+      let that = this;
+
+      let score_card = {
+        up: 5,
+        down: -5,
+        none: 0
+      };
+
+      axios
+        .get(qry)
+        .then(function(res) {
+          console.log("successful vote", res);
+          data.disabled = false;
+          data.vote = score_card[vote];
+          that.$set(that.tasks, index, data);
+        })
+        .catch(function(err) {
+          console.log(err);
+          data.disabled = false;
+          that.$set(that.tasks, index, data);
+        });
+    },
     follow(data, index) {
       let qry = `${
         process.env.VUE_APP_API
@@ -145,6 +194,8 @@ export default {
         })
         .catch(function(err) {
           console.log(err);
+          data.disabled = false;
+          that.$set(that.tasks, index, data);
         });
     },
     getTasks(user) {
