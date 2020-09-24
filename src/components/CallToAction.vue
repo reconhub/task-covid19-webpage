@@ -3,12 +3,12 @@
     <v-row class="text-center">
       <v-col cols="12" height>
         <!-- <v-img :src="require('../assets/Placeholder.png')" class="my-3" contain height="100"/> -->
-        <v-img
+        <!-- <v-img
           :src="require('@/assets/covid-19_challenge_logo.png')"
           class="my-3"
           contain
           height="100"
-        />
+        />-->
       </v-col>
       <v-col cols="12">
         <h2>Be part of the global response to COVID19</h2>

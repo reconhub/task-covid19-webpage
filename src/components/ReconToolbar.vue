@@ -10,10 +10,9 @@
     <v-app-bar>
       <v-app-bar-nav-icon @click="$emit('toggleDrawer')" class="hidden-lg-and-up"></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <v-avatar>
-          <v-img :src="require('@/assets/logo-sticker.png')"/>
-        </v-avatar>
-        <router-link to="/">RECON</router-link>
+        <router-link to="/">
+          <v-img width="200" :src="require('@/assets/covid-19_challenge_logo.png')"/>
+        </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="hidden-md-and-down">
