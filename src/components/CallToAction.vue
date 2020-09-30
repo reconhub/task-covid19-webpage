@@ -12,17 +12,23 @@
         />
       </v-col>-->
       <v-col cols="12">
-        <p>Join a community of field epidemiologists, infectious disease modellers and R programmers and contribute to improve the free and open source R tools used in the response to the COVID-19 epidemic.</p>
+        <p
+          class="white-back"
+        >Join a community of field epidemiologists, infectious disease modellers and R programmers and contribute to improve the free and open source R tools used in the response to the COVID-19 epidemic.</p>
         <v-row>
           <v-spacer></v-spacer>
           <v-col cols="5">
             <div class="click-div pa-3" @click="exploreOrLogin">
-              <p>You are a COVID-19 response field agent and want to submit a request</p>
+              <p>
+                <b>You are a COVID-19 response field agent and want to submit a request</b>
+              </p>
             </div>
           </v-col>
           <v-col cols="5">
             <div class="click-div pa-3" @click="$router.push('explore')">
-              <p>You are a member of the R community and wish to contribute to the response to COVID-19</p>
+              <p>
+                <b>You are a member of the R community and wish to contribute to the response to COVID-19</b>
+              </p>
             </div>
           </v-col>
           <v-spacer></v-spacer>
@@ -62,18 +68,18 @@ export default {
 <style>
 .click-div {
   cursor: pointer;
-  background-color: whitesmoke;
+  background-color: rgb(49, 79, 150);
   height: 100%;
   transition: background-color 1s;
   border-radius: 20px;
 }
 
 .click-div:hover {
-  background-color: lightgray;
+  background-color: rgb(9, 39, 110);
 }
 
 .click-div p {
-  color: black;
+  color: white;
 }
 </style>
 
