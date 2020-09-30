@@ -103,21 +103,21 @@ export default {
       favoriteSwitch: false,
       priorityTypes: [
         { text: "None", value: "" },
-        { text: "Low", value: "Priority: Low" },
+        { text: "Low", value: "Priority Low" },
         {
           text: "Medium",
-          value: "Priority: Medium"
+          value: "Priority Medium"
         },
-        { text: "High", value: "Priority: High" }
+        { text: "High", value: "Priority High" }
       ],
       complexityTypes: [
         { text: "None", value: "" },
-        { text: "Low", value: "Complexity: Low" },
+        { text: "Low", value: "Complexity Low" },
         {
           text: "Medium",
-          value: "Complexity: Medium"
+          value: "Complexity Medium"
         },
-        { text: "High", value: "Complexity: High" }
+        { text: "High", value: "Complexity High" }
       ]
     };
   },

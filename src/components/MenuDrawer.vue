@@ -23,13 +23,19 @@
     <v-divider></v-divider>
     <v-list>
       <v-list-item link>
-        <v-list-item-content @click="$router.push('about'); $emit('toggleDrawer')">About</v-list-item-content>
+        <v-list-item-content @click="$router.push('about'); $emit('toggleDrawer')">
+          <b>ABOUT</b>
+        </v-list-item-content>
       </v-list-item>
       <v-list-item link>
-        <v-list-item-content @click="$router.push('learn'); $emit('toggleDrawer')">Learn</v-list-item-content>
+        <v-list-item-content @click="$router.push('learn'); $emit('toggleDrawer')">
+          <b>LEARN</b>
+        </v-list-item-content>
       </v-list-item>
       <v-list-item link>
-        <v-list-item-action @click="$router.push({ name: 'explore'}); $emit('toggleDrawer')">Explore</v-list-item-action>
+        <v-list-item-content @click="$router.push({ name: 'explore'}); $emit('toggleDrawer')">
+          <b>EXPLORE</b>
+        </v-list-item-content>
       </v-list-item>
       <v-list-item link>
         <v-list-item-action

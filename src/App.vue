@@ -46,6 +46,7 @@
               <v-icon>fa4 fa-envelope fa-inverse</v-icon>
             </v-btn>
           </v-card-text>
+          <v-divider></v-divider>
           <v-card-text>RECON - R Epidemics Consortium - 2020</v-card-text>
         </v-card>
       </v-footer>
