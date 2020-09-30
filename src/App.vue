@@ -30,6 +30,25 @@
           :repos="repos"
         />
       </v-main>
+      <v-footer>
+        <v-card
+          flat
+          tile
+          width="100%"
+          style="background-color: rgb(245, 245, 245)"
+          class="text-center"
+        >
+          <v-card-text>
+            <v-btn icon href="https://github.com/reconhub" target="_blank">
+              <v-icon>fa4 fa-github fa-inverse</v-icon>
+            </v-btn>
+            <v-btn icon href="mailto:thibautjombart@gmail.com" target="_blank">
+              <v-icon>fa4 fa-envelope fa-inverse</v-icon>
+            </v-btn>
+          </v-card-text>
+          <v-card-text>RECON - R Epidemics Consortium - 2020</v-card-text>
+        </v-card>
+      </v-footer>
       <Popup
         v-if="popup.type"
         :popup="popup"
@@ -147,5 +166,41 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+@font-face {
+  font-family: "Sawasdee";
+  src: local("Sawasdee"),
+    url("~/fonts/sawasdee/Sawasdee.tff") format("truetype");
+}
+
+@font-face {
+  font-family: "Sawasdee";
+  src: url("~/fonts/sawasdee/Sawasdee-Bold.tff") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Sawasdee";
+  src: url("~/fonts/sawasdee/Sawasdee-BoldOblique.tff") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Sawasdee";
+  src: url("~/fonts/sawasdee/Sawasdee-BoldOblique.tff") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Sawasdee";
+  src: url("~/fonts/sawasdee/Sawasdee-Oblique.tff") format("truetype");
+  font-style: italic;
+}
+
+* {
+  font-family: Sawasdee;
 }
 </style>

@@ -1,17 +1,17 @@
 <template>
   <div>
-    <v-app-bar class="hidden-md-and-down">
+    <v-app-bar dark class="hidden-md-and-down" style="background-color: rgb(49, 79, 150);">
       <v-row align="end" class="px-3">
         <p style="margin-bottom: 0;">Together against COVID19</p>
         <v-spacer></v-spacer>
         <a href="https://www.repidemicsconsortium.org/">repidemicsconsortium.org</a>
       </v-row>
     </v-app-bar>
-    <v-app-bar>
+    <v-app-bar dark style="background-color: rgb(49,79,150);">
       <v-app-bar-nav-icon @click="$emit('toggleDrawer')" class="hidden-lg-and-up"></v-app-bar-nav-icon>
       <v-toolbar-title>
         <router-link to="/">
-          <v-img width="200" :src="require('@/assets/covid-19_challenge_logo.png')"/>
+          <v-img width="250" :src="require('@/assets/recon_task_manager_logo_white.png')"/>
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>

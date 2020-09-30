@@ -1,5 +1,11 @@
 <template>
-  <v-navigation-drawer absolute permanent class="hidden-lg-and-up">
+  <v-navigation-drawer
+    style="background-color: rgb(49, 79, 150);"
+    dark
+    absolute
+    permanent
+    class="hidden-lg-and-up"
+  >
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="title">RECON</v-list-item-title>
