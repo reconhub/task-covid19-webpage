@@ -36,7 +36,7 @@ export default {
   props: ["token", "auth"],
   data() {
     return {
-      git_login_url: ""
+      git_login_url: process.env.VUE_APP_GIT_LOGIN
     };
   },
   methods: {
@@ -50,8 +50,6 @@ export default {
       this.$router.push("/");
     }
   },
-  mounted() {
-    this.git_login_url = process.env.VUE_APP_GIT_LOGIN;
-  }
+  mounted() {}
 };
 </script>

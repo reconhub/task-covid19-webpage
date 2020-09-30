@@ -16,12 +16,12 @@
         <v-row>
           <v-spacer></v-spacer>
           <v-col cols="5">
-            <div class="click-div pa-3">
+            <div class="click-div pa-3" @click="exploreOrLogin">
               <p>You are a COVID-19 response field agent and want to submit a request</p>
             </div>
           </v-col>
           <v-col cols="5">
-            <div class="click-div pa-3">
+            <div class="click-div pa-3" @click="$router.push('explore')">
               <p>You are a member of the R community and wish to contribute to the response to COVID-19</p>
             </div>
           </v-col>
@@ -33,6 +33,30 @@
 </template>
 
 <script>
+export default {
+  name: "explore",
+  props: ["token", "user"],
+  data() {
+    return {
+      git_login_url: process.env.VUE_APP_GIT_LOGIN
+    };
+  },
+  methods: {
+    exploreOrLogin() {
+      if (this.token) {
+        this.$router.push("explore");
+      } else {
+        if (
+          confirm(
+            "You will need to login via GitHub before you can submit a request."
+          )
+        ) {
+          window.location.href = this.git_login_url;
+        }
+      }
+    }
+  }
+};
 </script>
 
 <style>
