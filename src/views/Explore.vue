@@ -1,17 +1,19 @@
 <template>
   <v-card flat class="explore pa-5">
-    <h2>This is an explore page</h2>
-    <p>Here is a list of all the proposed and pending tasks submitted to RECON.</p>
+    <h1 class="pa-5">Explore</h1>
+    <p
+      class="white-back"
+    >Here is a list of all the proposed and pending tasks submitted to the RECON COVID-19 challenge.</p>
     <v-row>
-      <v-col cols="4">
-        <v-row>
+      <v-col cols="8">
+        <v-row class="white-back">
           <v-col>
             <v-select label="Filter Complexity" :items="complexityTypes" v-model="complexityFilter"></v-select>
           </v-col>
           <v-col>
             <v-select label="Filter Priority" :items="priorityTypes" v-model="priorityFilter"></v-select>
           </v-col>
-          <v-col>
+          <v-col v-if="token">
             <v-switch v-model="favoriteSwitch" label="Favorite Only"></v-switch>
           </v-col>
         </v-row>

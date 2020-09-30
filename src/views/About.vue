@@ -1,12 +1,12 @@
 <template>
   <v-card flat class="about">
-    <h2>About</h2>
-    <p class="text-left mx-3">
+    <h1 class="pa-5">ABOUT</h1>
+    <p class="text-left mx-3 white-back">
       R Epidemics Consortium’s (
       <a href="https://www.repidemicsconsortium.org">RECON</a>
       ) COVID-19 challenge is a communication platform between field epidemiologists, infectious disease modellers and R developers whose goal is to help field agents who are dealing with the response to COVID-19 to fill their analytical needs. It provides a direct and real-time communication channel between the field and the R community focused on the development of R tools used to deal with epidemic outbreaks and COVID-19.
     </p>
-    <v-img :src="require('../assets/covid-explain.png')" class="my-3" contain height="300"/>
+    <v-img :src="require('../assets/covid-explain.png')" class="my-3" contain height="500"/>
     <p class="text-left mx-3">
       Possible development requests include modification of existing functions, creation of new packages or requests for analysis templates. A full list can be found
       <router-link to="learn">here</router-link>.

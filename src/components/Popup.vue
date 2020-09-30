@@ -4,7 +4,7 @@
     style="position: fixed; width: 100vw; height: 100vh; background-color: rgba(0,0,0, .5);"
   >
     <v-spacer></v-spacer>
-    <v-col cols="8">
+    <v-col cols="10">
       <PopupCreateIssue
         v-if="popup.type == 'CreateIssue'"
         :popup="popup"

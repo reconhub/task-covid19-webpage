@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="explore pt-2">
-    <h2>Admin Dashboard</h2>
+    <h1>Admin Dashboard</h1>
     <ul>
       <li>
         <b>Admin:</b>
@@ -38,11 +38,9 @@
       </v-row>
       <br>
       <br>
-      <br>
-      <br>
       <v-row>
         <v-spacer></v-spacer>
-        <v-col>
+        <v-col cols="8">
           <p>
             By default, anyone with a GitHub account has the role of
             <b>user</b>. Any other role needs to be explicitly given. If you do not see an

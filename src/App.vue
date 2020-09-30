@@ -28,6 +28,7 @@
           :user="user"
           :popup="popup"
           :repos="repos"
+          :style="{backgroundImage: 'url(' + require('@/assets//background.png') + ')'}"
         />
       </v-main>
       <v-footer>
@@ -203,5 +204,15 @@ export default {
 
 * {
   font-family: Sawasdee;
+}
+
+h1 {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 50px;
+}
+
+.white-back {
+  background-color: rgba(255, 255, 255, 0.4);
 }
 </style>

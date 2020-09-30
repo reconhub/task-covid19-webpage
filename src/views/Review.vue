@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="explore pt-2">
-    <h2>This is a Review page</h2>
+    <h1>Review page</h1>
     <v-col>
       <v-row>
         <v-spacer></v-spacer>

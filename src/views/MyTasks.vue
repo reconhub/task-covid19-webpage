@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="explore pt-2">
-    <h2>My Submitted Tasks</h2>
+    <h1>My Submitted Tasks</h1>
     <v-col>
       <v-row>
         <v-spacer></v-spacer>
