@@ -23,7 +23,7 @@
             <v-select v-model="item.priority" :items="priorityTypes" style="width: 100px;"></v-select>
           </template>
           <template v-slot:item.repo="{item}">
-            <v-select v-model="item.repo" :items="repoLabels" style="width: 125px;"></v-select>
+            <v-select v-model=" item.repo" :items="repoLabels" style="width: 125px;"></v-select>
           </template>
           <template v-slot:item.notes="{item}">
             <v-textarea @click="mycheck(item)" v-model="item.note"></v-textarea>
@@ -95,7 +95,6 @@ export default {
       let qry = `${process.env.VUE_APP_API}/issues?status=${status}`;
 
       let self = this;
-      console.log(self);
 
       axios
         .get(qry)
