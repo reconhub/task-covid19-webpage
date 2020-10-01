@@ -50,7 +50,10 @@ export default {
   methods: {
     exploreOrLogin() {
       if (this.token) {
-        this.$router.push("explore");
+        this.$router.push({
+          name: "explore",
+          params: { openForm: "testTrue" }
+        });
       } else {
         if (
           confirm(

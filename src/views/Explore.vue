@@ -67,15 +67,6 @@
                 <v-icon v-else style="color: grey;">mdi-thumb-down</v-icon>
               </v-btn>
             </v-col>
-            <!-- <v-col>
-              <p>
-                Additional Tags:
-                <span
-                  v-for="(tag, j) in task.otherTags"
-                  :key="j"
-                >&nbsp; {{tag.name}}&nbsp;|</span>
-              </p>
-            </v-col>-->
           </v-row>
           <v-row>
             <v-col>
@@ -95,7 +86,7 @@ import { setTimeout } from "timers";
 
 export default {
   name: "explore",
-  props: ["token", "user"],
+  props: ["token", "user", "openForm"],
   data() {
     return {
       tasks: [],
@@ -281,6 +272,10 @@ export default {
       this.getTasks(this.user);
     } else {
       this.getTasks();
+    }
+
+    if (this.openForm) {
+      this.updatePopup({ type: "CreateIssue", data: "" });
     }
     // if (token) {
     //   this.getTasks(token);
