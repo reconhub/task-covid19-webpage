@@ -16,24 +16,27 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="hidden-md-and-down">
-        <v-btn @click="$router.push('about')">About</v-btn>
-        <v-btn @click="$router.push('learn')">Learn</v-btn>
-        <v-btn @click="$router.push({ name: 'explore'})">Explore</v-btn>
-        <v-btn v-if="token" @click="$router.push('myTasks')">My Tasks</v-btn>
-        <v-btn v-if="auth == 'admin' | auth == 'reviewer'" @click="$router.push('review')">Review</v-btn>
-        <v-btn v-if="auth == 'admin'" @click="$router.push('adminDash')">Admin Dashboard</v-btn>
+        <ToolBarBtn route="about" text="about"/>
+        <ToolBarBtn route="learn" text="learn"/>
+        <ToolBarBtn route="explore" text="explore"/>
+        <ToolBarBtn v-if="token" route="myTasks" text="My Tasks"/>
+        <ToolBarBtn v-if="auth == 'admin' | auth == 'reviewer'" route="review" text="Review"/>
+        <ToolBarBtn v-if="auth == 'admin'" route="adminDash" text="Admin Dashboard"/>
         <!-- <v-btn @click="$router.push('repos')">Repos</v-btn> -->
       </div>
       <v-spacer></v-spacer>
-      <v-btn v-if="!token" :href="git_login_url">Log in</v-btn>
-      <v-btn v-if="token" @click="logout">Log Out</v-btn>
+      <ToolBarBtn v-if="!token" text="Log In" :href="git_login_url"/>
+      <ToolBarBtn v-if="token" text="Log Out" @click="logout"/>
     </v-app-bar>
   </div>
 </template>
 <script>
+import ToolBarBtn from "@/components/ToolBarBtn";
+
 export default {
   name: "toolbar",
   props: ["token", "auth"],
+  components: { ToolBarBtn },
   data() {
     return {
       git_login_url: process.env.VUE_APP_GIT_LOGIN

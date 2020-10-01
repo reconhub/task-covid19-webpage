@@ -170,6 +170,8 @@ export default {
   color: #42b983;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
 @font-face {
   font-family: "Sawasdee";
   src: local("Sawasdee"),
@@ -191,18 +193,11 @@ export default {
 
 @font-face {
   font-family: "Sawasdee";
-  src: url("~/fonts/sawasdee/Sawasdee-BoldOblique.tff") format("truetype");
-  font-weight: bold;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "Sawasdee";
   src: url("~/fonts/sawasdee/Sawasdee-Oblique.tff") format("truetype");
-  font-style: italic;
+  font-style: oblique;
 }
 
-* {
+p {
   font-family: Sawasdee;
   font-size: 18px;
 }
