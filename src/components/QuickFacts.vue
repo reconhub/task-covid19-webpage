@@ -30,18 +30,24 @@ export default {
       facts: [
         {
           txt:
-            "The tasking manager is a direct communication channel between field agents actively working on the response to COVID19 and the R community.",
-          img: require("../assets/Placeholder.png")
+            "Tools developed by the R epidemics consortium (RECON) are essential in helping professionals design outbreak analytics pipelines in response to COVID19.",
+          img: ""
         },
         {
           txt:
-            "Your R programming skills can help field agents around the world.",
-          img: require("../assets/Placeholder.png")
+            "The tasking manager is a direct communication channel between field agents actively working on the response to COVID19 and the R community.",
+          img: ""
+        },
+        {
+          txt:
+            "Your R programming skills can help fight COVID19 around the world.",
+          img: ""
         },
         {
           txt:
             "RECON packages have been used in many outbreaks such as the Ebola outbreaks in West Africa (2014-2016) and Eastern Democratic Republic of the Congo (2018-2020), and are currently used by various public health institutions and academic modelling groups in the COVID-19 response.",
-          img: require("../assets/Placeholder.png")
+          img: ""
+          // require("../assets/Placeholder.png")
         }
       ]
     };

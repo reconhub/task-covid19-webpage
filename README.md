@@ -28,8 +28,16 @@ npm run test:e2e
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-###
+### Docker launch
 ```
 docker build -t vue-test .
 docker run -it -p 8080:8080 --rm --name dockerize-vuejs-app-1 vue-test
+```
+
+### Heroku launch
+```
+heroku apps
+heroku container:push web
+heroku container:release web
+heroku open
 ```

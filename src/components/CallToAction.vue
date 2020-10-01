@@ -20,7 +20,7 @@
           <v-col cols="5">
             <div class="click-div pa-3" @click="exploreOrLogin">
               <p>
-                <b>You are a COVID-19 response field agent and want to submit a request</b>
+                <b>You are involved in the COVID-19 response and want to submit a request</b>
               </p>
             </div>
           </v-col>

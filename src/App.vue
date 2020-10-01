@@ -204,6 +204,7 @@ export default {
 
 * {
   font-family: Sawasdee;
+  font-size: 18px;
 }
 
 h1 {
