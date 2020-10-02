@@ -149,7 +149,7 @@ export default {
         this.formInfo.priority
       }&complexity=${this.formInfo.complexity}&repo=${
         this.formInfo.repo
-      }&assignees=${this.formInfo.assignees}`;
+      }&assignees=${this.formInfo.assignees}&token=${this.token}`;
 
       console.log(qry);
       axios

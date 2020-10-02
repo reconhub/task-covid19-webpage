@@ -19,7 +19,7 @@ export default {
   props: ["popup", "token", "user"],
   data() {
     return {
-      roles: ["admin", "reviewer", "user"],
+      roles: ["admin", "reviewer", "user", "nothing"],
       newRole: ""
     };
   },

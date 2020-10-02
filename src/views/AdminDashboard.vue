@@ -12,7 +12,11 @@
       </li>
       <li>
         <b>User:</b>
-        <i>[default] Can submit new tasks.</i>
+        <i>[default] Can submit new tasks. Is automatically created when an admin or reviewer approves their task.</i>
+      </li>
+      <li>
+        <b>Nothing:</b>
+        <i>Explicitly told not to collaborate.</i>
       </li>
     </ul>
     <v-col>
