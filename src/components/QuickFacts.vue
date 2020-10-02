@@ -8,15 +8,17 @@
       <v-spacer></v-spacer>
     </v-row>
     <v-row v-for="(fact, i) in facts" :key="i" align="center">
-      <v-col v-if="i % 2 === 0" cols="4" align="center">
+      <v-spacer></v-spacer>
+      <v-col v-if="i % 2 === 0" cols="3" align="center">
         <v-img :src="fact.img" class="my-3" contain height="200"/>
       </v-col>
-      <v-col cols="8">
+      <v-col cols="7">
         <p>{{fact.txt}}</p>
       </v-col>
-      <v-col v-if="i % 2 !== 0" cols="4">
+      <v-col v-if="i % 2 !== 0" cols="3">
         <v-img :src="fact.img" class="my-3" contain height="200"/>
       </v-col>
+      <v-spacer></v-spacer>
     </v-row>
   </v-container>
 </template>

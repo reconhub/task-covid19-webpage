@@ -1,17 +1,15 @@
 <template>
   <v-container>
-    <h2 class="pa-5">Be part of the global response to COVID19</h2>
+    <v-row>
+      <v-spacer></v-spacer>
+      <v-col cols="10">
+        <h2>Be part of the global response to COVID19</h2>
+      </v-col>
+      <v-spacer></v-spacer>
+    </v-row>
     <v-row class="text-center">
-      <!-- <v-col cols="12" height>
-        <v-img :src="require('../assets/Placeholder.png')" class="my-3" contain height="100"/>
-        <v-img
-          :src="require('@/assets/covid-19_challenge_logo.png')"
-          class="my-3"
-          contain
-          height="100"
-        />
-      </v-col>-->
-      <v-col cols="12">
+      <v-spacer></v-spacer>
+      <v-col cols="10">
         <p
           class="white-back"
         >Join a community of field epidemiologists, infectious disease modellers and R programmers and contribute to improve the free and open source R tools used in the response to the COVID-19 epidemic.</p>
@@ -34,6 +32,7 @@
           <v-spacer></v-spacer>
         </v-row>
       </v-col>
+      <v-spacer></v-spacer>
     </v-row>
   </v-container>
 </template>
@@ -74,7 +73,7 @@ export default {
   background-color: rgb(49, 79, 150);
   height: 100%;
   transition: background-color 1s;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 .click-div:hover {

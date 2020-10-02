@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="explore pa-5">
+  <v-card flat class="explore">
     <h1 class="pa-5">Explore</h1>
     <p
       class="white-back"

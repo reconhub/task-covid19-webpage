@@ -1,6 +1,6 @@
 <template>
-  <v-card flat class="explore pt-2">
-    <h1>Admin Dashboard</h1>
+  <v-card flat class="adminDash">
+    <h1 class="pa-5">Admin Dashboard</h1>
     <ul>
       <li>
         <b>Admin:</b>
@@ -63,7 +63,7 @@ import axios from "axios";
 import { setTimeout } from "timers";
 
 export default {
-  name: "review",
+  name: "adminDash",
   props: ["token", "user", "popup"],
   data() {
     return {
