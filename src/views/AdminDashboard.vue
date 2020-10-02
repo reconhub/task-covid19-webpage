@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="adminDash">
-    <h1 class="pa-5">Admin Dashboard</h1>
+    <h1 class="pa-5">ADMIN DASHBOARD</h1>
     <ul>
       <li>
         <b>Admin:</b>

@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="explore">
-    <h1 class="pa-5">Explore</h1>
+    <h1 class="pa-5">EXPLORE</h1>
     <p
       class="white-back"
     >Here is a list of all the proposed and pending tasks submitted to the RECON COVID-19 challenge.</p>
