@@ -7,13 +7,13 @@
       </v-col>
       <v-spacer></v-spacer>
     </v-row>
-    <v-row class="text-center">
+    <v-row class="text-left">
       <v-spacer></v-spacer>
       <v-col cols="8">
         <p
           class="white-back"
         >Join a community of field epidemiologists, infectious disease modellers and R programmers and contribute to improve the free and open source R tools used in the response to the COVID-19 epidemic.</p>
-        <v-row>
+        <v-row class="text-center">
           <v-spacer></v-spacer>
           <v-col cols="5">
             <div class="click-div pa-3" @click="exploreOrLogin">
