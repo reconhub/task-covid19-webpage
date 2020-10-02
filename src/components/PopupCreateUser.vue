@@ -6,10 +6,10 @@
       <v-row>
         <v-spacer></v-spacer>
         <v-col>
-          <v-text-field label="GitHub Handle" v-model="newUser"></v-text-field>
+          <v-text-field label="GitHub Handle" v-model="newUser" :rules="[rules.required]"></v-text-field>
         </v-col>
         <v-col>
-          <v-select :items="roles" v-model="newRole" label="Set role to:"></v-select>
+          <v-select :items="roles" v-model="newRole" label="Set role to:" :rules="[rules.required]"></v-select>
         </v-col>
         <v-spacer></v-spacer>
       </v-row>
@@ -31,7 +31,10 @@ export default {
     return {
       roles: ["admin", "reviewer", "user"],
       newRole: "user",
-      newUser: ""
+      newUser: "",
+      rules: {
+        required: value => !!value || "Required."
+      }
     };
   },
   methods: {
