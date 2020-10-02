@@ -39,7 +39,7 @@ p:hover {
 div p {
   text-align: center;
   border-bottom: 1px solid transparent;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 800;
   text-transform: uppercase;
   margin: 0px;

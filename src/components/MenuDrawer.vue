@@ -38,22 +38,25 @@
         </v-list-item-content>
       </v-list-item>
       <v-list-item link>
-        <v-list-item-action
-          v-if="token"
-          @click="$router.push('myTasks'); $emit('toggleDrawer')"
-        >My Tasks</v-list-item-action>
+        <v-list-item-content v-if="token" @click="$router.push('myTasks'); $emit('toggleDrawer')">
+          <b>MY TASKS</b>
+        </v-list-item-content>
       </v-list-item>
       <v-list-item link>
-        <v-list-item-action
+        <v-list-item-content
           v-if="auth == 'admin' | auth == 'reviewer'"
           @click="$router.push('review'); $emit('toggleDrawer')"
-        >Review</v-list-item-action>
+        >
+          <b>REVIEW</b>
+        </v-list-item-content>
       </v-list-item>
       <v-list-item link>
-        <v-list-item-action
+        <v-list-item-content
           v-if="auth == 'admin'"
           @click="$router.push('adminDash'); $emit('toggleDrawer')"
-        >Admin Dashboard</v-list-item-action>
+        >
+          <b>ADMIN DASHBOARD</b>
+        </v-list-item-content>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
