@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div style="width: 100%">
     <v-row>
       <v-spacer></v-spacer>
       <v-col cols="8">
@@ -34,7 +34,7 @@
       </v-col>
       <v-spacer></v-spacer>
     </v-row>
-  </v-container>
+  </div>
 </template>
 
 <script>
