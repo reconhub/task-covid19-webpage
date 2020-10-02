@@ -2,14 +2,14 @@
   <v-container>
     <v-row>
       <v-spacer></v-spacer>
-      <v-col cols="10">
+      <v-col cols="8">
         <h2>Be part of the global response to COVID19</h2>
       </v-col>
       <v-spacer></v-spacer>
     </v-row>
     <v-row class="text-center">
       <v-spacer></v-spacer>
-      <v-col cols="10">
+      <v-col cols="8">
         <p
           class="white-back"
         >Join a community of field epidemiologists, infectious disease modellers and R programmers and contribute to improve the free and open source R tools used in the response to the COVID-19 epidemic.</p>

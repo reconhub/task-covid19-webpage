@@ -175,6 +175,18 @@ export default {
       if (bool) {
         axios
           .post(qry)
+          // .post(`${process.env.VUE_APP_API}/submitIssue/`, {
+          //   title: self.formInfo.title,
+          //   author: self.user,
+          //   body: self.formInfo.description,
+          //   impact: self.formInfo.impact,
+          //   timeline: self.formInfo.timeline,
+          //   priority: self.formInfo.priority,
+          //   complexity: self.formInfo.complexity,
+          //   repo: self.formInfo.repo,
+          //   assignees: self.formInfo.assignees,
+          //   token: self.token
+          // })
           .then(function(res) {
             console.log("success", res);
             self.formInfo.title = "";

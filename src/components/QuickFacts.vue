@@ -2,20 +2,20 @@
   <v-container>
     <v-row>
       <v-spacer></v-spacer>
-      <v-col cols="10">
+      <v-col cols="8">
         <h2>Tools developed by the R epidemics consortium (RECON) are essential in helping professionals design outbreak analytics pipelines in response to COVID19.</h2>
       </v-col>
       <v-spacer></v-spacer>
     </v-row>
     <v-row v-for="(fact, i) in facts" :key="i" align="center">
       <v-spacer></v-spacer>
-      <v-col v-if="i % 2 === 0" cols="3" align="center">
+      <v-col v-if="i % 2 === 0" cols="2" align="center">
         <v-img :src="fact.img" class="my-3" contain height="200"/>
       </v-col>
-      <v-col cols="7">
+      <v-col cols="6">
         <p>{{fact.txt}}</p>
       </v-col>
-      <v-col v-if="i % 2 !== 0" cols="3">
+      <v-col v-if="i % 2 !== 0" cols="2">
         <v-img :src="fact.img" class="my-3" contain height="200"/>
       </v-col>
       <v-spacer></v-spacer>

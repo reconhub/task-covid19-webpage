@@ -3,7 +3,7 @@
     <h1 class="pa-5">ABOUT</h1>
     <v-row>
       <v-spacer></v-spacer>
-      <v-col cols="10">
+      <v-col cols="8">
         <p class="text-left mx-3 white-back">
           The R Epidemics Consortium’s (
           <a href="https://www.repidemicsconsortium.org">RECON</a>
