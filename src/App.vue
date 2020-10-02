@@ -198,7 +198,7 @@ export default {
 }
 
 p {
-  font-family: Sawasdee;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 20px;
 }
 
