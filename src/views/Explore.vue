@@ -20,7 +20,12 @@
       </v-col>
       <v-spacer></v-spacer>
       <v-col cols="4" v-if="token">
-        <v-btn @click="updatePopup({type: 'CreateIssue', data: '' })">Create new task</v-btn>
+        <ToolBarBtn
+          v-if="token"
+          text="Create New Task"
+          @click="updatePopup({type: 'CreateIssue', data: '' })"
+        />
+        <!-- <v-btn @click="updatePopup({type: 'CreateIssue', data: '' })">Create new task</v-btn> -->
       </v-col>
     </v-row>
     <v-row>
@@ -87,10 +92,12 @@
 <script>
 import axios from "axios";
 import { setTimeout } from "timers";
+import ToolBarBtn from "@/components/ToolBarBtn";
 
 export default {
   name: "explore",
   props: ["token", "user", "openForm"],
+  components: { ToolBarBtn },
   data() {
     return {
       tasks: [],
