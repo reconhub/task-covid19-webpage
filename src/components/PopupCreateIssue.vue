@@ -22,22 +22,26 @@
                 label="Task Title"
                 v-model="formInfo.title"
                 hint="A concise, informative title"
+                :rules="[rules.required]"
               ></v-text-field>
               <v-textarea
                 label="Task Description"
                 v-model="formInfo.description"
                 rows="2"
                 hint="A clear overview of the task which provides context, identifies key problems and specifies the work to be done, with itemized by deliverables"
+                :rules="[rules.required]"
               ></v-textarea>
               <v-text-field
                 label="Impact"
                 v-model="formInfo.impact"
                 hint="A quick explanation of how addressing this task will help improving COVID-19 analytics"
+                :rules="[rules.required]"
               ></v-text-field>
               <v-text-field
                 label="Timeline"
                 v-model="formInfo.timeline"
                 hint="A proposed timeline for the work."
+                :rules="[rules.required]"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -52,8 +56,14 @@
                 label="Task Complexity"
                 v-model="formInfo.complexity"
                 :items="complexityTypes"
+                :rules="[rules.required]"
               ></v-select>
-              <v-select label="Task priority" v-model="formInfo.priority" :items="priorityTypes"></v-select>
+              <v-select
+                label="Task priority"
+                v-model="formInfo.priority"
+                :items="priorityTypes"
+                :rules="[rules.required]"
+              ></v-select>
             </v-col>
           </v-row>
           <v-row>
@@ -116,6 +126,9 @@ export default {
           value: "Complexity_High"
         }
       ],
+      rules: {
+        required: value => !!value || "Required."
+      },
       formInfo: {
         title: "",
         description: "",
@@ -136,6 +149,14 @@ export default {
     },
     submitForm() {
       console.log("inside submit form");
+      let bool =
+        !!this.formInfo.title &
+        !!this.formInfo.description &
+        !!this.formInfo.impact &
+        !!this.formInfo.timeline &
+        !!this.formInfo.priority &
+        !!this.formInfo.complexity;
+
       let self = this;
       if (this.formInfo.assignees == 0) {
         this.formInfo.assignees = "__NONE__";
@@ -151,29 +172,32 @@ export default {
         this.formInfo.repo
       }&assignees=${this.formInfo.assignees}&token=${this.token}`;
 
-      console.log(qry);
-      axios
-        .post(qry)
-        .then(function(res) {
-          console.log("success", res);
-          self.formInfo.title = "";
-          self.formInfo.description = "";
-          self.formInfo.impact = "";
-          self.formInfo.timeline = "";
-          self.formInfo.priority = "";
-          self.formInfo.complexity = "";
-          self.formInfo.repo = "Do not know";
-          self.formInfo.assignees = "";
-          alert(
-            "Thank you for submitting your task. It is waiting for admin approval."
-          );
-          self.close();
-        })
-        .catch(function(err) {
-          alert(err);
-          console.log(err);
-          self.close();
-        });
+      if (bool) {
+        axios
+          .post(qry)
+          .then(function(res) {
+            console.log("success", res);
+            self.formInfo.title = "";
+            self.formInfo.description = "";
+            self.formInfo.impact = "";
+            self.formInfo.timeline = "";
+            self.formInfo.priority = "";
+            self.formInfo.complexity = "";
+            self.formInfo.repo = "Do not know";
+            self.formInfo.assignees = "";
+            alert(
+              "Thank you for submitting your task. It is waiting for admin approval."
+            );
+            self.close();
+          })
+          .catch(function(err) {
+            alert(err);
+            console.log(err);
+            self.close();
+          });
+      } else {
+        alert("Please complete all fields in the form.");
+      }
     },
     getCollaborators() {
       let self = this;
