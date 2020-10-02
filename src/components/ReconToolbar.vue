@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar dark class="hidden-md-and-down" style="background-color: rgb(49, 79, 150);">
+    <v-app-bar dark class="hidden-md-and-down" style="background-color: rgb(9, 39, 110);">
       <v-row align="end" class="px-3">
         <p style="margin-bottom: 0;">Together against COVID19</p>
         <v-spacer></v-spacer>

@@ -6,7 +6,7 @@
     >Here is a list of all the proposed and pending tasks submitted to the RECON COVID-19 challenge.</p>
     <v-row>
       <v-col cols="8">
-        <v-row class="white-back">
+        <v-row class="white-back ml-1">
           <v-col>
             <v-select label="Filter Complexity" :items="complexityTypes" v-model="complexityFilter"></v-select>
           </v-col>
@@ -70,7 +70,11 @@
           </v-row>
           <v-row>
             <v-col>
-              <p v-if="details[i]" style="white-space: pre-wrap">{{task.description}}</p>
+              <p
+                class="text-left pa-2"
+                v-if="details[i]"
+                style="white-space: pre-wrap;"
+              >{{task.description}}</p>
               <v-btn v-if="details[i]" @click="showDetail(i, false)">Hide Details</v-btn>
               <v-btn v-else @click="showDetail(i, true)">Show Details</v-btn>
             </v-col>
