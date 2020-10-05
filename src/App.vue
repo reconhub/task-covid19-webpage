@@ -43,7 +43,7 @@
             <v-btn icon href="https://github.com/reconhub" target="_blank">
               <v-icon>fa4 fa-github fa-inverse</v-icon>
             </v-btn>
-            <v-btn icon href="mailto:repidemicsconsortium@gmail.com" target="_blank">
+            <v-btn icon href="mailto:mj.rolland@gmail.com" target="_blank">
               <v-icon>fa4 fa-envelope fa-inverse</v-icon>
             </v-btn>
           </v-card-text>
