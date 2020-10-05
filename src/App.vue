@@ -172,7 +172,7 @@ export default {
 
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
-@font-face {
+/* @font-face {
   font-family: "Sawasdee";
   src: local("Sawasdee"),
     url("~/fonts/sawasdee/Sawasdee.tff") format("truetype");
@@ -189,7 +189,7 @@ export default {
   src: url("~/fonts/sawasdee/Sawasdee-BoldOblique.tff") format("truetype");
   font-weight: bold;
   font-style: italic;
-}
+} */
 
 @font-face {
   font-family: "Sawasdee";

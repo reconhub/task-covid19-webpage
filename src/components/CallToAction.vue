@@ -16,18 +16,16 @@
         <v-row class="text-center">
           <v-spacer></v-spacer>
           <v-col cols="5">
-            <div class="click-div pa-3" @click="exploreOrLogin">
-              <p>
-                <b>You are involved in the COVID-19 response and want to submit a request</b>
-              </p>
-            </div>
+            <StandAloneBtn
+              text="You are involved in the COVID-19 response and want to submit a request"
+              @click="exploreOrLogin"
+            />
           </v-col>
           <v-col cols="5">
-            <div class="click-div pa-3" @click="$router.push('explore')">
-              <p>
-                <b>You are a member of the R community and wish to contribute to the response to COVID-19</b>
-              </p>
-            </div>
+            <StandAloneBtn
+              text="You are a member of the R community and wish to contribute to the response to COVID-19"
+              route="explore"
+            />
           </v-col>
           <v-spacer></v-spacer>
         </v-row>
@@ -38,9 +36,12 @@
 </template>
 
 <script>
+import StandAloneBtn from "@/components/StandAloneBtn";
+
 export default {
   name: "explore",
   props: ["token", "user"],
+  components: { StandAloneBtn },
   data() {
     return {
       git_login_url: process.env.VUE_APP_GIT_LOGIN

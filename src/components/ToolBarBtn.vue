@@ -25,7 +25,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 div {
-  display: inline-block;
+  /* display: inline-block; */
   cursor: pointer;
   height: 100%;
   float: left;
