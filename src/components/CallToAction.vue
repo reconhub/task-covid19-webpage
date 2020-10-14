@@ -29,6 +29,21 @@
           </v-col>
           <v-spacer></v-spacer>
         </v-row>
+        <v-row>
+          <v-col cols="1">
+            <p>
+              <v-icon style="color: red">fa-exclamation-triangle</v-icon>
+            </p>
+          </v-col>
+          <v-col cols="11">
+            <p>
+              Note to users: this website is a trial version, please
+              <a
+                href="mailto:mj.rolland@gmail.com"
+              >give us any feedback</a> regarding the platform's content and functionality you think may help us improve the experience!
+            </p>
+          </v-col>
+        </v-row>
       </v-col>
       <v-spacer></v-spacer>
     </v-row>

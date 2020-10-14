@@ -37,7 +37,7 @@ export default {
         },
         {
           txt:
-            "The tasking manager is a direct communication channel between field agents actively working on the response to COVID19 and the R community.",
+            "The COVID-19 challenge is a direct communication channel between field agents actively working on the response to COVID19 and the R community.",
           img: ""
         },
         {
