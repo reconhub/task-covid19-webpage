@@ -7,26 +7,37 @@
       </v-col>
       <v-spacer></v-spacer>
     </v-row>
-    <v-row v-for="(fact, i) in facts" :key="i" align="center">
-      <v-spacer></v-spacer>
-      <v-col v-if="i % 2 === 0" cols="2" align="center">
-        <v-img :src="fact.img" class="my-3" contain height="100"/>
-      </v-col>
-      <v-col cols="6" class="text-left">
-        <p>{{fact.txt}}</p>
-      </v-col>
-      <v-col v-if="i % 2 !== 0" cols="2">
-        <v-img :src="fact.img" class="my-3" contain height="100"/>
-      </v-col>
-      <v-spacer></v-spacer>
-    </v-row>
+    <template v-if="alternate">
+      <v-row v-for="(fact, i) in facts" :key="i" align="center">
+        <v-spacer></v-spacer>
+        <v-col v-if="i % 2 === 0" cols="2" align="center">
+          <v-img :src="fact.img" class="my-3" contain height="100"/>
+        </v-col>
+        <v-col cols="6" class="text-left">
+          <p>{{fact.txt}}</p>
+        </v-col>
+        <v-col v-if="i % 2 !== 0" cols="2">
+          <v-img :src="fact.img" class="my-3" contain height="100"/>
+        </v-col>
+        <v-spacer></v-spacer>
+      </v-row>
+    </template>
+    <template v-else>
+      <v-row v-for="(fact, i) in facts" :key="i" align="center">
+        <v-spacer></v-spacer>
+        <v-col cols="8" class="text-left">
+          <p>{{fact.txt}}</p>
+        </v-col>
+        <v-spacer></v-spacer>
+      </v-row>
+    </template>
   </div>
 </template>
 
 <script>
 export default {
   name: "QuickFacts",
-
+  props: ["alternate"],
   data() {
     return {
       facts: [
