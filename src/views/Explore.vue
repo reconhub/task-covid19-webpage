@@ -25,6 +25,7 @@
             v-if="token"
             text="Create New Task"
             @click="updatePopup({type: 'CreateIssue', data: '' })"
+            style="text-transform: uppercase"
           />
         </div>
         <!-- <v-btn @click="updatePopup({type: 'CreateIssue', data: '' })">Create new task</v-btn> -->
