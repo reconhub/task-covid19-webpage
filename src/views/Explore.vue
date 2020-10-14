@@ -49,12 +49,24 @@
                   <v-icon v-else style="color: grey;">mdi-star</v-icon>
                 </v-btn>
               </div>
-              <p class="mb-0" style="border: 1px solid black">
+              <ProgressBar
+                label="Priority"
+                :title="task.priority"
+                :width="priorityBar[task.priority].width"
+                :color="priorityBar[task.priority].color"
+              />
+              <ProgressBar
+                label="Complexity"
+                :title="task.complexity"
+                :width="complexityBar[task.complexity].width"
+                :color="complexityBar[task.complexity].color"
+              />
+              <!-- <p class="mb-0" style="border: 1px solid black">
                 <i>{{task.priority}}</i>
               </p>
               <p>
                 <i>{{task.complexity}}</i>
-              </p>
+              </p>-->
             </v-col>
           </v-row>
           <v-row>
@@ -98,11 +110,11 @@ import axios from "axios";
 import { setTimeout } from "timers";
 // import ToolBarBtn from "@/components/ToolBarBtn";
 import StandAloneBtn from "@/components/StandAloneBtn";
-
+import ProgressBar from "@/components/ProgressBar";
 export default {
   name: "explore",
   props: ["token", "user", "openForm"],
-  components: { StandAloneBtn },
+  components: { StandAloneBtn, ProgressBar },
   data() {
     return {
       tasks: [],
@@ -119,6 +131,11 @@ export default {
         },
         { text: "High", value: "Priority High" }
       ],
+      priorityBar: {
+        "Priority Low": { width: "33%", color: "#7fcdbb" },
+        "Priority Medium": { width: "66%", color: "#1d91c0" },
+        "Priority High": { width: "100%", color: "#0c2c84" }
+      },
       complexityTypes: [
         { text: "None", value: "" },
         { text: "Low", value: "Complexity Low" },
@@ -127,7 +144,12 @@ export default {
           value: "Complexity Medium"
         },
         { text: "High", value: "Complexity High" }
-      ]
+      ],
+      complexityBar: {
+        "Complexity Low": { width: "33%", color: "#9ebcda" },
+        "Complexity Medium": { width: "66%", color: "#8c6bb1" },
+        "Complexity High": { width: "100%", color: "#6e016b" }
+      }
     };
   },
   computed: {
