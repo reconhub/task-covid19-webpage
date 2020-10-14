@@ -41,11 +41,11 @@ export default {
   data() {
     return {
       facts: [
-        {
-          txt:
-            "Tools developed by the R epidemics consortium (RECON) are essential in helping professionals design outbreak analytics pipelines in response to COVID19.",
-          img: ""
-        },
+        // {
+        //   txt:
+        //     "Tools developed by the R epidemics consortium (RECON) are essential in helping professionals design outbreak analytics pipelines in response to COVID19.",
+        //   img: ""
+        // },
         {
           txt:
             "The COVID-19 challenge is a direct communication channel between field agents actively working on the response to COVID19 and the R community.",

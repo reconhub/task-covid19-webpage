@@ -126,9 +126,9 @@ export default {
         { text: "High", value: "Priority High" }
       ],
       priorityBar: {
-        "Priority Low": { width: "33%", color: "#7fcdbb" },
-        "Priority Medium": { width: "66%", color: "#1d91c0" },
-        "Priority High": { width: "100%", color: "#0c2c84" }
+        "Priority Low": { width: "33%", color: "#91bfdb" },
+        "Priority Medium": { width: "66%", color: "#ffffbf" },
+        "Priority High": { width: "100%", color: "#fc8d59" }
       },
       complexityTypes: [
         { text: "None", value: "" },
@@ -140,9 +140,9 @@ export default {
         { text: "High", value: "Complexity High" }
       ],
       complexityBar: {
-        "Complexity Low": { width: "33%", color: "#9ebcda" },
-        "Complexity Medium": { width: "66%", color: "#8c6bb1" },
-        "Complexity High": { width: "100%", color: "#6e016b" }
+        "Complexity Low": { width: "33%", color: "#91bfdb" },
+        "Complexity Medium": { width: "66%", color: "#ffffbf" },
+        "Complexity High": { width: "100%", color: "#fc8d59" }
       }
     };
   },
