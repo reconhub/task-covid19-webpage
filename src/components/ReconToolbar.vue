@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-app-bar dark class="hidden-md-and-down" style="background-color: rgb(9, 39, 110);">
+    <!-- <v-app-bar dark class="hidden-md-and-down" style="background-color: rgb(9, 39, 110);">
       <v-row align="end" class="px-3">
         <p style="margin-bottom: 0;">Together against COVID19</p>
         <v-spacer></v-spacer>
         <a href="https://www.repidemicsconsortium.org/">repidemicsconsortium.org</a>
       </v-row>
-    </v-app-bar>
+    </v-app-bar>-->
     <v-app-bar dark style="background-color: rgb(49,79,150);">
       <v-app-bar-nav-icon @click="$emit('toggleDrawer')" class="hidden-lg-and-up"></v-app-bar-nav-icon>
       <v-toolbar-title>

@@ -48,7 +48,12 @@
             </v-btn>
           </v-card-text>
           <v-divider></v-divider>
-          <v-card-text>RECON - R Epidemics Consortium - 2020</v-card-text>
+          <v-card-text>
+            <a
+              href="https://www.repidemicsconsortium.org/"
+              target="_blank"
+            >RECON - R Epidemics Consortium - 2020</a>
+          </v-card-text>
         </v-card>
       </v-footer>
       <Popup
