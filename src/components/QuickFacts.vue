@@ -42,7 +42,7 @@ export default {
         },
         {
           txt:
-            "Your R programming skills can help fight COVID19 around the world.",
+            "Your R programming skills can help fight COVID-19 around the world.",
           img: ""
         },
         {
