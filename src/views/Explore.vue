@@ -61,12 +61,6 @@
                 :width="complexityBar[task.complexity].width"
                 :color="complexityBar[task.complexity].color"
               />
-              <!-- <p class="mb-0" style="border: 1px solid black">
-                <i>{{task.priority}}</i>
-              </p>
-              <p>
-                <i>{{task.complexity}}</i>
-              </p>-->
             </v-col>
           </v-row>
           <v-row>

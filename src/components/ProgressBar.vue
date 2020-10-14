@@ -1,7 +1,7 @@
 <template>
   <div :title="title" class="px-1 pb-1" style="border: 1px solid black">
     <p class="mb-0">{{label}}</p>
-    <div :style="{backgroundColor: color, height: '5px', width: width}"></div>
+    <div :style="{backgroundColor: color, height: '6px', width: width, 'border': '1px solid grey'}"></div>
   </div>
 </template>
 

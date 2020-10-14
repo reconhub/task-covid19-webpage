@@ -94,6 +94,7 @@
 <script>
 export default {
   name: "learn",
+  props: ["token"],
   data() {
     return {
       git_login_url: process.env.VUE_APP_GIT_LOGIN
