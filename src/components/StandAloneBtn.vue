@@ -1,5 +1,9 @@
 <template>
-  <div class="click-div pa-3" @click="newPage">
+  <div
+    class="click-div pa-3"
+    @click="newPage"
+    :style="{'--baseClr': baseClr ? baseClr : defaultBase, '--hoverClr': hoverClr ? hoverClr : defaultHover}"
+  >
     <p>
       <b>{{text}}</b>
     </p>
@@ -8,7 +12,13 @@
 <script>
 export default {
   name: "toolbarbtn",
-  props: ["text", "href", "route"],
+  props: ["text", "href", "route", "baseClr", "hoverClr"],
+  data() {
+    return {
+      defaultBase: "rgb(49, 79, 150)",
+      defaultHover: "rgb(9, 39, 110)"
+    };
+  },
   methods: {
     newPage() {
       if (this.href) {
@@ -26,14 +36,14 @@ export default {
 <style scoped>
 .click-div {
   cursor: pointer;
-  background-color: rgb(49, 79, 150);
+  background-color: var(--baseClr);
   height: 100%;
   transition: background-color 1s;
   border-radius: 5px;
 }
 
 .click-div:hover {
-  background-color: rgb(9, 39, 110);
+  background-color: var(--hoverClr);
 }
 
 .click-div p {
