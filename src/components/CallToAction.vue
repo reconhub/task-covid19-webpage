@@ -15,7 +15,7 @@
         >Join a community of field epidemiologists, infectious disease modellers and R programmers and contribute to improve the free and open source R tools used in the response to the COVID-19 epidemic.</p>
         <v-row class="text-center">
           <v-spacer></v-spacer>
-          <v-col cols="5">
+          <v-col md="5" lg="5" xl="5" cols="12">
             <StandAloneBtn
               text="SUBMIT TASK"
               @click="exploreOrLogin"
@@ -24,7 +24,8 @@
               title="You are involvedin the COVID-19 response and want to submit a request."
             />
           </v-col>
-          <v-col cols="5">
+
+          <v-col md="5" lg="5" xl="5" cols="12">
             <StandAloneBtn
               text="BROWSE TASKS"
               route="explore"
