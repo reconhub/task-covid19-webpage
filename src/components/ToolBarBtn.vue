@@ -1,12 +1,13 @@
 <template>
   <div class="d-flex mx-3 my-0" @click="newPage">
+    <v-icon v-if="icon">{{icon}}</v-icon>
     <p class="px-1">{{text}}</p>
   </div>
 </template>
 <script>
 export default {
   name: "toolbarbtn",
-  props: ["text", "href", "route"],
+  props: ["text", "href", "route", "icon"],
   methods: {
     newPage() {
       if (this.href) {

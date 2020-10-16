@@ -8,14 +8,14 @@
       </v-row>
     </v-app-bar>-->
     <v-app-bar dark style="background-color: rgb(49,79,150);">
-      <v-app-bar-nav-icon @click="$emit('toggleDrawer')" class="hidden-lg-and-up"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="$emit('toggleDrawer')" class="hidden-md-and-up"></v-app-bar-nav-icon>
       <v-toolbar-title>
         <router-link to="/">
           <v-img width="250" :src="require('@/assets/recon_task_manager_logo_white.png')"/>
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <div class="hidden-md-and-down">
+      <div class="hidden-sm-and-down">
         <ToolBarBtn route="about" text="about"/>
         <ToolBarBtn route="learn" text="learn"/>
         <ToolBarBtn route="explore" text="explore"/>
@@ -25,8 +25,14 @@
         <!-- <v-btn @click="$router.push('repos')">Repos</v-btn> -->
       </div>
       <v-spacer></v-spacer>
-      <ToolBarBtn v-if="!token" text="Log In" :href="git_login_url"/>
-      <ToolBarBtn v-if="token" text="Log Out" @click="logout"/>
+      <div class="hidden-xs-only">
+        <ToolBarBtn v-if="!token" text="Log In" :href="git_login_url"/>
+        <ToolBarBtn v-if="token" text="Log Out" @click="logout"/>
+      </div>
+      <div class="hidden-sm-and-up">
+        <ToolBarBtn v-if="!token" icon="fa-sign-in" :href="git_login_url"/>
+        <ToolBarBtn v-if="token" icon="fa-sign-out" @click="logout"/>
+      </div>
     </v-app-bar>
   </div>
 </template>
