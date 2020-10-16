@@ -58,7 +58,7 @@
         </p>
         <p
           class="text-left mx-3 white-back"
-        >Once the task is validated you will be notified by email with a link to the GitHub issue that was created in your name. It is in this space that you will be able to communicate with the person(s) taking care of your task, this does not require any specific knowledge of git or GitHub.</p>
+        >Once the task is validated you will be notified by email with an invitation from GitHub to the concerned package repository. You will receive another email with a description of the task you created, this email contains a link to the atual issue that was created in your name ("View it on GitHub"). It's in this space that you will be able to communicate with the person(s) taking care of your task, this does not require any specific knowledge of git or GitHub.</p>
         <p class="text-left mx-3 white-back">
           You can access all of the information regarding your tasks (validation process status, link to github, etc) at any time in your
           <a
