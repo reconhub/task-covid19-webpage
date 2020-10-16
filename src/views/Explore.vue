@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="explore">
+  <v-card flat class="explore" tabindex="0">
     <h1 class="pa-5">EXPLORE</h1>
     <p
       class="white-back"
@@ -8,14 +8,14 @@
       <v-spacer></v-spacer>
       <v-col cols="10" class="py-0">
         <v-row class="white-back ml-1">
-          <v-col>
+          <v-col tabindex="0">
             <v-select label="Filter Complexity" :items="complexityTypes" v-model="complexityFilter"></v-select>
           </v-col>
-          <v-col>
+          <v-col tabindex="0">
             <v-select label="Filter Priority" :items="priorityTypes" v-model="priorityFilter"></v-select>
           </v-col>
-          <v-col v-if="token">
-            <v-switch v-model="favoriteSwitch" label="Favorite Only"></v-switch>
+          <v-col v-if="token" tabindex="0">
+            <v-switch v-model="favoriteSwitch" label="Favorite Only" tabindex="0"></v-switch>
           </v-col>
         </v-row>
       </v-col>
@@ -41,7 +41,7 @@
     </v-row>
     <v-row>
       <v-col v-for="(task, i) in filteredData" :key="i" sm="12" lg="4" md="6" xl="4" cols="12">
-        <v-card class="mx-2 pr-2">
+        <v-card class="mx-2 pr-2" tabindex="0">
           <v-row>
             <v-col cols="8">
               <v-card-title>

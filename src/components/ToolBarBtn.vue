@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex mx-3 my-0" @click="newPage">
+  <div class="d-flex mx-3 my-0" @click="newPage" tabindex="0">
     <v-icon v-if="icon">{{icon}}</v-icon>
     <p class="px-1">{{text}}</p>
   </div>

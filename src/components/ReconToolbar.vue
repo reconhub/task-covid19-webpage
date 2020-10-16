@@ -10,7 +10,7 @@
     <v-app-bar dark style="background-color: rgb(49,79,150);">
       <v-app-bar-nav-icon @click="$emit('toggleDrawer')" class="hidden-md-and-up"></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <router-link to="/">
+        <router-link to="/" aria-label="return home">
           <v-img width="250" :src="require('@/assets/recon_task_manager_logo_white.png')"/>
         </router-link>
       </v-toolbar-title>

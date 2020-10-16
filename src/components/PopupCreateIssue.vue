@@ -104,6 +104,7 @@ export default {
   data() {
     return {
       priorityTypes: [
+        { text: "Do Not Know", value: "unknown" },
         { text: "Low - Useful for COVID19 analytics", value: "Priority_Low" },
         {
           text: "Medium - Essential for COVID19 analytics",
@@ -112,6 +113,7 @@ export default {
         { text: "High - Urgent for COVID19 analytics", value: "Priority_High" }
       ],
       complexityTypes: [
+        { text: "Do Not Know", value: "unknown" },
         {
           text: "Low - Can be completed by 1 person in a few hours",
           value: "Complexity_Low"

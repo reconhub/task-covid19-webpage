@@ -1,5 +1,5 @@
 <template>
-  <v-card flat>
+  <v-card flat tabindex="0">
     <h1 class="pa-5">RECON COVID-19 CHALLENGE</h1>
     <call-to-action :token="token" :user="user"/>
     <!-- <intro-slides/> -->

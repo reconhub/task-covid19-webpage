@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="review">
+  <v-card flat class="review" tabindex="0">
     <h1 class="pa-5">REVIEW</h1>
     <v-col>
       <v-row>
@@ -109,6 +109,15 @@ export default {
         });
     },
     judgeSubmission(sub, status) {
+      if (sub.complexity == "unknown") {
+        alert("Complexity cannot be blank/unknown");
+        return null;
+      }
+      if (sub.priority == "unknown") {
+        alert("Priority cannot be blank/unknown");
+        return null;
+      }
+
       let qry = `${process.env.VUE_APP_API}/judgeIssue?token=${
         this.token
       }&note=${sub.note}&approver=${this.user}&status=${status}&id=${
@@ -134,7 +143,7 @@ export default {
     }
   },
   mounted() {
-    this.getSubmissions("pending");
+    this.getSubmissions("pending validation");
     this.$emit("updateToken");
     this.$emit("updateAuth");
     this.$emit("updateUser");
