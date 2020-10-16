@@ -5,7 +5,8 @@
       class="white-back"
     >Here is a list of all the proposed and pending tasks submitted to the RECON COVID-19 challenge.</p>
     <v-row>
-      <v-col cols="8">
+      <v-spacer></v-spacer>
+      <v-col cols="10" class="py-0">
         <v-row class="white-back ml-1">
           <v-col>
             <v-select label="Filter Complexity" :items="complexityTypes" v-model="complexityFilter"></v-select>
@@ -19,14 +20,18 @@
         </v-row>
       </v-col>
       <v-spacer></v-spacer>
-      <v-col cols="2" v-if="token">
+    </v-row>
+    <v-row v-if="token" class="my-0">
+      <v-spacer></v-spacer>
+      <v-col class="py-0">
         <div>
           <!-- Create New Task -->
           <StandAloneBtn
             v-if="token"
-            :text="['xs', 'sm'].indexOf($vuetify.breakpoint.name) >= 0 ? 'New' : 'Create New Task' "
+            :text="['xs', 'sm'].indexOf($vuetify.breakpoint.name) >= 0 ? 'Create new task' : 'Create New Task' "
             @click="updatePopup({type: 'CreateIssue', data: '' })"
             style="text-transform: uppercase"
+            title="Create a new task."
           />
         </div>
         <!-- <v-btn @click="updatePopup({type: 'CreateIssue', data: '' })">Create new task</v-btn> -->
@@ -61,6 +66,12 @@
                 :title="task.complexity"
                 :width="complexityBar[task.complexity].width"
                 :color="complexityBar[task.complexity].color"
+              />
+              <ProgressBar
+                label="Interest"
+                :title="'Community Interest: ' + task.score "
+                :width="task.perc_score + '%'"
+                :color="interestColor(task.perc_score)"
               />
             </v-col>
           </v-row>
@@ -298,6 +309,12 @@ export default {
     showDetail(i, bool) {
       console.log("show" + bool);
       this.$set(this.details, i, bool);
+    },
+    interestColor(perc_score) {
+      if (perc_score < 25) return "#9ecae1";
+      if (perc_score < 50) return "#4292c6";
+      if (perc_score < 75) return "#2171b5";
+      return "#08306b";
     }
   },
   mounted() {
