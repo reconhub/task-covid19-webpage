@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="review" tabindex="0">
+  <v-card flat class="review" >
     <h1 class="pa-5">REVIEW</h1>
     <v-col>
       <v-row>

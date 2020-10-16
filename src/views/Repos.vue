@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="repos" tabindex="0">
+  <v-card flat class="repos" >
     <v-img :src="require('../assets/Placeholder.png')" class="my-3" contain height="200"/>
     <h1>REPOS</h1>
     <p>Here is a list of all the projects RECON has taken on in the past. Feel free to explore the projects. If you think something is missing, then please log in and post an issue.</p>

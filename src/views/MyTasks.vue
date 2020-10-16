@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="explore" tabindex="0">
+  <v-card flat class="explore">
     <h1 class="pa-5">MY SUBMITTED TASKS</h1>
     <v-col>
       <v-row>

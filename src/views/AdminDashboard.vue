@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="adminDash" tabindex="0">
+  <v-card flat class="adminDash">
     <h1 class="pa-5">ADMIN DASHBOARD</h1>
     <ul>
       <li>

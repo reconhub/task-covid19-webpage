@@ -2,7 +2,7 @@
   <div
     class="click-div pa-3"
     @click="newPage"
-    tabindex="0"
+    
     :style="{'--baseClr': baseClr ? baseClr : defaultBase, '--hoverClr': hoverClr ? hoverClr : defaultHover}"
   >
     <p>

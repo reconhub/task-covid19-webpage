@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="about" tabindex="0">
+  <v-card flat class="about">
     <h1 class="pa-5">ABOUT</h1>
     <v-row>
       <v-spacer></v-spacer>
