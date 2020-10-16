@@ -34,6 +34,7 @@
           <li>Code reviews for existing code</li>
           <li>Testing existing features</li>
         </ul>
+        <br>
         <p
           class="text-left mx-3 white-back"
         >Currently, request need to be directly related to the response to COVID-19</p>
