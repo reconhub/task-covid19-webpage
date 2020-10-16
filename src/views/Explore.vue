@@ -21,9 +21,10 @@
       <v-spacer></v-spacer>
       <v-col cols="2" v-if="token">
         <div>
+          <!-- Create New Task -->
           <StandAloneBtn
             v-if="token"
-            text="Create New Task"
+            :text="['xs', 'sm'].indexOf($vuetify.breakpoint.name) >= 0 ? 'New' : 'Create New Task' "
             @click="updatePopup({type: 'CreateIssue', data: '' })"
             style="text-transform: uppercase"
           />
