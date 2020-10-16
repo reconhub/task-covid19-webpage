@@ -25,13 +25,14 @@
       <v-spacer></v-spacer>
       <v-col class="py-0">
         <div>
-          <!-- Create New Task -->
           <StandAloneBtn
             v-if="token"
-            :text="['xs', 'sm'].indexOf($vuetify.breakpoint.name) >= 0 ? 'Create new task' : 'Create New Task' "
+            :text="['xs', 'sm'].indexOf($vuetify.breakpoint.name) >= 0 ? 'Submit Task' : 'Submit Task' "
             @click="updatePopup({type: 'CreateIssue', data: '' })"
             style="text-transform: uppercase"
             title="Create a new task."
+            baseClr="#967831"
+            hoverClr="#5c4a1e"
           />
         </div>
         <!-- <v-btn @click="updatePopup({type: 'CreateIssue', data: '' })">Create new task</v-btn> -->
@@ -55,23 +56,24 @@
                   <v-icon v-else style="color: grey;">mdi-star</v-icon>
                 </v-btn>
               </div>
-              <ProgressBar
+              <!-- <ProgressBar
                 label="P"
                 :title="task.priority"
                 :width="priorityBar[task.priority].width"
                 :color="priorityBar[task.priority].color"
+              />-->
+
+              <ProgressBar
+                label="P"
+                :title="'Community Priority: ' + task.score "
+                :width="task.perc_score + '%'"
+                :color="interestColor(task.perc_score)"
               />
               <ProgressBar
                 label="C"
                 :title="task.complexity"
                 :width="complexityBar[task.complexity].width"
                 :color="complexityBar[task.complexity].color"
-              />
-              <ProgressBar
-                label="I"
-                :title="'Community Interest: ' + task.score "
-                :width="task.perc_score + '%'"
-                :color="interestColor(task.perc_score)"
               />
             </v-col>
           </v-row>
@@ -154,9 +156,9 @@ export default {
         { text: "High", value: "Complexity High" }
       ],
       complexityBar: {
-        "Complexity Low": { width: "33%", color: "#91bfdb" },
-        "Complexity Medium": { width: "66%", color: "#ffffbf" },
-        "Complexity High": { width: "100%", color: "#fc8d59" }
+        "Complexity Low": { width: "33%", color: "#fef0d9" },
+        "Complexity Medium": { width: "66%", color: "#fc8d59" },
+        "Complexity High": { width: "100%", color: "#b30000" }
       }
     };
   },
@@ -201,8 +203,14 @@ export default {
         .get(qry)
         .then(function(res) {
           console.log("successful vote", res);
+          console.log("data", data);
           data.disabled = false;
           data.vote = score_card[vote];
+          // console.log("res.data.newRank", res.data.newRank);
+          data.score = res.data.newRank[0].score;
+          data.perc_score = Math.round(
+            (res.data.newRank[0].score / res.data.maxScore[0]) * 100
+          );
           that.$set(that.tasks, index, data);
         })
         .catch(function(err) {
@@ -311,10 +319,11 @@ export default {
       this.$set(this.details, i, bool);
     },
     interestColor(perc_score) {
-      if (perc_score < 25) return "#9ecae1";
-      if (perc_score < 50) return "#4292c6";
-      if (perc_score < 75) return "#2171b5";
-      return "#08306b";
+      if (perc_score < 20) return "#fef0d9";
+      if (perc_score < 40) return "#fdcc8a";
+      if (perc_score < 60) return "#fc8d59";
+      if (perc_score < 80) return "#e34a33";
+      return "#b30000";
     }
   },
   mounted() {
