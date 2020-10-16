@@ -38,13 +38,13 @@
           <v-row>
             <v-col cols="8">
               <v-card-title>
-                <a :href="task.url" target="_blank">{{task.title}}</a>
+                <a :href="task.url" target="_blank" title="Link to GitHub issue.">{{task.title}}</a>
               </v-card-title>
               <!-- <v-card-subtitle v-text="task.description" style="white-space: pre"></v-card-subtitle> -->
             </v-col>
             <v-col cols="4">
               <div v-if="token">
-                <v-btn icon :disabled="task.disabled" @click="follow(task, i)">
+                <v-btn icon :disabled="task.disabled" title="Follow task." @click="follow(task, i)">
                   <v-icon v-if="task.status" style="color: red;">mdi-star</v-icon>
                   <v-icon v-else style="color: grey;">mdi-star</v-icon>
                 </v-btn>
@@ -69,6 +69,7 @@
                 icon
                 :disabled="task.disabled"
                 @click="vote(task,i, task.vote > 0 ? 'none' : 'up')"
+                title="Increase this task's priority."
               >
                 <v-icon v-if="task.vote > 0" style="color: green;">mdi-thumb-up</v-icon>
                 <v-icon v-else style="color: grey;">mdi-thumb-up</v-icon>
@@ -77,6 +78,7 @@
                 icon
                 :disabled="task.disabled"
                 @click="vote(task,i, task.vote < 0 ? 'none' : 'down')"
+                title="Decrease this task's priority."
               >
                 <v-icon v-if="task.vote < 0" style="color: red;">mdi-thumb-down</v-icon>
                 <v-icon v-else style="color: grey;">mdi-thumb-down</v-icon>

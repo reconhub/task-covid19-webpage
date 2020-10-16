@@ -21,6 +21,7 @@
               @click="exploreOrLogin"
               baseClr="#967831"
               hoverClr="#5c4a1e"
+              title="You are involvedin the COVID-19 response and want to submit a request."
             />
           </v-col>
           <v-col cols="5">
@@ -29,6 +30,7 @@
               route="explore"
               baseClr="#96314f"
               hoverClr="#963136"
+              title="You are a member of the R community and wish to contribute to the response to COVID-19"
             />
           </v-col>
           <v-spacer></v-spacer>
