@@ -56,19 +56,19 @@
                 </v-btn>
               </div>
               <ProgressBar
-                label="Priority"
+                label="P"
                 :title="task.priority"
                 :width="priorityBar[task.priority].width"
                 :color="priorityBar[task.priority].color"
               />
               <ProgressBar
-                label="Complexity"
+                label="C"
                 :title="task.complexity"
                 :width="complexityBar[task.complexity].width"
                 :color="complexityBar[task.complexity].color"
               />
               <ProgressBar
-                label="Interest"
+                label="I"
                 :title="'Community Interest: ' + task.score "
                 :width="task.perc_score + '%'"
                 :color="interestColor(task.perc_score)"

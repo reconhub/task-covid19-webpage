@@ -1,13 +1,17 @@
 <template>
-  <div :title="title" class="px-1 pb-1" style>
-    <p class="mb-0">{{label}}</p>
-    <div style="position: relative; padding-bottom: 6px;">
-      <div
-        :style="{backgroundColor: color, height: '6px', width: width, 'border': '1px solid grey', 'position': 'absolute'}"
-      ></div>
-      <div style="width: 100%; border: 1px solid black; height: 6px; position: absolute"></div>
-    </div>
-  </div>
+  <v-row :title="title" class="px-0 pb-" style>
+    <v-col cols="1" class="ma-0 pa-0">
+      <p class="ma-0 pa-0" style="font-size: 15px;">{{label}}</p>
+    </v-col>
+    <v-col style="display: flex; align-items: center; justify-content: center" class="ma-0 pa-0">
+      <div style="position: relative; width: 80%">
+        <div
+          :style="{backgroundColor: color, height: '10px', width: width, 'border': '1px solid grey', 'position': 'absolute'}"
+        ></div>
+        <div style="width: 100%; border: 1px solid black; height: 10px;"></div>
+      </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
