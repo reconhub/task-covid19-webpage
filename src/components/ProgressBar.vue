@@ -4,7 +4,7 @@
       <p class="ma-0 pa-0" style="font-size: 15px;">{{label}}</p>
     </v-col>
     <v-col
-      cols="9"
+      cols="8"
       style="display: flex; align-items: center; justify-content: center"
       class="ma-0 pa-0"
     >

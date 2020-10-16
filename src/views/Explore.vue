@@ -59,7 +59,7 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="10" style="align-items:">
+            <v-col cols="12" style="align-items:">
               <!-- <ProgressBar
                 label="P"
                 :title="task.priority"
