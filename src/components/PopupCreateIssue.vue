@@ -235,7 +235,9 @@ export default {
   },
   mounted() {
     console.log("inside popup", this.popup);
-    this.repoLabels = this.repoLabels.concat(this.repos.map(d => d.name));
+    this.repoLabels = this.repoLabels.concat(
+      this.repos.map(d => d.org + "/" + d.repo)
+    );
     this.getCollaborators();
   }
 };

@@ -12,7 +12,9 @@
         <div
           :style="{backgroundColor: color, height: '10px', width: width, 'border': '1px solid grey', 'position': 'absolute'}"
         ></div>
-        <div style="width: 100%; border: 1px solid black; height: 10px;"></div>
+        <div
+          style="width: 100%; border: 1px solid black; height: 10px; background-color: lightgrey"
+        ></div>
       </div>
     </v-col>
   </v-row>

@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="review" >
+  <v-card flat class="review">
     <h1 class="pa-5">REVIEW</h1>
     <v-col>
       <v-row>
@@ -147,7 +147,9 @@ export default {
     this.$emit("updateToken");
     this.$emit("updateAuth");
     this.$emit("updateUser");
-    this.repoLabels = this.repoLabels.concat(this.repos.map(d => d.name));
+    this.repoLabels = this.repoLabels.concat(
+      this.repos.map(d => d.org + "/" + d.repo)
+    );
   }
 };
 </script>

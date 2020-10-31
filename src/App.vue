@@ -110,26 +110,29 @@ export default {
     },
     getRepos() {
       let self = this;
-      let size = 100;
-      let qry = `https://api.github.com/orgs/${"reconhub"}/repos?sort=full_name&per_page=${size}&page=${
-        this.page
-      }`;
+      // let size = 100;
+      // let qry = `https://api.github.com/orgs/${"reconhub"}/repos?sort=full_name&per_page=${size}&page=${
+      //   this.page
+      // }`;
+      let qry = `${process.env.VUE_APP_API}/pkgs`;
       console.log("app" + qry);
       axios
-        .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
+        .get(qry)
+        // .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
         .then(function(res) {
-          console.log("page", self.page);
-          console.log("data", res.data);
-          if (self.page == 1) {
-            self.repos = res.data;
-          } else {
-            self.repos = self.repos.concat(res.data);
-          }
+          self.repos = res.data;
+          // console.log("page", self.page);
+          // console.log("data", res.data);
+          // if (self.page == 1) {
+          //   self.repos = res.data;
+          // } else {
+          //   self.repos = self.repos.concat(res.data);
+          // }
 
-          if (res.data.length >= size) {
-            self.page += 1;
-            self.getRepos(self.page);
-          }
+          // if (res.data.length >= size) {
+          //   self.page += 1;
+          //   self.getRepos(self.page);
+          // }
         })
         .catch(function(err) {
           console.log(JSON.stringify(err));

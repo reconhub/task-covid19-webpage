@@ -70,14 +70,16 @@
                 label="Priority"
                 :title="'Community Priority: ' + task.score "
                 :width="task.perc_score + '%'"
-                :color="interestColor(task.perc_score)"
+                color="#b30000"
               />
+              <!-- :color="interestColor(task.perc_score)" -->
               <ProgressBar
                 label="Complexity"
                 :title="task.complexity"
                 :width="complexityBar[task.complexity].width"
-                :color="complexityBar[task.complexity].color"
+                color="#b30000"
               />
+              <!-- :color="complexityBar[task.complexity].color" -->
             </v-col>
           </v-row>
           <v-row>
