@@ -17,29 +17,22 @@
           <v-col v-if="token">
             <v-switch v-model="favoriteSwitch" label="Favorite Only"></v-switch>
           </v-col>
+          <v-col>
+            <StandAloneBtn
+              v-if="token"
+              :text="['xs', 'sm'].indexOf($vuetify.breakpoint.name) >= 0 ? 'Submit Task' : 'Submit Task' "
+              @click="updatePopup({type: 'CreateIssue', data: '' })"
+              style="text-transform: uppercase"
+              title="Create a new task."
+              baseClr="#967831"
+              hoverClr="#5c4a1e"
+            />
+          </v-col>
         </v-row>
       </v-col>
       <v-spacer></v-spacer>
     </v-row>
-    <v-row v-if="token" class="my-0">
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-col class="py-0">
-        <div>
-          <StandAloneBtn
-            v-if="token"
-            :text="['xs', 'sm'].indexOf($vuetify.breakpoint.name) >= 0 ? 'Submit Task' : 'Submit Task' "
-            @click="updatePopup({type: 'CreateIssue', data: '' })"
-            style="text-transform: uppercase"
-            title="Create a new task."
-            baseClr="#967831"
-            hoverClr="#5c4a1e"
-          />
-        </div>
-        <!-- <v-btn @click="updatePopup({type: 'CreateIssue', data: '' })">Create new task</v-btn> -->
-      </v-col>
-      <v-spacer></v-spacer>
-    </v-row>
+
     <v-row>
       <v-col v-for="(task, i) in filteredData" :key="i" sm="12" lg="4" md="6" xl="4" cols="12">
         <v-card class="mx-2 pr-2">
