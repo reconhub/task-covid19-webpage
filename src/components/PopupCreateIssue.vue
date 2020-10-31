@@ -37,12 +37,12 @@
                 hint="A quick explanation of how addressing this task will help improving COVID-19 analytics"
                 :rules="[rules.required]"
               ></v-text-field>
-              <v-text-field
+              <!-- <v-text-field
                 label="Timeline"
                 v-model="formInfo.timeline"
                 hint="A proposed timeline for the work."
                 :rules="[rules.required]"
-              ></v-text-field>
+              ></v-text-field>-->
             </v-col>
           </v-row>
         </v-col>
@@ -69,13 +69,13 @@
           <v-row>
             <v-col>
               <p>
-                <b>Assign task to specific github repo</b>
+                <b>Suggest task to specific github repo</b>
               </p>
               <v-select
                 width="100%"
                 v-model="formInfo.repo"
                 :items="repoLabels"
-                label="Assigned Repo"
+                label="Suggested Repo"
               ></v-select>
               <!-- <v-select
                 width="100%"
@@ -135,7 +135,7 @@ export default {
         title: "",
         description: "",
         impact: "",
-        timeline: "",
+        timeline: "NONE",
         priority: "",
         complexity: "",
         repo: "Do not know",
@@ -155,7 +155,7 @@ export default {
         !!this.formInfo.title &
         !!this.formInfo.description &
         !!this.formInfo.impact &
-        !!this.formInfo.timeline &
+        // !!this.formInfo.timeline &
         !!this.formInfo.priority &
         !!this.formInfo.complexity;
 
@@ -194,7 +194,7 @@ export default {
             self.formInfo.title = "";
             self.formInfo.description = "";
             self.formInfo.impact = "";
-            self.formInfo.timeline = "";
+            self.formInfo.timeline = "NONE";
             self.formInfo.priority = "";
             self.formInfo.complexity = "";
             self.formInfo.repo = "Do not know";
