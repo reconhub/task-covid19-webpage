@@ -23,6 +23,7 @@
     </v-row>
     <v-row v-if="token" class="my-0">
       <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
       <v-col class="py-0">
         <div>
           <StandAloneBtn
