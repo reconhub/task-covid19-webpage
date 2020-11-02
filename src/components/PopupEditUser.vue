@@ -32,11 +32,9 @@ export default {
       console.log("newpopup", this.popup.data);
       let self = this;
 
-      let qry = `${process.env.VUE_APP_API}/editAuth?token=${
-        this.token
-      }&admin=${this.user}&user=${this.popup.data.username}&type=${
-        this.newRole
-      }`;
+      let qry = `${process.env.VUE_APP_API}/editAuth?token=${this.token}&user=${
+        this.user
+      }&login=${this.popup.data.username}&type=${this.newRole}`;
 
       console.log(qry);
       axios

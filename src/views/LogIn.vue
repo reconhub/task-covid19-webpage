@@ -24,7 +24,7 @@ export default {
         .get(qry, { headers: { Authorization: `token ${token}` } })
         .then(function(res) {
           console.log("getUser", res.data);
-          self.getAuthorization(res.data.login);
+          self.getAuthorization(res.data.login, token);
         })
         .catch(function(err) {
           console.log(JSON.stringify(err));
@@ -33,8 +33,10 @@ export default {
           self.$router.push("/");
         });
     },
-    getAuthorization(username) {
-      let qry = `${process.env.VUE_APP_API}/auth?user=${username}`;
+    getAuthorization(username, token) {
+      let qry = `${
+        process.env.VUE_APP_API
+      }/auth?user=${username}&token=${token}`;
 
       let self = this;
 

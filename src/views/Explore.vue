@@ -184,7 +184,7 @@ export default {
     vote(data, index, vote) {
       let qry = `${process.env.VUE_APP_API}/vote?vote=${vote}&issue_id=${
         data.id
-      }&username=${this.user}`;
+      }&user=${this.user}&token=${this.token}`;
 
       data.disabled = true;
 
@@ -221,9 +221,9 @@ export default {
     follow(data, index) {
       let qry = `${
         process.env.VUE_APP_API
-      }/follow?status=${!data.status}&username=${this.user}&issue_id=${
+      }/follow?status=${!data.status}&user=${this.user}&issue_id=${
         data.id
-      }`;
+      }&token=${this.token}`;
 
       data.disabled = true;
       this.$set(this.tasks, index, data);
@@ -247,10 +247,8 @@ export default {
     getTasks(user) {
       let qry = `${process.env.VUE_APP_API}/tasks`;
       if (user) {
-        qry = qry + `?user=${user}`;
+        qry = qry + `?user=${user}&token=${this.token}`;
       }
-
-      // "https://api.github.com/repos/BenjaminOrtizUlloa/ExploreGitAPI/issues?per_page=100";
 
       let self = this;
       console.log(self);

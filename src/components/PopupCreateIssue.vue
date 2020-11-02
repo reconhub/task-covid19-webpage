@@ -166,7 +166,7 @@ export default {
 
       let qry = `${process.env.VUE_APP_API}/submitIssue?title=${
         this.formInfo.title
-      }&author=${this.user}&body=${this.formInfo.description}&impact=${
+      }&user=${this.user}&body=${this.formInfo.description}&impact=${
         this.formInfo.impact
       }&timeline=${this.formInfo.timeline}&priority=${
         this.formInfo.priority

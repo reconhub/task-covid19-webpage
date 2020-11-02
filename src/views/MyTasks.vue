@@ -59,7 +59,9 @@ export default {
   },
   methods: {
     getSubmissions() {
-      let qry = `${process.env.VUE_APP_API}/myIssues?user=${this.user}`;
+      let qry = `${process.env.VUE_APP_API}/myIssues?user=${this.user}&token=${
+        this.token
+      }`;
       console.log(qry);
       let self = this;
       console.log(self);

@@ -92,7 +92,9 @@ export default {
   },
   methods: {
     getSubmissions(status) {
-      let qry = `${process.env.VUE_APP_API}/issues?status=${status}`;
+      let qry = `${process.env.VUE_APP_API}/issues?status=${status}&user=${
+        this.user
+      }&token=${this.token}`;
 
       let self = this;
 
@@ -120,7 +122,7 @@ export default {
 
       let qry = `${process.env.VUE_APP_API}/judgeIssue?token=${
         this.token
-      }&note=${sub.note}&approver=${this.user}&status=${status}&id=${
+      }&note=${sub.note}&user=${this.user}&status=${status}&id=${
         sub.id
       }&complexity=${sub.complexity}&priority=${sub.priority}&repo=${sub.repo}`;
 
