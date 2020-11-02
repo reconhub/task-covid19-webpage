@@ -27,6 +27,14 @@
         :user="user"
         @updatePopup="updatePopup"
       />
+      <PopupAddPackage
+        v-else-if="popup.type == 'AddPackage'"
+        :popup="popup"
+        :token="token"
+        :user="user"
+        @updatePopup="updatePopup"
+      />
+
       <v-btn v-else @click="updatePopup({type: ''})">Close</v-btn>
     </v-col>
     <v-spacer></v-spacer>
@@ -36,14 +44,15 @@
 import PopupCreateIssue from "@/components/PopupCreateIssue";
 import PopupEditUser from "@/components/PopupEditUser";
 import PopupCreateUser from "@/components/PopupCreateUser";
-
+import PopupAddPackage from "@/components/PopupAddPackage";
 export default {
   name: "popup",
   props: ["popup", "user", "token", "repos"],
   components: {
     PopupCreateIssue,
     PopupEditUser,
-    PopupCreateUser
+    PopupCreateUser,
+    PopupAddPackage
   },
   data() {
     return {

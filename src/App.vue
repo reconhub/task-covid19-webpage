@@ -53,6 +53,14 @@
               href="https://www.repidemicsconsortium.org/"
               target="_blank"
             >RECON - R Epidemics Consortium - 2020</a>
+
+            <span v-if="token">
+              |
+              <a
+                href="#"
+                @click="updatePopup({type: 'AddPackage', data: '' })"
+              >Add your package to RECON</a>
+            </span>
           </v-card-text>
         </v-card>
       </v-footer>
