@@ -35,6 +35,16 @@
         </v-data-table>
         <v-spacer></v-spacer>
       </v-row>
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-data-table :headers="headersPkg" :items="pendingSuggestedPkg">
+          <template v-slot:item.actions="{item}">
+            <v-icon small class="mr-2" @click="judgeSuggestedPkg(item, 'approved')">mdi-thumb-up</v-icon>
+            <v-icon small @click="judgeSuggestedPkg(item, 'rejected')">mdi-thumb-down</v-icon>
+          </template>
+        </v-data-table>
+        <v-spacer></v-spacer>
+      </v-row>
     </v-col>
   </v-card>
 </template>
@@ -64,7 +74,15 @@ export default {
         { text: "Notes", value: "notes", sortable: false },
         { text: "Actions", value: "actions", sortable: false }
       ],
+      headersPkg: [
+        { text: "Organization", value: "org" },
+        { text: "Repository", value: "repo" },
+        { text: "Point of Contct", value: "poc" },
+        { text: "Updated", value: "last_update" },
+        { text: "Actions", value: "actions", sortable: false }
+      ],
       pendingSubmissions: [],
+      pendingSuggestedPkg: [],
       priorityTypes: [
         { text: "Low", value: "Priority_Low" },
         {
@@ -110,6 +128,42 @@ export default {
           console.log(err);
         });
     },
+    getSuggestedPkg(status) {
+      let qry = `${process.env.VUE_APP_API}/pkgs?status=${status}`;
+
+      let self = this;
+
+      axios
+        .get(qry)
+        .then(function(res) {
+          console.log("getSuggestedPkg", res.data);
+          self.pendingSuggestedPkg = res.data;
+        })
+        .catch(function(err) {
+          console.log(JSON.stringify(err));
+          alert(err);
+          console.log(err);
+        });
+    },
+    judgeSuggestedPkg(sub, status) {
+      let qry = `${process.env.VUE_APP_API}/editPkg?token=${
+        this.token
+      }&status=${status}&user=${this.user}&id=${sub.id}`;
+
+      let self = this;
+
+      axios
+        .post(qry)
+        .then(function(res) {
+          console.log("judgeSuggestedPkg", res.data);
+          self.getSuggestedPkg("pending validation");
+        })
+        .catch(function(err) {
+          console.log(JSON.stringify(err));
+          alert(err);
+          console.log(err);
+        });
+    },
     judgeSubmission(sub, status) {
       if (sub.complexity == "unknown") {
         alert("Complexity cannot be blank/unknown");
@@ -132,7 +186,7 @@ export default {
         .post(qry)
         .then(function(res) {
           console.log("judgeSubmission", res.data);
-          self.getSubmissions("pending");
+          self.getSubmissions("pending validation");
         })
         .catch(function(err) {
           console.log(JSON.stringify(err));
@@ -146,6 +200,7 @@ export default {
   },
   mounted() {
     this.getSubmissions("pending validation");
+    this.getSuggestedPkg("pending validation");
     this.$emit("updateToken");
     this.$emit("updateAuth");
     this.$emit("updateUser");
