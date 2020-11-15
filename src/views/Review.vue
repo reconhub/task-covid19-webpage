@@ -110,14 +110,22 @@ export default {
   },
   methods: {
     getSubmissions(status) {
-      let qry = `${process.env.VUE_APP_API}/issues?status=${status}&user=${
-        this.user
-      }&token=${this.token}`;
+      // let qry = `${process.env.VUE_APP_API}/issues?status=${status}&user=${
+      //   this.user
+      // }&token=${this.token}`;
+
+      let qry = `${process.env.VUE_APP_API}/issue?status=${status}`;
 
       let self = this;
 
       axios
-        .get(qry)
+        .get(qry, {
+          headers: {
+            "content-type": "multipart/form-data",
+            Authorization: self.token,
+            "X-User": self.user
+          }
+        })
         .then(function(res) {
           console.log("getsubmissions", res.data);
           self.pendingSubmissions = res.data;
@@ -198,7 +206,8 @@ export default {
           {
             headers: {
               "content-type": "multipart/form-data",
-              Authorization: self.token
+              Authorization: self.token,
+              "X-User": self.user
             }
           }
         )

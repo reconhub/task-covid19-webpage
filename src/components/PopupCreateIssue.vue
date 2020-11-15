@@ -183,7 +183,8 @@ export default {
             {
               headers: {
                 "content-type": "multipart/form-data",
-                Authorization: self.token
+                Authorization: self.token,
+                "X-User": self.user
               }
             }
           )
