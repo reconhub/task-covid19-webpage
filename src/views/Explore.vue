@@ -238,7 +238,7 @@ export default {
     getTasks() {
       let qry = `${process.env.VUE_APP_API}/tasks`;
       let options = {};
-      if (this.jwt & this.user) {
+      if (this.jwt && this.user) {
         qry = qry + `/${this.user}`;
         options = {
           headers: {
