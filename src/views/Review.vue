@@ -174,16 +174,34 @@ export default {
         return null;
       }
 
-      let qry = `${process.env.VUE_APP_API}/judgeIssue?token=${
-        this.token
-      }&note=${sub.note}&user=${this.user}&status=${status}&id=${
-        sub.id
-      }&complexity=${sub.complexity}&priority=${sub.priority}&repo=${sub.repo}`;
+      // let qry = `${process.env.VUE_APP_API}/judgeIssue?token=${
+      //   this.token
+      // }&note=${sub.note}&user=${this.user}&status=${status}&id=${
+      //   sub.id
+      // }&complexity=${sub.complexity}&priority=${sub.priority}&repo=${sub.repo}`;
 
       let self = this;
 
       axios
-        .post(qry)
+        .put(
+          `${process.env.VUE_APP_API}/issue`,
+          {
+            token: self.token,
+            note: sub.note,
+            user: self.user,
+            status: status,
+            id: sub.id,
+            complexity: sub.complexity,
+            priority: sub.priority,
+            repo: sub.repo
+          },
+          {
+            headers: {
+              "content-type": "multipart/form-data",
+              Authorization: self.token
+            }
+          }
+        )
         .then(function(res) {
           console.log("judgeSubmission", res.data);
           self.getSubmissions("pending validation");
