@@ -164,33 +164,30 @@ export default {
         this.formInfo.assignees = "__NONE__";
       }
 
-      let qry = `${process.env.VUE_APP_API}/submitIssue?title=${
-        this.formInfo.title
-      }&user=${this.user}&body=${this.formInfo.description}&impact=${
-        this.formInfo.impact
-      }&timeline=${this.formInfo.timeline}&priority=${
-        this.formInfo.priority
-      }&complexity=${this.formInfo.complexity}&repo=${
-        this.formInfo.repo
-      }&assignees=${this.formInfo.assignees}&token=${this.token}`;
-
       if (bool) {
         axios
-          .post(qry)
-          // .post(`${process.env.VUE_APP_API}/submitIssue/`, {
-          //   title: self.formInfo.title,
-          //   author: self.user,
-          //   body: self.formInfo.description,
-          //   impact: self.formInfo.impact,
-          //   timeline: self.formInfo.timeline,
-          //   priority: self.formInfo.priority,
-          //   complexity: self.formInfo.complexity,
-          //   repo: self.formInfo.repo,
-          //   assignees: self.formInfo.assignees,
-          //   token: self.token
-          // })
+          .post(
+            `${process.env.VUE_APP_API}/issue`,
+            {
+              title: self.formInfo.title,
+              user: self.user,
+              body: self.formInfo.description,
+              impact: self.formInfo.impact,
+              timeline: self.formInfo.timeline,
+              priority: self.formInfo.priority,
+              complexity: self.formInfo.complexity,
+              repo: self.formInfo.repo,
+              assignees: self.formInfo.assignees,
+              token: self.token
+            },
+            {
+              headers: {
+                "content-type": "multipart/form-data",
+                Authorization: self.token
+              }
+            }
+          )
           .then(function(res) {
-            console.log("success", res);
             self.formInfo.title = "";
             self.formInfo.description = "";
             self.formInfo.impact = "";

@@ -8,6 +8,7 @@ import Repos from "./views/Repos.vue"
 import MyTasks from "./views/MyTasks.vue"
 import AdminDashboard from "./views/AdminDashboard.vue"
 import Learn from "./views/Learn.vue"
+import Test from "@/views/Test.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -63,6 +64,11 @@ export default new Router({
       path: "/learn",
       name: "learn",
       component: Learn
+    },
+    {
+      path: "/test",
+      name: "test",
+      component: Test
     }
 
   ]
