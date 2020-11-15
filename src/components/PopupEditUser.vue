@@ -16,7 +16,7 @@
 import axios from "axios";
 export default {
   name: "PopupCreateIssue",
-  props: ["popup", "token", "user"],
+  props: ["popup", "token", "user", "jwt"],
   data() {
     return {
       roles: ["admin", "reviewer", "user", "nothing"],
@@ -28,19 +28,27 @@ export default {
       this.$emit("updatePopup", { type: "" });
     },
     submitForm() {
-      console.log("inside submit form");
-      console.log("newpopup", this.popup.data);
       let self = this;
 
-      let qry = `${process.env.VUE_APP_API}/editAuth?token=${this.token}&user=${
-        this.user
-      }&login=${this.popup.data.username}&type=${this.newRole}`;
+      // let qry = `${process.env.VUE_APP_API}/editAuth?token=${this.token}&user=${
+      //   this.user
+      // }&login=${this.popup.data.username}&type=${this.newRole}`;
+
+      let qry = `${process.env.VUE_APP_API}/auth`;
 
       console.log(qry);
       axios
-        .post(qry)
+        .put(
+          qry,
+          { login: self.popup.data.username, type: self.newRole },
+          {
+            headers: {
+              "content-type": "multipart/form-data",
+              Authorization: self.jwt
+            }
+          }
+        )
         .then(function(res) {
-          console.log("success", res);
           alert(`${self.popup.data.username}'s role was updated.`);
 
           self.close();

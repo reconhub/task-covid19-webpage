@@ -64,7 +64,7 @@ import { setTimeout } from "timers";
 
 export default {
   name: "adminDash",
-  props: ["token", "user", "popup"],
+  props: ["token", "user", "popup", "jwt"],
   data() {
     return {
       search: "",
@@ -93,9 +93,13 @@ export default {
       let self = this;
 
       axios
-        .get(qry)
+        .get(qry, {
+          headers: {
+            "content-type": "multipart/form-data",
+            Authorization: self.jwt
+          }
+        })
         .then(function(res) {
-          console.log("getAuthorizations", res.data);
           self.authorizations = res.data;
         })
         .catch(function(err) {

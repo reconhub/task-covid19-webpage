@@ -110,10 +110,6 @@ export default {
   },
   methods: {
     getSubmissions(status) {
-      // let qry = `${process.env.VUE_APP_API}/issues?status=${status}&user=${
-      //   this.user
-      // }&token=${this.token}`;
-
       let qry = `${process.env.VUE_APP_API}/issue?status=${status}`;
 
       let self = this;
@@ -127,11 +123,9 @@ export default {
           }
         })
         .then(function(res) {
-          console.log("getsubmissions", res.data);
           self.pendingSubmissions = res.data;
         })
         .catch(function(err) {
-          console.log(JSON.stringify(err));
           alert(err);
           console.log(err);
         });
@@ -181,12 +175,6 @@ export default {
         alert("Priority cannot be blank/unknown");
         return null;
       }
-
-      // let qry = `${process.env.VUE_APP_API}/judgeIssue?token=${
-      //   this.token
-      // }&note=${sub.note}&user=${this.user}&status=${status}&id=${
-      //   sub.id
-      // }&complexity=${sub.complexity}&priority=${sub.priority}&repo=${sub.repo}`;
 
       let self = this;
 

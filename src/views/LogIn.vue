@@ -34,9 +34,7 @@ export default {
         });
     },
     getAuthorization(username, token) {
-      let qry = `${
-        process.env.VUE_APP_API
-      }/auth?user=${username}&token=${token}`;
+      let qry = `${process.env.VUE_APP_API}/auth/${username}/token`;
 
       let self = this;
 

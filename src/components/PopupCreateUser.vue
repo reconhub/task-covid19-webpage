@@ -26,7 +26,7 @@
 import axios from "axios";
 export default {
   name: "PopupCreateIssue",
-  props: ["popup", "token", "user"],
+  props: ["popup", "token", "user", "jwt"],
   data() {
     return {
       roles: ["admin", "reviewer", "user"],
@@ -47,17 +47,25 @@ export default {
       let self = this;
 
       let qry = `https://api.github.com/users/${this.newUser}`;
-      let qry2 = `${process.env.VUE_APP_API}/addAuth?token=${this.token}&user=${
-        this.user
-      }&login=${this.newUser}&type=${this.newRole}`;
+      // let qry2 = `${process.env.VUE_APP_API}/addAuth?token=${this.token}&user=${
+      //   this.user
+      // }&login=${this.newUser}&type=${this.newRole}`;
+      let qry2 = `${process.env.VUE_APP_API}/auth`;
 
       axios
         .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
         .then(function(res) {
-          console.log("success", res);
-          console.log(qry2);
           axios
-            .post(qry2)
+            .post(
+              qry2,
+              { login: self.newUser, type: self.newRole },
+              {
+                headers: {
+                  "content-type": "multipart/form-data",
+                  Authorization: self.jwt
+                }
+              }
+            )
             .then(function(res) {
               alert(res.data);
               self.close();
