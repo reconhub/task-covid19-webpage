@@ -42,7 +42,7 @@
 import axios from "axios";
 export default {
   name: "PopupAddPackage",
-  props: ["popup", "token", "user"],
+  props: ["popup", "token", "user", "jwt"],
   data() {
     return {
       org: "",
@@ -63,17 +63,23 @@ export default {
       let self = this;
 
       let qry = `https://api.github.com/users/${this.poc}`;
-      let qry2 = `${process.env.VUE_APP_API}/suggestPkg?token=${
-        this.token
-      }&user=${this.user}&poc=${this.poc}&org=${this.org}&pkg=${this.pkg}`;
+
+      let qry2 = `${process.env.VUE_APP_API}/pkgs`;
 
       axios
         .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
         .then(function(res) {
-          console.log("success", res);
-          console.log(qry2);
           axios
-            .post(qry2)
+            .post(
+              qry2,
+              { poc: self.poc, org: self.org, pkg: self.pkg },
+              {
+                headers: {
+                  "content-type": "multipart/form-data",
+                  Authorization: self.jwt
+                }
+              }
+            )
             .then(function(res) {
               alert(
                 "Thank you for suggesting this package to RECON. The suggestion will be reviewed by our team."

@@ -138,30 +138,32 @@ export default {
       axios
         .get(qry)
         .then(function(res) {
-          console.log("getSuggestedPkg", res.data);
           self.pendingSuggestedPkg = res.data;
         })
         .catch(function(err) {
-          console.log(JSON.stringify(err));
           alert(err);
           console.log(err);
         });
     },
     judgeSuggestedPkg(sub, status) {
-      let qry = `${process.env.VUE_APP_API}/editPkg?token=${
-        this.token
-      }&status=${status}&user=${this.user}&id=${sub.id}`;
-
+      let qry = `${process.env.VUE_APP_API}/pkgs`;
       let self = this;
 
       axios
-        .post(qry)
+        .put(
+          qry,
+          { status: status, id: sub.id },
+          {
+            headers: {
+              "content-type": "multipart/form-data",
+              Authorization: self.jwt
+            }
+          }
+        )
         .then(function(res) {
-          console.log("judgeSuggestedPkg", res.data);
           self.getSuggestedPkg("pending validation");
         })
         .catch(function(err) {
-          console.log(JSON.stringify(err));
           alert(err);
           console.log(err);
         });

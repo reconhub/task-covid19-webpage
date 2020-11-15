@@ -125,32 +125,15 @@ export default {
     },
     getRepos() {
       let self = this;
-      // let size = 100;
-      // let qry = `https://api.github.com/orgs/${"reconhub"}/repos?sort=full_name&per_page=${size}&page=${
-      //   this.page
-      // }`;
-      let qry = `${process.env.VUE_APP_API}/pkgs`;
+
+      let qry = `${process.env.VUE_APP_API}/pkgs?status=approved`;
       console.log("app" + qry);
       axios
         .get(qry)
-        // .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
         .then(function(res) {
           self.repos = res.data;
-          // console.log("page", self.page);
-          // console.log("data", res.data);
-          // if (self.page == 1) {
-          //   self.repos = res.data;
-          // } else {
-          //   self.repos = self.repos.concat(res.data);
-          // }
-
-          // if (res.data.length >= size) {
-          //   self.page += 1;
-          //   self.getRepos(self.page);
-          // }
         })
         .catch(function(err) {
-          console.log(JSON.stringify(err));
           alert(err);
           console.log(err);
         });
