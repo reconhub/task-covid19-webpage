@@ -41,7 +41,6 @@
               <v-card-title>
                 <a :href="task.url" target="_blank" title="Link to GitHub issue.">{{task.title}}</a>
               </v-card-title>
-              <!-- <v-card-subtitle v-text="task.description" style="white-space: pre"></v-card-subtitle> -->
             </v-col>
             <v-col cols="4">
               <div v-if="jwt">
