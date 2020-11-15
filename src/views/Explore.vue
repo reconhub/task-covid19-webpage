@@ -44,7 +44,7 @@
               <!-- <v-card-subtitle v-text="task.description" style="white-space: pre"></v-card-subtitle> -->
             </v-col>
             <v-col cols="4">
-              <div v-if="token">
+              <div v-if="jwt">
                 <v-btn icon :disabled="task.disabled" title="Follow task." @click="follow(task, i)">
                   <v-icon v-if="task.status" style="color: red;">mdi-star</v-icon>
                   <v-icon v-else style="color: grey;">mdi-star</v-icon>
@@ -54,30 +54,22 @@
           </v-row>
           <v-row>
             <v-col cols="12" style="align-items:">
-              <!-- <ProgressBar
-                label="P"
-                :title="task.priority"
-                :width="priorityBar[task.priority].width"
-                :color="priorityBar[task.priority].color"
-              />-->
               <ProgressBar
                 label="Priority"
                 :title="'Community Priority: ' + task.score "
                 :width="task.perc_score + '%'"
                 color="#b30000"
               />
-              <!-- :color="interestColor(task.perc_score)" -->
               <ProgressBar
                 label="Complexity"
                 :title="task.complexity"
                 :width="complexityBar[task.complexity].width"
                 color="#b30000"
               />
-              <!-- :color="complexityBar[task.complexity].color" -->
             </v-col>
           </v-row>
           <v-row>
-            <v-col v-if="token">
+            <v-col v-if="jwt">
               <v-btn
                 icon
                 :disabled="task.disabled"
@@ -117,12 +109,11 @@
 <script>
 import axios from "axios";
 import { setTimeout } from "timers";
-// import ToolBarBtn from "@/components/ToolBarBtn";
 import StandAloneBtn from "@/components/StandAloneBtn";
 import ProgressBar from "@/components/ProgressBar";
 export default {
   name: "explore",
-  props: ["token", "user", "openForm"],
+  props: ["token", "user", "openForm", "jwt"],
   components: { StandAloneBtn, ProgressBar },
   data() {
     return {
@@ -244,26 +235,28 @@ export default {
           that.$set(that.tasks, index, data);
         });
     },
-    getTasks(user) {
+    getTasks() {
       let qry = `${process.env.VUE_APP_API}/tasks`;
-      if (user) {
-        qry = qry + `?user=${user}&token=${this.token}`;
+      let options = {};
+      if (this.jwt & this.user) {
+        qry = qry + `/${this.user}`;
+        options = {
+          headers: {
+            Authorization: this.jwt,
+            "content-type": "multipart/form-data"
+          }
+        };
       }
 
       let self = this;
-      console.log(self);
 
       axios
-        .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
+        .get(qry, options)
         .then(function(res) {
-          console.log(res.data);
           self.tasks = res.data;
-          // self.tasks = self.parseIssues(res.data);
           self.details = self.tasks.map(() => false);
-          console.log("tasks", self.tasks);
         })
         .catch(function(err) {
-          console.log(JSON.stringify(err));
           alert(err);
           console.log(err);
         });
@@ -323,21 +316,12 @@ export default {
       return "#b30000";
     }
   },
-  mounted() {
-    let token = sessionStorage.getItem("RECON_GitHub_Token");
-    this.$emit("updateToken");
-    if (token) {
-      this.getTasks(this.user);
-    } else {
-      this.getTasks();
-    }
+  created() {
+    this.getTasks();
 
     if (this.openForm) {
       this.updatePopup({ type: "CreateIssue", data: "" });
     }
-    // if (token) {
-    //   this.getTasks(token);
-    // }
   }
 };
 </script>

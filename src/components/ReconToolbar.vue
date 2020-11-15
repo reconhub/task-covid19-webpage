@@ -53,9 +53,11 @@ export default {
       sessionStorage.setItem("RECON_GitHub_Token", "");
       sessionStorage.setItem("RECON_User_Auth", "");
       sessionStorage.setItem("RECON_User_Name", "");
+      sessionStorage.setItem("RECON_JWT", "");
       this.$emit("updateToken");
       this.$emit("updateAuth");
       this.$emit("updateUser");
+      this.$emit("updateJWT");
       this.$router.push("/");
     }
   },

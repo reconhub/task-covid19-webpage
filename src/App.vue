@@ -16,6 +16,7 @@
           @updateToken="updateToken"
           @updateAuth="updateAuth"
           @updateUser="updateUser"
+          @updateJWT="updateJWT"
           @toggleDrawer="toggleDrawer"
         />
         <router-view
