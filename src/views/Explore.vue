@@ -172,9 +172,7 @@ export default {
   },
   methods: {
     vote(data, index, vote) {
-      let qry = `${process.env.VUE_APP_API}/vote?vote=${vote}&issue_id=${
-        data.id
-      }&user=${this.user}&token=${this.token}`;
+      let qry = `${process.env.VUE_APP_API}/vote`;
 
       data.disabled = true;
 
@@ -189,13 +187,20 @@ export default {
       };
 
       axios
-        .get(qry)
+        .put(
+          qry,
+          { vote: vote, issue_id: data.id },
+          {
+            headers: {
+              "content-type": "multipart/form-data",
+              Authorization: that.jwt
+            }
+          }
+        )
         .then(function(res) {
-          console.log("successful vote", res);
-          console.log("data", data);
           data.disabled = false;
           data.vote = score_card[vote];
-          // console.log("res.data.newRank", res.data.newRank);
+
           data.score = res.data.newRank[0].score;
           data.perc_score = Math.round(
             (res.data.newRank[0].score / res.data.maxScore[0]) * 100
@@ -209,11 +214,7 @@ export default {
         });
     },
     follow(data, index) {
-      let qry = `${
-        process.env.VUE_APP_API
-      }/follow?status=${!data.status}&user=${this.user}&issue_id=${
-        data.id
-      }&token=${this.token}`;
+      let qry = `${process.env.VUE_APP_API}/follow`;
 
       data.disabled = true;
       this.$set(this.tasks, index, data);
@@ -221,9 +222,17 @@ export default {
       let that = this;
 
       axios
-        .get(qry) // replace with put once figured out
+        .put(
+          qry,
+          { status: !data.status, issue_id: data.id },
+          {
+            headers: {
+              "content-type": "multipart/form-data",
+              Authorization: that.jwt
+            }
+          }
+        )
         .then(function(res) {
-          console.log("success", res);
           data.disabled = false;
           data.status = !data.status;
           that.$set(that.tasks, index, data);
