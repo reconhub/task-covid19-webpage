@@ -54,7 +54,7 @@ import { setTimeout } from "timers";
 
 export default {
   name: "review",
-  props: ["token", "user", "repos"],
+  props: ["token", "user", "repos", "jwt"],
   data() {
     return {
       search: "",
@@ -122,7 +122,7 @@ export default {
         .get(qry, {
           headers: {
             "content-type": "multipart/form-data",
-            Authorization: self.token,
+            Authorization: self.jwt,
             "X-User": self.user
           }
         })
@@ -194,9 +194,7 @@ export default {
         .put(
           `${process.env.VUE_APP_API}/issue`,
           {
-            token: self.token,
             note: sub.note,
-            user: self.user,
             status: status,
             id: sub.id,
             complexity: sub.complexity,
@@ -206,7 +204,7 @@ export default {
           {
             headers: {
               "content-type": "multipart/form-data",
-              Authorization: self.token,
+              Authorization: self.jwt,
               "X-User": self.user
             }
           }

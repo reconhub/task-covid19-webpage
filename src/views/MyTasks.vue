@@ -35,7 +35,7 @@ import { setTimeout } from "timers";
 
 export default {
   name: "review",
-  props: ["token", "user"],
+  props: ["token", "user", "jwt"],
   data() {
     return {
       search: "",
@@ -59,15 +59,16 @@ export default {
   },
   methods: {
     getSubmissions() {
-      let qry = `${process.env.VUE_APP_API}/myIssues?user=${this.user}&token=${
-        this.token
-      }`;
-      console.log(qry);
+      let qry = `${process.env.VUE_APP_API}/issue/${this.user}`;
       let self = this;
-      console.log(self);
 
       axios
-        .get(qry)
+        .get(qry, {
+          headers: {
+            Authorization: self.jwt,
+            "content-type": "multipart/form-data"
+          }
+        })
         .then(function(res) {
           console.log("getsubmissions", res.data);
           self.submissions = res.data;

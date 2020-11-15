@@ -10,6 +10,7 @@
         :popup="popup"
         :token="token"
         :user="user"
+        :jwt="jwt"
         :repos="repos"
         @updatePopup="updatePopup"
       />
@@ -18,6 +19,7 @@
         :popup="popup"
         :token="token"
         :user="user"
+        :jwt="jwt"
         @updatePopup="updatePopup"
       />
       <PopupCreateUser
@@ -25,6 +27,7 @@
         :popup="popup"
         :token="token"
         :user="user"
+        :jwt="jwt"
         @updatePopup="updatePopup"
       />
       <PopupAddPackage
@@ -32,6 +35,7 @@
         :popup="popup"
         :token="token"
         :user="user"
+        :jwt="jwt"
         @updatePopup="updatePopup"
       />
 
@@ -47,7 +51,7 @@ import PopupCreateUser from "@/components/PopupCreateUser";
 import PopupAddPackage from "@/components/PopupAddPackage";
 export default {
   name: "popup",
-  props: ["popup", "user", "token", "repos"],
+  props: ["popup", "user", "token", "repos", "jwt"],
   components: {
     PopupCreateIssue,
     PopupEditUser,

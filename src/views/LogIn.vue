@@ -46,6 +46,7 @@ export default {
           console.log("getAuthorization", res.data);
           self.setAuth(res.data.type);
           self.setUser(res.data.user);
+          self.setJWT(res.data.jwt);
           self.$router.push({ name: "explore" });
         })
         .catch(function(err) {
@@ -66,6 +67,10 @@ export default {
     setUser(user) {
       sessionStorage.setItem("RECON_User_Name", user);
       this.$emit("updateUser");
+    },
+    setJWT(jwt) {
+      sessionStorage.setItem("RECON_JWT", jwt);
+      this.$emit("updateJWT");
     }
   },
   mounted() {

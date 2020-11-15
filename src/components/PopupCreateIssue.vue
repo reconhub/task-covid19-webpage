@@ -100,7 +100,7 @@
 import axios from "axios";
 export default {
   name: "PopupCreateIssue",
-  props: ["popup", "token", "user", "repos"],
+  props: ["popup", "token", "user", "repos", "jwt"],
   data() {
     return {
       priorityTypes: [
@@ -170,20 +170,18 @@ export default {
             `${process.env.VUE_APP_API}/issue`,
             {
               title: self.formInfo.title,
-              user: self.user,
               body: self.formInfo.description,
               impact: self.formInfo.impact,
               timeline: self.formInfo.timeline,
               priority: self.formInfo.priority,
               complexity: self.formInfo.complexity,
               repo: self.formInfo.repo,
-              assignees: self.formInfo.assignees,
-              token: self.token
+              assignees: self.formInfo.assignees
             },
             {
               headers: {
                 "content-type": "multipart/form-data",
-                Authorization: self.token,
+                Authorization: self.jwt,
                 "X-User": self.user
               }
             }

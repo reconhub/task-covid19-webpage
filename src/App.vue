@@ -23,9 +23,11 @@
           @updateAuth="updateAuth"
           @updateUser="updateUser"
           @updatePopup="updatePopup"
+          @updateJWT="updateJWT"
           :token="token"
           :auth="auth"
           :user="user"
+          :jwt="jwt"
           :popup="popup"
           :repos="repos"
           :style="{backgroundImage: 'url(' + require('@/assets//background.png') + ')'}"
@@ -70,6 +72,7 @@
         :user="user"
         :token="token"
         :repos="repos"
+        :jwt="jwt"
         @updatePopup="updatePopup"
       />
     </v-app>
@@ -92,6 +95,7 @@ export default {
       token: "",
       auth: "",
       user: "",
+      jwt: "",
       popup: { type: "" },
       repos: [],
       collaborators: [],
@@ -108,6 +112,9 @@ export default {
     },
     updateUser() {
       this.user = sessionStorage.getItem("RECON_User_Name");
+    },
+    updateJWT() {
+      this.jwt = sessionStorage.getItem("RECON_JWT");
     },
     updatePopup(bus) {
       this.popup = bus;
@@ -149,12 +156,13 @@ export default {
         });
     }
   },
-  mounted() {
+  created() {
     this.updateToken();
     this.updateAuth();
     this.updateUser();
     this.getRepos();
-    console.log("app mounted");
+    this.updateJWT();
+    console.log("app created");
   },
   beforeUpdate() {
     this.updateToken();
