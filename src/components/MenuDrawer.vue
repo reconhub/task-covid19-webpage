@@ -38,6 +38,11 @@
         </v-list-item-content>
       </v-list-item>
       <v-list-item link>
+        <v-list-item-content @click="$router.push({ name: 'repos'}); $emit('toggleDrawer')">
+          <b>REPOS</b>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item link>
         <v-list-item-content v-if="token" @click="$router.push('myTasks'); $emit('toggleDrawer')">
           <b>MY TASKS</b>
         </v-list-item-content>

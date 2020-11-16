@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e"
+    "test:e2e": "vue-cli-service test:e2e",
+    "deploy-us-east": "aws --region us-east-1 --profile recon-admin s3 sync ./dist s3://demo-recon-frontend-1 --delete"
   },
   "dependencies": {
     "acorn-dynamic-import": "^4.0.0",

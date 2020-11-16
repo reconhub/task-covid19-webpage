@@ -1,185 +1,90 @@
 <template>
-  <v-card flat class="repos" >
-    <v-img :src="require('../assets/Placeholder.png')" class="my-3" contain height="200"/>
-    <h1>REPOS</h1>
-    <p>Here is a list of all the projects RECON has taken on in the past. Feel free to explore the projects. If you think something is missing, then please log in and post an issue.</p>
-    <v-btn
-      v-if="token"
-      @click="updatePopup({type: 'CreateIssue', data: repoCatcher })"
-    >Suggest a Repo</v-btn>
-    <v-row>
-      <v-col v-for="(repo, i) in repos" :key="i" sm="12" lg="4" md="6" xl="4" cols="12">
-        <v-card class="mx-2 px-2" :loading="!repos.length">
-          <v-row>
-            <v-col cols="8">
-              <v-card-title>
-                <a :href="repo.html_url" target="_blank">{{repo.name}}</a>
-              </v-card-title>
-              <v-card-subtitle v-text="repo.description"></v-card-subtitle>
-            </v-col>
-            <v-col cols="4">
-              <p style="border: 1px solid black">
-                <b>Updated on:</b>
-                <br>
-                <i>{{repo.updated_at.match(/^\d{4}-\d{2}-\d{2}/g)[0]}}</i>
-              </p>
-              <v-spacer></v-spacer>
-              <p>
-                <b>Created on:</b>
-                <br>
-                <i>{{repo.created_at.match(/^\d{4}-\d{2}-\d{2}/g)[0]}}</i>
-              </p>
-              <v-spacer></v-spacer>
-              <v-btn v-if="issue_list[i].length" @click="closeIssue(i)">Close</v-btn>
-              <v-btn v-else @click="getIssue(repo, i)">
-                Check
-                <br>issues
-              </v-btn>
-            </v-col>
-          </v-row>
-          <v-row v-if="issue_list[i].length" class="mx-2">
-            <v-simple-table style="width: 100% ">
-              <template v-slot:default>
-                <tbody>
-                  <tr v-if="issue_list[i][0] == 'None'">
-                    <p>
-                      <b>This repo has no pending issues.</b>
-                    </p>
-                  </tr>
-                  <tr v-else v-for="(issue, j) in issue_list[i]" :key="j">
-                    <td>
-                      <a :href="issue.html_url" target="_blank">
-                        <b>{{issue.title}}</b>
-                      </a>
-                      <p v-if="issue.labels.length">
-                        Labels:
-                        <span v-for="(label, k) in issue.labels" :key="k">
-                          &nbsp;{{label.name}}&nbsp;
-                          <span v-if="k != issue.labels.length -1">|</span>
-                        </span>
-                      </p>
-                      <!-- <p>{{issue.body}}</p>     -->
-                    </td>
-                  </tr>
-                  <tr v-if="token">
-                    <td>
-                      <v-btn @click="updatePopup({type: 'CreateIssue', data: repo})">Add Issue</v-btn>
-                    </td>
-                  </tr>
-                </tbody>
-              </template>
-            </v-simple-table>
-          </v-row>
-        </v-card>
-      </v-col>
-    </v-row>`
+  <v-card flat class="review">
+    <h1 class="pa-5">Repos</h1>
+    <v-col>
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-col cols="8">
+          <p>Below are a list of all the packages affiliated with RECON. If you would like to contribute, then please reachout to the point of contact via GitHub.</p>
+        </v-col>
+        <v-spacer></v-spacer>
+      </v-row>
+      <v-row v-if="this.jwt">
+        <v-spacer></v-spacer>
+        <v-col cols="8">
+          <p>If you would like to suggest a package to add to to the RECON family, then please let us know .</p>
+          <v-btn @click="updatePopup({type: 'AddPackage', data: '' })">Suggest a package</v-btn>
+        </v-col>
+        <v-spacer></v-spacer>
+      </v-row>
+      <v-row v-else>
+        <v-spacer></v-spacer>
+        <v-col cols="8">
+          <p>If you would like to suggest a package to add to to the RECON family, then please login and come here to suggest a new package.</p>
+        </v-col>
+        <v-spacer></v-spacer>
+      </v-row>
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+        <v-spacer></v-spacer>
+      </v-row>
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-data-table :headers="headers" :items="showRepo" :search="search" style="font-size: 15px">
+          <template v-slot:item.endPoint="{item}">
+            <a :href="`https://github.com/${item.endPoint}`" target="_blank">{{item.endPoint}}</a>
+          </template>
+          <template v-slot:item.poc="{item}">
+            <a :href="`https://github.com/${item.poc}`" target="_blank">{{item.poc}}</a>
+          </template>
+        </v-data-table>
+        <v-spacer></v-spacer>
+      </v-row>
+    </v-col>
   </v-card>
 </template>
 <script>
-import axios from "axios";
 export default {
-  name: "Repos",
-  props: ["token", "repos"],
+  name: "repos",
+  props: ["token", "user", "repos", "jwt"],
   data() {
     return {
-      issue_list: [],
-      page: 1
+      search: "",
+      headers: [
+        { text: "Repo", value: "endPoint" },
+        { text: "Point of Contact", value: "poc" }
+      ]
     };
   },
   computed: {
-    repoCatcher() {
-      let repoCatch = this.repos.filter(d => d.name == "covid19hub");
-      if (repoCatch[0]) return repoCatch[0];
+    showRepo() {
+      let adjRepo = this.repos.map(d => {
+        d.endPoint = `${d.org}/${d.repo}`;
+        return d;
+      });
+      return adjRepo;
     }
   },
   methods: {
     updatePopup(dta) {
       this.$emit("updatePopup", dta);
-    },
-    makeRepo() {
-      let qry = `https://api.github.com/orgs/RECON-Mirror/repos`;
-      let bdy = {
-        name: "test-repo",
-        description: "Here is a test description for the test-repo"
-      };
-      let token = sessionStorage.getItem("RECON_GitHub_Token");
-
-      axios
-        .post(qry, bdy, {
-          headers: {
-            Accept: "application/vnd.github.v3+json",
-            Authorization: `token ${token}`
-          }
-        })
-        .then(function(res) {
-          console.log("success");
-          console.log(res);
-        })
-        .catch(function(err) {
-          console.log(JSON.stringify(err));
-          alert(err);
-          console.log(err);
-        });
-    },
-    // getRepos() {
-    //   let self = this;
-    //   let size = 100;
-    //   let qry = `https://api.github.com/orgs/${"reconhub"}/repos?sort=updated&per_page=${size}&page=${
-    //     this.page
-    //   }`;
-    //   console.log(qry);
-    //   axios
-    //     .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
-    //     .then(function(res) {
-    //       if (self.page == 1) {
-    //         self.repos = res.data;
-    //       } else {
-    //         self.repos = self.repos.concat(res.data);
-    //       }
-
-    //       if (res.data.length >= size) {
-    //         self.page += 1;
-    //         self.getRepos(self.page);
-    //       } else {
-    //         self.issue_list = self.repos.map(() => []);
-    //       }
-    //     })
-    //     .catch(function(err) {
-    //       console.log(JSON.stringify(err));
-    //       alert(err);
-    //       console.log(err);
-    //     });
-    // },
-    getIssue(repo_info, i) {
-      let owner = repo_info.owner.login;
-      let repo = repo_info.name;
-      let qry = `https://api.github.com/repos/${owner}/${repo}/issues`;
-      let self = this;
-      axios
-        .get(qry, { headers: { Accept: "application/vnd.github.v3+json" } })
-        .then(function(res) {
-          console.log(res);
-          //   self.issue_list[i] = res.data;
-
-          if (res.data.length) {
-            self.$set(self.issue_list, i, res.data);
-          } else {
-            self.$set(self.issue_list, i, ["None"]);
-          }
-        })
-        .catch(function(err) {
-          console.log(JSON.stringify(err));
-          alert(err);
-          console.log(err);
-        });
-    },
-    closeIssue(i) {
-      this.$set(this.issue_list, i, []);
     }
   },
-  mounted() {
-    // this.getRepos();
-    this.issue_list = this.repos.map(() => []);
-  }
+  mounted() {}
 };
 </script>
+<style>
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > th,
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td,
+.v-data-table > .v-data-table__wrapper > table > thead > tr > th,
+.v-data-table > .v-data-table__wrapper > table > tfoot > tr > th {
+  font-size: 20px !important;
+}
+</style>

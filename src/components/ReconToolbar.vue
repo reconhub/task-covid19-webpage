@@ -19,6 +19,7 @@
         <ToolBarBtn route="about" text="about"/>
         <ToolBarBtn route="learn" text="learn"/>
         <ToolBarBtn route="explore" text="explore"/>
+        <ToolBarBtn route="repos" text="repos"/>
         <ToolBarBtn v-if="token" route="myTasks" text="My Tasks"/>
         <ToolBarBtn v-if="auth == 'admin' | auth == 'reviewer'" route="review" text="Review"/>
         <ToolBarBtn v-if="auth == 'admin'" route="adminDash" text="Admin Dashboard"/>
