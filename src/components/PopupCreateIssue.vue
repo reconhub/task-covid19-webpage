@@ -181,8 +181,7 @@ export default {
             {
               headers: {
                 "content-type": "multipart/form-data",
-                Authorization: self.jwt,
-                "X-User": self.user
+                Authorization: self.jwt
               }
             }
           )
