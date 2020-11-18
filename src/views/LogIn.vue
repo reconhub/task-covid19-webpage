@@ -23,11 +23,11 @@ export default {
       axios
         .get(qry, { headers: { Authorization: `token ${token}` } })
         .then(function(res) {
-          console.log("getUser", res.data);
+          //console.log("getUser", res.data);
           self.getAuthorization(res.data.login, token);
         })
         .catch(function(err) {
-          console.log(JSON.stringify(err));
+          //console.log(JSON.stringify(err));
           alert(err);
           self.setToken("");
           self.$router.push("/");
@@ -41,14 +41,14 @@ export default {
       axios
         .get(qry)
         .then(function(res) {
-          console.log("getAuthorization", res.data);
+          //console.log("getAuthorization", res.data);
           self.setAuth(res.data.type);
           self.setUser(res.data.user);
           self.setJWT(res.data.jwt);
           self.$router.push({ name: "explore" });
         })
         .catch(function(err) {
-          console.log(JSON.stringify(err));
+          //console.log(JSON.stringify(err));
           alert(err);
           self.setToken("");
           self.$router.push("/");
@@ -73,7 +73,7 @@ export default {
   },
   mounted() {
     let tkn = this.token;
-    console.log("in login token", tkn);
+    //console.log("in login token", tkn);
     this.setToken(tkn);
     this.getUser(tkn);
   }

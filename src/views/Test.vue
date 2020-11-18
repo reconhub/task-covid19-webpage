@@ -48,7 +48,7 @@ export default {
           that.$set(that.requests, i, tmp);
         })
         .catch(err => {
-          console.log("test", err);
+          //console.log("test", err);
         });
     }
   }

@@ -32,7 +32,7 @@ export default {
 
       let qry = `${process.env.VUE_APP_API}/auth`;
 
-      console.log(qry);
+      //console.log(qry);
       axios
         .put(
           qry,
@@ -57,7 +57,7 @@ export default {
     }
   },
   mounted() {
-    console.log("inside popup", this.popup);
+    //console.log("inside popup", this.popup);
     this.newRole = this.popup.data.type;
   }
 };

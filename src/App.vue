@@ -121,14 +121,14 @@ export default {
       this.popup = bus;
     },
     toggleDrawer() {
-      console.log("drawer");
+      //console.log("drawer");
       this.drawer = !this.drawer;
     },
     getRepos() {
       let self = this;
 
       let qry = `${process.env.VUE_APP_API}/pkgs?status=approved`;
-      console.log("app" + qry);
+      //console.log("app" + qry);
       axios
         .get(qry)
         .then(function(res) {
@@ -146,7 +146,7 @@ export default {
     this.updateUser();
     this.getRepos();
     this.updateJWT();
-    console.log("app created");
+    //console.log("app created");
   },
   beforeUpdate() {
     this.updateToken();

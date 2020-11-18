@@ -103,7 +103,7 @@ export default {
           self.authorizations = res.data;
         })
         .catch(function(err) {
-          console.log(JSON.stringify(err));
+          //console.log(JSON.stringify(err));
           alert(err);
           console.log(err);
         });

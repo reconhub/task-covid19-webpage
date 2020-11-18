@@ -150,7 +150,7 @@ export default {
       this.$emit("updatePopup", { type: "" });
     },
     submitForm() {
-      console.log("inside submit form");
+      //console.log("inside submit form");
       let bool =
         !!this.formInfo.title &
         !!this.formInfo.description &
@@ -221,7 +221,7 @@ export default {
           }
         )
         .then(function(res) {
-          console.log("collaborators", res.data);
+          //console.log("collaborators", res.data);
           self.collaborators = self.collaborators.concat(
             res.data.map(d => d.login)
           );
@@ -229,7 +229,7 @@ export default {
     }
   },
   mounted() {
-    console.log("inside popup", this.popup);
+    //console.log("inside popup", this.popup);
     this.repoLabels = this.repoLabels.concat(
       this.repos.map(d => d.org + "/" + d.repo)
     );

@@ -70,24 +70,24 @@ export default {
           }
         })
         .then(function(res) {
-          console.log("getsubmissions", res.data);
+          //console.log("getsubmissions", res.data);
           self.submissions = res.data;
         })
         .catch(function(err) {
-          console.log(JSON.stringify(err));
+          //console.log(JSON.stringify(err));
           alert(err);
           console.log(err);
         });
     }
   },
   beforeCreate() {
-    console.log("beforecreate");
+    //console.log("beforecreate");
     this.$emit("updateToken");
     this.$emit("updateAuth");
     this.$emit("updateUser");
   },
   mounted() {
-    console.log("now get subm");
+    //console.log("now get subm");
     this.getSubmissions();
   }
 };

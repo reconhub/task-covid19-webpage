@@ -42,8 +42,8 @@ export default {
       this.$emit("updatePopup", { type: "" });
     },
     submitForm() {
-      console.log("inside submit form");
-      console.log("newpopup", this.popup.data);
+      //console.log("inside submit form");
+      //console.log("newpopup", this.popup.data);
       let self = this;
 
       let qry = `https://api.github.com/users/${this.newUser}`;
@@ -83,7 +83,7 @@ export default {
     }
   },
   mounted() {
-    console.log("inside popup", this.popup);
+    //console.log("inside popup", this.popup);
     this.newRole = this.popup.data.type;
   }
 };

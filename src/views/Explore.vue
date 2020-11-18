@@ -313,7 +313,7 @@ export default {
       return issues;
     },
     showDetail(i, bool) {
-      console.log("show" + bool);
+      //console.log("show" + bool);
       this.$set(this.details, i, bool);
     },
     interestColor(perc_score) {

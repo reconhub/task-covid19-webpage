@@ -198,11 +198,11 @@ export default {
           }
         )
         .then(function(res) {
-          console.log("judgeSubmission", res.data);
+          //console.log("judgeSubmission", res.data);
           self.getSubmissions("pending validation");
         })
         .catch(function(err) {
-          console.log(JSON.stringify(err));
+          //console.log(JSON.stringify(err));
           alert(err);
           console.log(err);
         });
