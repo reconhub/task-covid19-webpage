@@ -95,7 +95,7 @@ export default {
       axios
         .get(qry, {
           headers: {
-            "content-type": "multipart/form-data",
+            //"content-type": "multipart/form-data",
             Authorization: self.jwt
           }
         })

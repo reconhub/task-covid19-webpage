@@ -117,7 +117,7 @@ export default {
       axios
         .get(qry, {
           headers: {
-            "content-type": "multipart/form-data",
+            //"content-type": "multipart/form-data",
             Authorization: self.jwt
           }
         })
@@ -154,7 +154,7 @@ export default {
           { status: status, id: sub.id },
           {
             headers: {
-              "content-type": "multipart/form-data",
+              //"content-type": "multipart/form-data",
               Authorization: self.jwt
             }
           }
@@ -192,7 +192,7 @@ export default {
           },
           {
             headers: {
-              "content-type": "multipart/form-data",
+              //"content-type": "multipart/form-data",
               Authorization: self.jwt
             }
           }

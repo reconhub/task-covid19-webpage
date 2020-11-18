@@ -37,7 +37,7 @@ export default {
           lastName: "Flintstone"
         },
         headers: {
-          "content-type": "multipart/form-data",
+          //"content-type": "multipart/form-data",
           Authorization: "yolo"
         }
       })

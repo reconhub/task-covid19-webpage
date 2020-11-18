@@ -61,7 +61,7 @@ export default {
               { login: self.newUser, type: self.newRole },
               {
                 headers: {
-                  "content-type": "multipart/form-data",
+                  //"content-type": "multipart/form-data",
                   Authorization: self.jwt
                 }
               }

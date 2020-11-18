@@ -75,7 +75,7 @@ export default {
               { poc: self.poc, org: self.org, pkg: self.pkg },
               {
                 headers: {
-                  "content-type": "multipart/form-data",
+                  //"content-type": "multipart/form-data",
                   Authorization: self.jwt
                 }
               }

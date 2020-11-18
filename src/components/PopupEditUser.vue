@@ -39,7 +39,7 @@ export default {
           { login: self.popup.data.username, type: self.newRole },
           {
             headers: {
-              "content-type": "multipart/form-data",
+              //"content-type": "multipart/form-data",
               Authorization: self.jwt
             }
           }

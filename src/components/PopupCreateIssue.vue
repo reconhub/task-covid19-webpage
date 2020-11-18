@@ -180,7 +180,7 @@ export default {
             },
             {
               headers: {
-                "content-type": "multipart/form-data",
+                //"content-type": "multipart/form-data",
                 Authorization: self.jwt
               }
             }

@@ -66,7 +66,7 @@ export default {
         .get(qry, {
           headers: {
             Authorization: self.jwt,
-            "content-type": "multipart/form-data"
+            //"content-type": "multipart/form-data"
           }
         })
         .then(function(res) {

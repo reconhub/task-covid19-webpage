@@ -192,7 +192,7 @@ export default {
           { vote: vote, issue_id: data.id },
           {
             headers: {
-              "content-type": "multipart/form-data",
+              //"content-type": "multipart/form-data",
               Authorization: that.jwt
             }
           }
@@ -227,7 +227,7 @@ export default {
           { status: !data.status, issue_id: data.id },
           {
             headers: {
-              "content-type": "multipart/form-data",
+              //"content-type": "multipart/form-data",
               Authorization: that.jwt
             }
           }
@@ -250,8 +250,8 @@ export default {
         qry = qry + `/${this.user}`;
         options = {
           headers: {
-            Authorization: this.jwt,
-            "content-type": "multipart/form-data"
+            Authorization: this.jwt
+            //"content-type": "multipart/form-data"
           }
         };
       }
