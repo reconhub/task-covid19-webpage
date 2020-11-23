@@ -38,6 +38,15 @@
         :jwt="jwt"
         @updatePopup="updatePopup"
       />
+      <PopupEditTask
+        v-else-if="popup.type == 'EditTask'"
+        :popup="popup"
+        :token="token"
+        :user="user"
+        :jwt="jwt"
+        :repos="repos"
+        @updatePopup="updatePopup"
+      />
 
       <v-btn v-else @click="updatePopup({type: ''})">Close</v-btn>
     </v-col>
@@ -49,6 +58,7 @@ import PopupCreateIssue from "@/components/PopupCreateIssue";
 import PopupEditUser from "@/components/PopupEditUser";
 import PopupCreateUser from "@/components/PopupCreateUser";
 import PopupAddPackage from "@/components/PopupAddPackage";
+import PopupEditTask from "@/components/PopupEditTask";
 export default {
   name: "popup",
   props: ["popup", "user", "token", "repos", "jwt"],
@@ -56,7 +66,8 @@ export default {
     PopupCreateIssue,
     PopupEditUser,
     PopupCreateUser,
-    PopupAddPackage
+    PopupAddPackage,
+    PopupEditTask
   },
   data() {
     return {

@@ -17,7 +17,15 @@
         <v-spacer></v-spacer>
         <v-data-table :headers="headers" :items="submissions" :search="search">
           <template v-slot:item.title="{item}">
-            <a :href="item.url">{{item.title}}</a>
+            <a v-if="item.status == 'approved'" :href="item.url">{{item.title}}</a>
+            <p v-else-if="item.status == 'pending validation'">
+              <v-icon
+                style="color: blue; cursor: pointer"
+                @click="updatePopup({type: 'EditTask', data: item })"
+              >fa-edit</v-icon>
+              {{item.title}}
+            </p>
+            <p v-else>{{item.title}}</p>
           </template>
           <!-- <template v-slot:item.actions="{item}">
             <v-icon small class="mr-2" @click="judgeSubmission(item, 'approved')">mdi-thumb-up</v-icon>
@@ -50,14 +58,17 @@ export default {
         { text: "Complexity", value: "complexity" },
         { text: "Priority", value: "priority" },
         { text: "Status", value: "status" },
-        { text: "Created", value: "created_on" },
-        { text: "Notes", value: "note" },
-        { text: "Updated", value: "last_update" }
+        // { text: "Created", value: "created_on" },
+        { text: "Notes", value: "note" }
+        // { text: "Updated", value: "last_update" }
       ],
       submissions: []
     };
   },
   methods: {
+    updatePopup(dta) {
+      this.$emit("updatePopup", dta);
+    },
     getSubmissions() {
       let qry = `${process.env.VUE_APP_API}/issue/${this.user}`;
       let self = this;
@@ -65,7 +76,7 @@ export default {
       axios
         .get(qry, {
           headers: {
-            Authorization: self.jwt,
+            Authorization: self.jwt
             //"content-type": "multipart/form-data"
           }
         })
