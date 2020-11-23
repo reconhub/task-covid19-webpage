@@ -125,7 +125,6 @@ export default {
       this.$emit("updatePopup", { type: "" });
     },
     submitForm(sub) {
-      alert(JSON.stringify(sub));
       if (sub.complexity == "unknown") {
         alert("Complexity cannot be blank/unknown");
         return null;
