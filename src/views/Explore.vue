@@ -37,12 +37,12 @@
       <v-col v-for="(task, i) in filteredData" :key="i" sm="12" lg="4" md="6" xl="4" cols="12">
         <v-card class="mx-2 pr-2">
           <v-row>
-            <v-col cols="8">
-              <v-card-title>
+            <v-col cols="10">
+              <p class="mx-2 text-left">
                 <a :href="task.url" target="_blank" title="Link to GitHub issue.">{{task.title}}</a>
-              </v-card-title>
+              </p>
             </v-col>
-            <v-col cols="4">
+            <v-col cols="2">
               <div v-if="jwt">
                 <v-btn icon :disabled="task.disabled" title="Follow task." @click="follow(task, i)">
                   <v-icon v-if="task.status" style="color: red;">mdi-star</v-icon>

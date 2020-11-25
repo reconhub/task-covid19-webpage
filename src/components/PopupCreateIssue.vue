@@ -195,7 +195,7 @@ export default {
             self.formInfo.repo = "Do not know";
             self.formInfo.assignees = "";
             alert(
-              "Thank you for submitting your task. It is waiting for admin approval."
+              "Thank you for submitting your task. It is waiting for admin approval. A link to the task will be provided once it is validated."
             );
             self.close();
           })

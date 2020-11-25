@@ -1,7 +1,7 @@
 <template>
   <v-card color="white" shaped rounded raised elevation-24 class="rounded-xl pa-4">
     <v-card-title>PLACEHOLDER</v-card-title>
-    <v-card-text>
+    <v-card-text v-if="task">
       <v-row>
         <v-col cols="6">
           <v-row>
@@ -11,20 +11,20 @@
               </p>
               <v-text-field
                 label="Task Title"
-                v-model="popup.data.title"
+                v-model="task.title"
                 hint="A concise, informative title"
                 :rules="[rules.required]"
               ></v-text-field>
               <v-textarea
                 label="Task Description"
-                v-model="popup.data.body"
+                v-model="task.body"
                 rows="2"
                 hint="A clear overview of the task which provides context, identifies key problems and specifies the work to be done, with itemized by deliverables"
                 :rules="[rules.required]"
               ></v-textarea>
               <v-text-field
                 label="Impact"
-                v-model="popup.data.impact"
+                v-model="task.impact"
                 hint="A quick explanation of how addressing this task will help improving COVID-19 analytics"
                 :rules="[rules.required]"
               ></v-text-field>
@@ -45,13 +45,13 @@
               </p>
               <v-select
                 label="Task Complexity"
-                v-model="popup.data.complexity"
+                v-model="task.complexity"
                 :items="complexityTypes"
                 :rules="[rules.required]"
               ></v-select>
               <v-select
                 label="Task priority"
-                v-model="popup.data.priority"
+                v-model="task.priority"
                 :items="priorityTypes"
                 :rules="[rules.required]"
               ></v-select>
@@ -62,12 +62,7 @@
               <p>
                 <b>Suggest task to specific github repo</b>
               </p>
-              <v-select
-                width="100%"
-                v-model="popup.data.repo"
-                :items="repoLabels"
-                label="Suggested Repo"
-              ></v-select>
+              <v-select width="100%" v-model="task.repo" :items="repoLabels" label="Suggested Repo"></v-select>
             </v-col>
           </v-row>
         </v-col>
@@ -75,7 +70,7 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn @click="submitForm(popup.data)">Submit</v-btn>
+      <v-btn @click="submitForm(task)">Submit</v-btn>
       <v-btn @click="close">Close</v-btn>
       <v-spacer></v-spacer>
     </v-card-actions>
@@ -88,6 +83,7 @@ export default {
   props: ["popup", "token", "user", "jwt", "repos"],
   data() {
     return {
+      task: null,
       priorityTypes: [
         // { text: "Do Not Know", value: "unknown" },
         { text: "Low - Useful for COVID19 analytics", value: "Priority_Low" },
@@ -156,7 +152,7 @@ export default {
           }
         )
         .then(function(res) {
-          //console.log("judgeSubmission", res.data);
+          alert("The task was successfully edited.");
           self.close();
         })
         .catch(function(err) {
@@ -170,6 +166,9 @@ export default {
     this.repoLabels = this.repoLabels.concat(
       this.repos.map(d => d.org + "/" + d.repo)
     );
+
+    this.task = Object.assign({}, this.popup.data);
+
     this.newRole = this.popup.data.type;
   }
 };
