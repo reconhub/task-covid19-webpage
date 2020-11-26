@@ -16,8 +16,19 @@
       <v-row>
         <v-spacer></v-spacer>
         <v-data-table :headers="headers" :items="pendingSubmissions" :search="search">
+          <template v-slot:item.title="{item}">
+            <v-icon
+              style="color: blue; cursor: pointer"
+              @click="updatePopup({type: 'EditTask', data: item })"
+            >fa-edit</v-icon>
+            <v-icon
+              style="color: blue; cursor: pointer"
+              @click="updatePopup({type: 'ShowTask', data: item})"
+            >fa-eye</v-icon>
+            {{item.title}}
+          </template>
           <template v-slot:item.complexity="{item}">
-            <v-select v-model="item.complexity" :items="complexityTypes" style="width: 100px;"></v-select>
+            <v-select v-model="item.complexity" :items="complexityTypes" style="width: 120px;"></v-select>
           </template>
           <template v-slot:item.priority="{item}">
             <v-select v-model="item.priority" :items="priorityTypes" style="width: 100px;"></v-select>
@@ -26,7 +37,7 @@
             <v-select v-model=" item.repo" :items="repoLabels" style="width: 125px;"></v-select>
           </template>
           <template v-slot:item.notes="{item}">
-            <v-textarea @click="mycheck(item)" v-model="item.note"></v-textarea>
+            <v-textarea @click="mycheck(item)" v-model="item.note" style="width: 250px;"></v-textarea>
           </template>
           <template v-slot:item.actions="{item}">
             <v-icon small class="mr-2" @click="judgeSubmission(item, 'approved')">mdi-thumb-up</v-icon>
@@ -65,12 +76,12 @@ export default {
           value: "author"
         },
         { text: "Title", value: "title" },
-        { text: "Description", value: "body" },
+        // { text: "Description", value: "body" },
         { text: "Complexity", value: "complexity" },
         { text: "Priority", value: "priority" },
         { text: "Repo", value: "repo" },
         // { text: "Created", value: "created_on" },
-        { text: "Updated", value: "last_update" },
+        // { text: "Updated", value: "last_update" },
         { text: "Notes", value: "notes", sortable: false },
         { text: "Actions", value: "actions", sortable: false }
       ],
@@ -209,6 +220,9 @@ export default {
     },
     mycheck(d) {
       console.log(d);
+    },
+    updatePopup(dta) {
+      this.$emit("updatePopup", dta);
     }
   },
   mounted() {

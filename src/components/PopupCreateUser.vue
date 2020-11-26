@@ -1,5 +1,13 @@
 <template>
-  <v-card color="white" shaped rounded raised elevation-24 class="rounded-xl pa-4">
+  <v-card
+    color="white"
+    shaped
+    rounded
+    raised
+    elevation-24
+    class="rounded-xl pa-4"
+    max-height="600px"
+  >
     <v-card-title>Add new user.</v-card-title>
     <v-card-text>
       <p>Please enter the GitHub handle and the role of the user you would like to add.</p>

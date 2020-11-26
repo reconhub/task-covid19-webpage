@@ -1,6 +1,14 @@
 <template>
-  <v-card color="white" shaped rounded raised elevation-24 class="rounded-xl pa-4">
-    <v-card-title>PLACEHOLDER</v-card-title>
+  <v-card
+    color="white"
+    shaped
+    rounded
+    raised
+    elevation-24
+    class="rounded-xl pa-4"
+    style="overflow-y: scroll;"
+    max-height="600px"
+  >
     <v-card-text v-if="task">
       <v-row>
         <v-col cols="6">
@@ -134,7 +142,7 @@ export default {
 
       axios
         .put(
-          `${process.env.VUE_APP_API}/issue/${this.user}`,
+          `${process.env.VUE_APP_API}/issue/${sub.author}`,
           {
             title: sub.title,
             body: sub.body,

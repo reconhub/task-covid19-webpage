@@ -17,15 +17,21 @@
         <v-spacer></v-spacer>
         <v-data-table :headers="headers" :items="submissions" :search="search">
           <template v-slot:item.title="{item}">
-            <a v-if="item.status == 'approved'" :href="item.url">{{item.title}}</a>
-            <p v-else-if="item.status == 'pending validation'">
+            <p v-if="item.status == 'pending validation'">
               <v-icon
                 style="color: blue; cursor: pointer"
                 @click="updatePopup({type: 'EditTask', data: item })"
               >fa-edit</v-icon>
               {{item.title}}
             </p>
-            <p v-else>{{item.title}}</p>
+            <p v-else>
+              <v-icon
+                style="color: blue; cursor: pointer"
+                @click="updatePopup({type: 'ShowTask', data: item})"
+              >fa-eye</v-icon>
+              <a v-if="item.url" :href="item.url">{{item.title}}</a>
+              <span v-else>{{item.title}}</span>
+            </p>
           </template>
           <!-- <template v-slot:item.actions="{item}">
             <v-icon small class="mr-2" @click="judgeSubmission(item, 'approved')">mdi-thumb-up</v-icon>
@@ -54,12 +60,12 @@ export default {
           value: "repo"
         },
         { text: "Title", value: "title" },
-        { text: "Description", value: "body" },
-        { text: "Complexity", value: "complexity" },
-        { text: "Priority", value: "priority" },
-        { text: "Status", value: "status" },
+        // { text: "Description", value: "body" },
+        // { text: "Complexity", value: "complexity" },
+        // { text: "Priority", value: "priority" },
+        { text: "Status", value: "status" }
         // { text: "Created", value: "created_on" },
-        { text: "Notes", value: "note" }
+        // { text: "Notes", value: "note" }
         // { text: "Updated", value: "last_update" }
       ],
       submissions: []
