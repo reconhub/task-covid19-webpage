@@ -65,7 +65,7 @@ import { setTimeout } from "timers";
 
 export default {
   name: "review",
-  props: ["token", "user", "repos", "jwt"],
+  props: ["token", "user", "repos", "jwt", "popup"],
   data() {
     return {
       search: "",
@@ -118,6 +118,13 @@ export default {
       ],
       repoLabels: ["Do not know"]
     };
+  },
+  watch: {
+    popup: function(newVal) {
+      if (!newVal.type) {
+        this.getSubmissions("pending validation");
+      }
+    }
   },
   methods: {
     getSubmissions(status) {

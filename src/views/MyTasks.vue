@@ -29,7 +29,7 @@
                 style="color: blue; cursor: pointer"
                 @click="updatePopup({type: 'ShowTask', data: item})"
               >fa-eye</v-icon>
-              <a v-if="item.url" :href="item.url">{{item.title}}</a>
+              <a v-if="item.url" :href="item.url" target="_blank">{{item.title}}</a>
               <span v-else>{{item.title}}</span>
             </p>
           </template>
@@ -49,7 +49,7 @@ import { setTimeout } from "timers";
 
 export default {
   name: "review",
-  props: ["token", "user", "jwt"],
+  props: ["token", "user", "jwt", "popup"],
   data() {
     return {
       search: "",
@@ -70,6 +70,13 @@ export default {
       ],
       submissions: []
     };
+  },
+  watch: {
+    popup: function(newVal) {
+      if (!newVal.type) {
+        this.getSubmissions();
+      }
+    }
   },
   methods: {
     updatePopup(dta) {
