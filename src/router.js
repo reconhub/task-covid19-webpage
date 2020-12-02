@@ -48,7 +48,10 @@ export default new Router({
     {
       path: "/repos",
       name: "repos",
-      component: Repos
+      component: Repos,
+      props: (route) => ({
+        ...route.params
+      })
     },
     {
       path: "/myTasks",

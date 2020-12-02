@@ -9,10 +9,10 @@
       <v-col cols="10" class="py-0">
         <v-row class="white-back ml-1">
           <v-col>
-            <v-select label="Filter Complexity" :items="complexityTypes" v-model="complexityFilter"></v-select>
+            <v-select label="Filter Priority" :items="priorityTypes" v-model="priorityFilter"></v-select>
           </v-col>
           <v-col>
-            <v-select label="Filter Priority" :items="priorityTypes" v-model="priorityFilter"></v-select>
+            <v-select label="Filter Complexity" :items="complexityTypes" v-model="complexityFilter"></v-select>
           </v-col>
           <v-col v-if="token">
             <v-switch v-model="favoriteSwitch" label="Favorite Only"></v-switch>

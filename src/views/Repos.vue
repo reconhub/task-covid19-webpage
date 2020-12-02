@@ -1,11 +1,11 @@
 <template>
   <v-card flat class="review">
-    <h1 class="pa-5">Repos</h1>
+    <h1 class="pa-5">REPOS</h1>
     <v-col>
       <v-row>
         <v-spacer></v-spacer>
         <v-col cols="8">
-          <p>Below are a list of all the packages affiliated with RECON. If you would like to contribute, then please reachout to the point of contact via GitHub.</p>
+          <p>Below is a list of packages affiliated with RECON's task managing platform. If you would like to contribute, then please reachout to the point of contact via GitHub.</p>
         </v-col>
         <v-spacer></v-spacer>
       </v-row>
@@ -53,7 +53,7 @@
 <script>
 export default {
   name: "repos",
-  props: ["token", "user", "repos", "jwt"],
+  props: ["token", "user", "repos", "jwt", "openForm"],
   data() {
     return {
       search: "",
@@ -77,7 +77,11 @@ export default {
       this.$emit("updatePopup", dta);
     }
   },
-  mounted() {}
+  created() {
+    if (this.openForm) {
+      this.updatePopup({ type: "AddPackage", data: "" });
+    }
+  }
 };
 </script>
 <style>

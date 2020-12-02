@@ -51,6 +51,11 @@
             </p>
           </v-col>
         </v-row>
+        <p>
+          If you are a package developer and wish to add your package to the
+          <router-link to="repos">list of partners</router-link>:
+          <a href="#" @click="reposOrLogin">click here</a>.
+        </p>
       </v-col>
       <v-spacer></v-spacer>
     </v-row>
@@ -80,6 +85,22 @@ export default {
         if (
           confirm(
             "You will need to login via GitHub before you can submit a request."
+          )
+        ) {
+          window.location.href = this.git_login_url;
+        }
+      }
+    },
+    reposOrLogin() {
+      if (this.token) {
+        this.$router.push({
+          name: "repos",
+          params: { openForm: "testTrue" }
+        });
+      } else {
+        if (
+          confirm(
+            "You will need to login via GithHub before you can submit your package."
           )
         ) {
           window.location.href = this.git_login_url;
