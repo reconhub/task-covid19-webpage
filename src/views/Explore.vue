@@ -95,7 +95,8 @@
                 class="text-left pa-2"
                 v-if="details[i]"
                 style="white-space: pre-wrap;"
-              >{{task.description}}</p>
+                v-html="task.description"
+              ></p>
               <v-btn v-if="details[i]" @click="showDetail(i, false)">Hide Details</v-btn>
               <v-btn v-else @click="showDetail(i, true)">Show Details</v-btn>
             </v-col>
@@ -262,6 +263,13 @@ export default {
         .get(qry, options)
         .then(function(res) {
           self.tasks = res.data;
+          self.tasks.forEach(
+            d =>
+              (d.description = d.description.replaceAll(
+                /(https[\S]+)/gi,
+                "<a href='$1'>$1</a>"
+              ))
+          );
           self.details = self.tasks.map(() => false);
         })
         .catch(function(err) {
