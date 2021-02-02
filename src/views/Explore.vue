@@ -57,13 +57,13 @@
                 label="Priority"
                 :title="'Community Priority: ' + task.score "
                 :width="task.perc_score + '%'"
-                color="#b30000"
+                color="#65825e"
               />
               <ProgressBar
                 label="Complexity"
                 :title="task.complexity"
                 :width="complexityBar[task.complexity].width"
-                color="#b30000"
+                color="#65825e"
               />
             </v-col>
           </v-row>
@@ -75,7 +75,7 @@
                 @click="vote(task,i, task.vote > 0 ? 'none' : 'up')"
                 title="Increase this task's priority."
               >
-                <v-icon v-if="task.vote > 0" style="color: green;">mdi-thumb-up</v-icon>
+                <v-icon v-if="task.vote > 0" style="color: #6da8cf;">mdi-thumb-up</v-icon>
                 <v-icon v-else style="color: grey;">mdi-thumb-up</v-icon>
               </v-btn>
               <v-btn
@@ -84,7 +84,7 @@
                 @click="vote(task,i, task.vote < 0 ? 'none' : 'down')"
                 title="Decrease this task's priority."
               >
-                <v-icon v-if="task.vote < 0" style="color: red;">mdi-thumb-down</v-icon>
+                <v-icon v-if="task.vote < 0" style="color: #cf6d89;">mdi-thumb-down</v-icon>
                 <v-icon v-else style="color: grey;">mdi-thumb-down</v-icon>
               </v-btn>
             </v-col>
