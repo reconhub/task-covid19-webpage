@@ -1,9 +1,18 @@
 <template>
   <div style="width: 100%">
+    <v-row class='text-left'>
+      <v-spacer></v-spacer>
+      <v-col cols="8">
+        <p class='white-back'>
+          Citizen science is a critical engine for creating professional tools that are becoming the new standard in epidemic outbreak response. The problem is connecting people on the front lines and people with R language skills. The COVID-19 challenge is a direct communication channel between field agents actively working on the response to COVID-19 and the R community.
+        </p>
+      </v-col>
+      <v-spacer></v-spacer>
+    </v-row>
     <v-row>
       <v-spacer></v-spacer>
       <v-col cols="8">
-        <h2>Be part of the global response to COVID19</h2>
+        <h2>You can get involved in the response to COVID-19 response too!</h2>
       </v-col>
       <v-spacer></v-spacer>
     </v-row>
@@ -21,7 +30,7 @@
               @click="exploreOrLogin"
               baseClr="#967831"
               hoverClr="#5c4a1e"
-              title="You are involvedin the COVID-19 response and want to submit a request."
+              title="You are involved in the COVID-19 response and want to submit a request."
             />
           </v-col>
 
